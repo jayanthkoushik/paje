@@ -4,7 +4,6 @@ permalink: assets/main
 {%- capture allsass -%}
   {%- include_relative _bootstrap.min.css -%}
   {%- include_relative _katex.min.css -%}
-  {%- include_relative _fonts.scss -%}
   {%- include_relative _custom.scss -%}
 {%- endcapture -%}
 {{- allsass | sasscc -}}
