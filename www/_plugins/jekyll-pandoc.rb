@@ -25,7 +25,7 @@ module Jekyll
                     :csl => :"_includes/bibstyle.csl",
                     :"default-image-extension" => :"png",
                 },
-                "-F pandoc-crossref -F pandoc-citeproc",
+                "-F pandoc-crossref",
                 "-M reference-section-title=References -M link-citations=true -M linkReferences=true -M figPrefix=Figure -M eqnPrefix=Equation -M tblPrefix=Table -M lstPrefix=List -M secPrefix=Section"
             )
         end

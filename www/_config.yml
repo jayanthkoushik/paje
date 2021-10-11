@@ -12,3 +12,6 @@ defaults:
       path: "*.md"
     values:
       layout: "default"
+sass:
+  style: compressed
+  sourcemap: never

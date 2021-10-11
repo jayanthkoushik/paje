@@ -10,12 +10,24 @@ layout: compress
   <meta name="description" content="{{ page.description }}">
   {% endif %}
   <title>{{page.title}}</title>
-  <link rel="stylesheet" href="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/main.css">
+  <link rel="stylesheet" href="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/bootstrap/bootstrap.min.css">
+  {% unless page.nomath %}
+  <link rel="stylesheet" href="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/katex/katex.min.css">
+  {% endunless %}
+  <style>
+  {% capture defaultstyle %}
+    {% include default.scss %}
+  {% endcapture %}
+  {{ defaultstyle | scssify }}
   {% if page.extcss %}
-  {% for extcss in page.extcss %}
-  <link rel="stylesheet" href="{{ extcss }}">
-  {% endfor %}
+    {% capture extrastyle %}
+      {% for extcss in page.extcss %}
+        {% include {{ extcss }} %}
+      {% endfor %}
+    {% endcapture %}
+    {{ extrastyle | scssify }}
   {% endif %}
+  </style>
 </head>
 <body>
 <div class="container">
@@ -68,11 +80,25 @@ layout: compress
 </div>
 </div>
 </div>
-<script src="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/main.js"></script>
+<script src="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/jquery/jquery-slim.min.js"></script>
+<script src="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/bootstrap/bootstrap.min.js"></script>
+{% unless page.nomath %}
+<script src="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/katex/katex.min.js"></script>
+<script src="{% unless page.localassets %}https://jkoushik.me/paje/{% endunless %}assets/katex/auto-render.min.js"></script>
+{% endunless %}
+<script>
+{% capture defaultjs %}
+  {% include default.js %}
+{% endcapture %}
+{{ defaultjs | uglify }}
 {% if page.extjs %}
-{% for extjs in page.extjs %}
-<script src="{{ extjs }}"></script>
-{% endfor %}
+  {% capture extrajs %}
+    {% for extjs in page.extjs %}
+      {% include {{ extjs }} %}
+    {% endfor %}
+  {% endcapture %}
+  {{ extrajs | uglify }}
 {% endif %}
+</script>
 </body>
 </html>
