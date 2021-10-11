@@ -6,7 +6,7 @@ on:
     - master
     paths:
     - 'srcimg/*'
-    - '.github/workflows/dist-srcimg-workflow.yml'
+    - '.github/workflows/dist-srcimg.yml'
   workflow_dispatch:
 
 jobs:

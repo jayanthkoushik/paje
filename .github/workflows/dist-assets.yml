@@ -10,7 +10,7 @@ on:
     - 'Dockerfile'
     - 'action.yml'
     - 'main.sh'
-    - '.github/workflows/dist-assets-workflow.yml'
+    - '.github/workflows/dist-assets.yml'
   workflow_run:
     workflows: ['Publish source image']
     branches:
@@ -26,7 +26,7 @@ jobs:
     - uses: actions/checkout@master
     - uses: ./
       with:
-        setupscript: cp -r assets/* /www/
+        setupscript: cp -r assets /www/
         targetbranch: dist
         no404: false
       env:
