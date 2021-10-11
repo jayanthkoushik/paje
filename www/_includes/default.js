@@ -4,7 +4,9 @@ $('#theme-switch').on('click', function () {
 });
 
 $(document).ready(function () {
-    renderMathInElement(document.body);
+    if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body);
+    }
 
     var wantDark = getURLParameter('dark');
     var wantLight = getURLParameter('light');
