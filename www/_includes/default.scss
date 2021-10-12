@@ -30,11 +30,9 @@ a {
   }
 }
 
-@media (min-width: 576px) {
-  p {
-    text-align: justify;
-    text-justify: inter-word;
-  }
+div > p {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .container {
@@ -72,6 +70,7 @@ abbr, .abbr {
   font-size: smaller;
   font-variant: small-caps;
   letter-spacing: 0.1em;
+  text-decoration: none !important;
 }
 
 table {
@@ -128,11 +127,13 @@ h4, h5, h6 {
 
 #refs {
   font-size: smaller;
+  div {
+    margin: 1rem 0;
+  }
 }
 
-.csl-left-margin {
-  float: left;
-  padding-right: 3px;
+.footnotes {
+  font-size: smaller;
 }
 
 .subfigures p {
@@ -142,4 +143,8 @@ h4, h5, h6 {
 #appendix {
   border-top: 1px solid;
   margin-top: 5rem;
+}
+
+.citation a {
+  text-decoration: none;
 }

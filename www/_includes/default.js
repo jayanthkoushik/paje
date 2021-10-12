@@ -18,14 +18,9 @@ $(document).ready(function () {
         setTheme('light', modLinks=false);
     }
 
-    $('#abstract p').addClass('lead');
-
     $('table').wrap('<div class="table-responsive"></div>');
 
     $('.math.display').wrap('<span class="math-display-wrap"></span>');
-
-    $('#refs').append($('.footnotes ol'));
-    $('.footnotes').remove();
 
     $('#appendix #refs').remove();
     $('#appendix .footnotes').remove();
