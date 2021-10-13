@@ -30,7 +30,7 @@ a {
   }
 }
 
-div > p {
+p {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -56,6 +56,10 @@ svg {
   stroke-linejoin: round;
 }
 
+#title {
+  margin-bottom: 1rem;
+}
+
 #theme-switch {
   svg {
     width: 24px;
@@ -64,6 +68,7 @@ svg {
   &:hover {
     cursor: pointer;
   }
+  margin-left: 2rem;
 }
 
 abbr, .abbr {

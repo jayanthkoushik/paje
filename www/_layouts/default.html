@@ -45,12 +45,13 @@ layout: compress
 <h1 id="title">
   <small aria-disabled="true" id="theme-switch" class="float-end"></small>
   {{- page.title -}}
+  {% if page.subtitle %}
   <br>
   <small>{{- page.subtitle -}}</small>
+  {% endif %}
 </h1>
 
 {% if page.author %}
-<p>
 
 <ul class="lead list-inline">
 {% assign has_equal_contribs = false %}
@@ -71,14 +72,11 @@ layout: compress
 {%- endif -%}
 {%- endunless -%}
 
-</p>
 {% endif %}
 
 {% if page.abstract %}
 <h1>Abstract</h1>
-<div id="abstract">
-  <p>{{- page.abstract | pandoc -}}</p>
-</div>
+<p id="abstract">{{- page.abstract | markdownify -}}</p>
 {% endif %}
 
 {{ content }}

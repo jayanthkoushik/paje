@@ -45,5 +45,3 @@ class Jekyll::Converters::Markdown::PandocProcessor
     Pandoc::pandoc(content)
   end
 end
-
-Liquid::Template.register_filter(Pandoc)
