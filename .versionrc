@@ -1,0 +1,16 @@
+{
+  "bumpFiles": [
+    {
+      "filename": ".version",
+      "type": "plain-text"
+    }
+  ],
+  "scripts": {
+    "postbump": "sed -i '' \"s|jayanthkoushik/paje:v.*$|jayanthkoushik/paje:v`cat .version`'|\" action.yml",
+    "precommit": "git add action.yml"
+  },
+  "commit-all": true,
+  "skip": {
+    "changelog": true
+  }
+}

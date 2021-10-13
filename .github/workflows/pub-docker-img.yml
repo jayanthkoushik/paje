@@ -2,9 +2,8 @@ name: Publish Docker image
 
 on:
   push:
-    branches:
-    - master
-  workflow_dispatch:
+    tags:
+      - 'v*'
 
 jobs:
   main:
@@ -17,4 +16,4 @@ jobs:
     - uses: docker/build-push-action@v2
       with:
         push: true
-        tags: jayanthkoushik/paje:v1.0.0,jayanthkoushik/paje:latest
+        tags: jayanthkoushik/paje:${{ github.ref }},jayanthkoushik/paje:latest
