@@ -9,6 +9,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+    - id: vars
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
     - uses: docker/login-action@v1
       with:
         username: jayanthkoushik
@@ -16,4 +18,4 @@ jobs:
     - uses: docker/build-push-action@v2
       with:
         push: true
-        tags: jayanthkoushik/paje:${{ github.ref }},jayanthkoushik/paje:latest
+        tags: jayanthkoushik/paje:${{ steps.vars.outputs.tag }},jayanthkoushik/paje:latest
