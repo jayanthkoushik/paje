@@ -1,17 +1,15 @@
-plugins:
-  - uglifier
 markdown: PandocProcessor
 exclude: [Gemfile, Gemfile.lock]
-compress_html:
-  clippings: all
-  comments: ["<!-- ", " -->"]
-  endings: all
-  startings: [html, head, body]
 defaults:
   - scope:
       path: "*.md"
     values:
       layout: "default"
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  startings: [html, head, body]
 sass:
   style: compressed
   sourcemap: never

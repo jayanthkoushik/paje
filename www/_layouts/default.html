@@ -4,31 +4,39 @@ layout: compress
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  {% if page.description %}
-  <meta name="description" content="{{ page.description }}">
-  {% endif %}
-  <title>{{page.title}}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  {% unless page.nomath %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous">
-  {% endunless %}
-  <style>
-  {% capture defaultstyle %}
-    {% include default.scss %}
-  {% endcapture %}
-  {{ defaultstyle | scssify }}
-  {% if page.extcss %}
-    {% capture extrastyle %}
-      {% for extcss in page.extcss %}
-        {% include {{ extcss }} %}
-      {% endfor %}
-    {% endcapture %}
-    {{ extrastyle | scssify }}
-  {% endif %}
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% if page.description %}
+<meta name="description" content="{{- page.description -}}">
+{% endif %}
+
+<title>{{- page.title -}}</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+{% unless page.nomath %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous">
+{% endunless %}
+
+<style>
+{% capture defaultstyle %}
+  {% include default.scss %}
+{% endcapture %}
+{{ defaultstyle | scssify }}
+
+{% if page.extcss %}
+{% capture extrastyle %}
+  {% for extcss in page.extcss %}
+    {% include {{ extcss }} %}
+  {% endfor %}
+{% endcapture %}
+{{ extrastyle | scssify }}
+{% endif %}
+</style>
 </head>
+
 <body>
 <div class="container">
 <div class="row justify-content-center">
@@ -36,68 +44,70 @@ layout: compress
 
 <h1 id="title">
   <small aria-disabled="true" id="theme-switch" class="float-end"></small>
-  {{page.title}}
+  {{- page.title -}}
   <br>
-  <small>{{page.subtitle}}</small>
+  <small>{{- page.subtitle -}}</small>
 </h1>
 
 {% if page.author %}
 <p>
+
 <ul class="lead list-inline">
 {% assign has_equal_contribs = false %}
 {% for author in page.author %}
-  <li class="list-inline-item">
-    {{ author.name }}<sup class="sup-right">{{ author.affiliation.id }}{%- unless page.skipequal -%}{%- if author.equalcontrib -%},*{%- assign has_equal_contribs = true -%}{%- endif -%}{%- endunless -%}</sup>
-  </li>
+  <li class="list-inline-item">{{- author.name -}}<sup class="sup-right">{{- author.affiliation.id -}}{%- unless page.skipequal -%}{%- if author.equalcontrib -%},*{%- assign has_equal_contribs = true -%}{%- endif -%}{%- endunless -%}</sup></li>
 {% endfor %}
 </ul>
+
 <ul class="list-inline">
 {% for institute in page.institute %}
-  <li class="list-inline-item"><sup class="sup-left">{{ institute.id }}</sup>{{ institute.name }}</li>
+  <li class="list-inline-item"><sup class="sup-left">{{- institute.id -}}</sup>{{- institute.name -}}</li>
 {% endfor %}
 </ul>
-{%- unless page.skipequal -%}{%- if has_equal_contribs == true -%}<p class="small"><sup class="sup-left">*</sup>Equal contribution</p>{%- endif -%}{%- endunless -%}
+
+{%- unless page.skipequal -%}
+{%- if has_equal_contribs == true -%}
+<p class="small"><sup class="sup-left">*</sup>Equal contribution</p>
+{%- endif -%}
+{%- endunless -%}
+
+</p>
 {% endif %}
 
 {% if page.abstract %}
 <h1>Abstract</h1>
 <div id="abstract">
-{{- page.abstract | pandoc -}}
+  <p>{{- page.abstract | pandoc -}}</p>
 </div>
 {% endif %}
 
-{{content}}
-
-{%- capture appendix -%}
-{%- include appendix.md -%}
-{%- endcapture -%}
-{% if appendix != "" %}
-<div id="appendix">
-{{ appendix | pandoc }}
-</div>
-{% endif %}
+{{ content }}
 
 </div>
 </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
 {% unless page.nomath %}
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 {% endunless %}
+
 <script>
 {% capture defaultjs %}
   {% include default.js %}
 {% endcapture %}
 {{ defaultjs | uglify }}
+
 {% if page.extjs %}
-  {% capture extrajs %}
-    {% for extjs in page.extjs %}
-      {% include {{ extjs }} %}
-    {% endfor %}
-  {% endcapture %}
-  {{ extrajs | uglify }}
+{% capture extrajs %}
+  {% for extjs in page.extjs %}
+    {% include {{ extjs }} %}
+  {% endfor %}
+{% endcapture %}
+{{ extrajs | uglify }}
 {% endif %}
 </script>
 </body>

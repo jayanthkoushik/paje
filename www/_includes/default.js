@@ -17,30 +17,6 @@ $(document).ready(function () {
     } else {
         setTheme('light', modLinks=false);
     }
-
-    $('table').wrap('<div class="table-responsive"></div>');
-
-    $('.math.display').wrap('<span class="math-display-wrap"></span>');
-
-    $('#appendix #refs').remove();
-    $('#appendix .footnotes').remove();
-
-    $('#appendix .header-section-number').each(function(index) {
-        var q = Math.floor(index / 26) + 1;
-        var r = index % 26;
-        var secChr = String.fromCharCode(65 + r);
-        $(this).text(secChr.repeat(q));
-    });
-
-    $('#appendix figcaption').each(function(index) {
-        var cap = $(this).text().replace(/^Figure /, 'Figure S');
-        $(this).text(cap);
-        $(this).siblings('img').prop('alt', cap);
-    });
-    $('#appendix table caption').each(function(index) {
-        var cap = $(this).text();
-        $(this).text(cap.replace(/^Table /, 'Table S'));
-    });
 });
 
 function setTheme(theme, modLinks=true) {

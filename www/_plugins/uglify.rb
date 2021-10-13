@@ -1,11 +1,9 @@
 require "uglifier"
 
-module Jekyll
-  module Uglify
-    def uglify(input)
-      Uglifier.new(:harmony=>true).compile(input)
-    end
+module Uglify
+  def uglify(content)
+    Uglifier.new(:harmony => true).compile(content)
   end
 end
 
-Liquid::Template.register_filter(Jekyll::Uglify)
+Liquid::Template.register_filter(Uglify)
