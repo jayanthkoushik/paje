@@ -19,7 +19,7 @@ module Pandoc
         :default_image_extension => :"png",
       },
       "-F pandoc-crossref",
-      "-F pandoc-citeproc",
+      "--citeproc",
       "-M nameInLink=true",
       "-M link-citations=true",
       "-M linkReferences=true",

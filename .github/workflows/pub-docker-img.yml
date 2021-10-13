@@ -1,0 +1,20 @@
+name: Publish Docker image
+
+on:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker/login-action@v1
+      with:
+        username: jayanthkoushik
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: v1.0.0,latest
