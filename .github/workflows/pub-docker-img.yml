@@ -17,4 +17,4 @@ jobs:
     - uses: docker/build-push-action@v2
       with:
         push: true
-        tags: v1.0.0,latest
+        tags: jayanthkoushik/paje:v1.0.0,jayanthkoushik/paje:latest
