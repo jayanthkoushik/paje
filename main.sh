@@ -17,7 +17,8 @@ if [ "${INPUT_NO404}" = true ]; then
     rm 404.md
 fi
 
-bundle exec jekyll build -d "${GITHUB_WORKSPACE}"
+bundle exec jekyll build
+cp -r _site/* "${GITHUB_WORKSPACE}"
 
 cd "${GITHUB_WORKSPACE}"
 git add .
