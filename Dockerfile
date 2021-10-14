@@ -12,6 +12,7 @@ RUN pacman -S pandoc pandoc-crossref --noconfirm
 RUN pacman -S imagemagick --noconfirm
 RUN pacman -S ghostscript --noconfirm
 RUN pacman -S git --noconfirm
+RUN pacman -S rsync --noconfirm
 
 RUN truncate -s 0 /etc/ImageMagick-7/policy.xml
 
