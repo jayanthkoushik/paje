@@ -1,7 +1,8 @@
-FROM archlinux:base-devel
+FROM archlinux
 MAINTAINER Jayanth Koushik <jnkoushik@gmail.com>
 
 RUN pacman -Syu --noconfirm
+RUN pacman -S base-devel --noconfirm
 
 RUN pacman -S python python-pip --noconfirm
 RUN pacman -S ruby ruby-bundler --noconfirm
