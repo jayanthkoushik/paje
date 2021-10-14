@@ -3,14 +3,16 @@ name: Publish Docker image
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
 
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
     - id: vars
-      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      run: |
+        echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        echo ::set-output name=taghead::${GITHUB_REF#refs/*/} | cut -d. -f1
     - uses: docker/login-action@v1
       with:
         username: jayanthkoushik
@@ -18,4 +20,4 @@ jobs:
     - uses: docker/build-push-action@v2
       with:
         push: true
-        tags: jayanthkoushik/paje:${{ steps.vars.outputs.tag }},jayanthkoushik/paje:latest
+        tags: jayanthkoushik/paje:${{ steps.vars.outputs.tag }},jayanthkoushik/paje:${{ steps.vars.outputs.taghead }},jayanthkoushik/paje:latest
