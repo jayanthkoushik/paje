@@ -7,7 +7,7 @@ _paje_ is a website creation and deployment system. It is composed of two major 
 
 2. Create a new branch named `source`, and switch to it (`git checkout -b source`). This is where the source for your site will live. The `master` branch will be used to deploy the site.
 
-> :warning: **The `master` branch will be overwritten when using the configuration provided in the quickstart.**.
+> :warning: **The `master` branch will be overwritten when using the configuration provided in the quickstart**.
 
 3. Create a file named `index.md` at the root of your repository. This file will contain the root of your site. For now, just add a title:
 
@@ -83,13 +83,15 @@ extjs:
 _paje_ supports typesetting math using [KaTeX](https://katex.org). Inline and block expressions can be added as shown below:
 
 ```txt
-This is an inline expression: $x = 2$. This is a block expression:
+This is an inline expression: $f(x) = x^2 + 2x + 1$.
+This is a block expression:
 
 $$
 f(x) = \int_{0^\infty} \exp(-x^2) \mathrm{d}x.
 $$
 
-Note the empty lines surrounding the block expression. These are necessary! You can also make equations:
+Note the empty lines surrounding the block expression.
+These are necessary! You can also make equations:
 
 $$
 \begin{aligned}
