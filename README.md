@@ -105,3 +105,30 @@ And refer to them (@eq:ex) using tags.
 
 ### Bibliography
 You can include a `bib` file of references, and add citations in your page. The page _must be named `references.bib`_, and you need to add the following line to _setup.sh_: `cp references.bib /www/_includes`. Refer to the pandoc guide for syntax used to make citations.
+
+### Figures
+`.png` images can be added as figures with captions and links:
+
+```txt
+This is a figure:
+
+![This is the figure caption.](img_name_without_extension){#fig:figid}
+
+Note the surrounding empty lines! You can refer to
+the figure (@fig:figid) like any other reference.
+```
+
+### Tables
+Note that support for tables is finicky. They can be added as such:
+
+```txt
+This is a table:
+
+Header    col1   col2    col3
+--------- ------ ------- ------
+Row       1      2       3
+
+: Table caption. {#tbl:tblid}
+
+Note the empty lines surrounding the table (@tbl:tblid).
+```
