@@ -51,7 +51,7 @@ cp index.md /www
 
 8. Once the workflow is complete (indicated by a check mark), the master branch should have two file, `index.html`, and `404.html`. The site has been built, and is ready to be deployed!
 
-9. On the repository's GitHub page, go to the _Pages_ section under _Settings_. Here, set the source branch to `source`, and save.
+9. On the repository's GitHub page, go to the _Pages_ section under _Settings_. Here, set the source branch to `master`, and save.
 
 10. Your website should now be online!
 
