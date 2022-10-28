@@ -1,0 +1,5 @@
+.git*                       export-ignore
+.version*                   export-ignore
+Dockerfile                  export-ignore
+action.yml                  export-ignore
+main.sh                     export-ignore
