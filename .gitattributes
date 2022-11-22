@@ -1,4 +1,2 @@
 .git*                       export-ignore
 .version*                   export-ignore
-Dockerfile                  export-ignore
-main.sh                     export-ignore
