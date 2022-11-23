@@ -11,8 +11,8 @@ jobs:
     steps:
     - id: vars
       run: |
-        echo name=tag::${GITHUB_REF#refs/*/} >> ${GITHUB_OUTPUT}
-        echo name=taghead::${GITHUB_REF#refs/*/} | cut -d. -f1 >> ${GITHUB_OUTPUT}
+        echo tag=${GITHUB_REF#refs/*/} >> ${GITHUB_OUTPUT}
+        echo taghead=${GITHUB_REF#refs/*/} | cut -d. -f1 >> ${GITHUB_OUTPUT}
     - uses: docker/login-action@v2
       with:
         username: jayanthkoushik
