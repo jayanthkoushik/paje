@@ -17,7 +17,8 @@ git init
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git config remote.origin.url "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}"
-git pull --depth=1 origin "${INPUT_TARGETBRANCH}" || git checkout -b "${INPUT_TARGETBRANCH}"
+git checkout -b "${INPUT_TARGETBRANCH}"
+git pull --depth=1 origin "${INPUT_TARGETBRANCH}" || true
 
 rsync -r --delete --exclude=.git/ /www/_site/ ./
 git add .
