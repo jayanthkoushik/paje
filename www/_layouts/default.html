@@ -14,11 +14,10 @@ layout: compress
 
 <title>{{- page.title -}}</title>
 
-{% if page.nomath %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-{% else %}
-<link href="https://cdn.jsdelivr.net/combine/npm/bootstrap@5.1/dist/css/bootstrap.min.css,npm/katex@0.13/dist/katex.min.css" rel="stylesheet" crossorigin="anonymous">
-{% endif %}
+{% unless page.nomath %}
+<link href="https://cdn.jsdelivr.net/npm/katex@0.13/dist/katex.min.css" rel="stylesheet" crossorigin="anonymous">
+{% endunless %}
 
 <style>
 {% capture defaultstyle %}
@@ -85,11 +84,10 @@ layout: compress
 </div>
 </div>
 
-{% if page.nomath %}
 <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.6/dist/jquery.slim.min.js,npm/bootstrap@5.1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-{% else %}
-<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.6/dist/jquery.slim.min.js,npm/bootstrap@5.1/dist/js/bootstrap.min.js,npm/katex@0.13/dist/katex.min.js,npm/katex@0.13/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
-{% endif %}
+{% unless page.nomath %}
+<script defer src="https://cdn.jsdelivr.net/combine/npm/katex@0.13/dist/katex.min.js,npm/katex@0.13/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+{% endunless %}
 
 <script>
 {% capture defaultjs %}
