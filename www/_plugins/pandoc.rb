@@ -2,7 +2,7 @@ require "jekyll"
 require "pandoc-ruby"
 
 module Pandoc
-  def self.pandoc(content)
+  def pandoc(content)
     acros = content.scan(/\\acrodef\{(.*?)\}\{(.*?)\}/)
     acros.each do |acro|
       content = content.sub(/\\acp?\{(#{acro[0]})\}/){|r| "#{acro[1]}" + (r[3] == "p" ? "s" : "") + " (<span class='abbr'>#{r[$1]}" + (r[3] == "p" ? "s" : "") + "</span>)"}
@@ -42,6 +42,8 @@ class Jekyll::Converters::Markdown::PandocProcessor
     @config = config
   end
   def convert(content)
-    Pandoc::pandoc(content)
+    pandoc(content)
   end
 end
+
+Liquid::Template.register_filter(Pandoc)

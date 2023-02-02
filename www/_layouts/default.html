@@ -75,7 +75,7 @@ layout: compress
 
 {% if page.abstract %}
 <h1>Abstract</h1>
-<p id="abstract">{{- page.abstract | markdownify -}}</p>
+<p id="abstract">{{- page.abstract | pandoc -}}</p>
 {% endif %}
 
 {{ content }}
