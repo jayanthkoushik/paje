@@ -1,30 +1,16 @@
-$('#theme-switch').on('click', function () {
-    var newTheme = $('html').attr('data-bs-theme') === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-});
-
-$(document).ready(function () {
-    var wantDark = getURLParameter('dark');
-    var wantLight = getURLParameter('light');
-
-    if (wantDark === true) {
-        setTheme('dark');
-    } else if (wantLight === true) {
-        setTheme('light');
+function getPreferedTheme() {
+    var storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || storedTheme === 'light') {
+        return storedTheme;
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        // don't modify urls or history when following media query preference
-        setTheme('dark', modLinks=false);
+        return 'dark';
     } else {
-        setTheme('light', modLinks=false);
+        return 'light';
     }
+}
 
-    $('table').addClass('table mx-auto w-auto');
-    $('tbody').addClass('table-group-divider');
-});
-
-function setTheme(theme, modLinks=true) {
+function setTheme(theme) {
     $('html').attr('data-bs-theme', theme);
-
     var otherTheme = theme === 'dark' ? 'light' : 'dark';
     // svg sources from https://github.com/tabler/tabler-icons
     if (otherTheme === 'dark') {
@@ -34,27 +20,21 @@ function setTheme(theme, modLinks=true) {
         // sun icon
         $('#theme-switch').html('<svg style="fill: none"><circle cx="12" cy="12" r="4" /><path d="M3 12h1M12 3v1M20 12h1M12 20v1M5.6 5.6l.7 .7M18.4 5.6l-.7 .7M17.7 17.7l.7 .7M6.3 17.7l-.7 .7" /></svg>');
     }
-
-    if (modLinks === true) {
-        $('.local-link').each(function() {
-            var href = $(this)[0].href.split('?', 1)[0];
-            $(this)[0].href = href + '?' + theme;
-        });
-
-        history.replaceState({theme: true}, document.title, '?' + theme);
-    }
 }
 
-function getURLParameter(param) {
-    var params = window.location.search.substring(1).split('&');
-    for (var i = 0; i < params.length; i++) {
-        var param_val_i = params[i].split('=');
-        if (param_val_i[0] === param) {
-            if (param_val_i[1] === undefined) {
-                return true;
-            } else {
-                return decodeURIComponent(param_val_i[1]);
-            }
-        }
-    }
-};
+window.addEventListener('DOMContentLoaded', () => {
+    setTheme(getPreferedTheme());
+    $('table').addClass('table mx-auto w-auto');
+    $('tbody').addClass('table-group-divider');
+});
+
+document.getElementById('theme-switch').addEventListener('click', () => {
+    var newTheme = $('html').attr('data-bs-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+});
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    localStorage.removeItem('theme');
+});
