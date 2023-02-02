@@ -1,32 +1,7 @@
-body.dark-theme {
-  background-color: rgb(28, 28, 30);
-  color: rgb(188, 188, 186);
-  a {
-    &:link {
-      color: CornflowerBlue
-    }
-    &:visited {
-      color: DeepSkyBlue
-    }
-    &:hover {
-      color: DodgerBlue
-    }
-  }
-  figure img {
+html[data-bs-theme="dark"] {
+  figure img, .subfigures img {
     filter: invert(90%);
     border: 1px solid black;
-  }
-}
-
-a {
-  &:link {
-    color: MediumBlue
-  }
-  &:visited {
-    color: DarkBlue
-  }
-  &:hover {
-    color: Blue
   }
 }
 
@@ -74,17 +49,10 @@ abbr, .abbr {
 }
 
 table {
-  width: 100%;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  border-collapse: collapse;
-  td, th {
-    padding: .75rem;
-    vertical-align: top;
-  }
-  th {
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+  caption {
+    text-align: center;
   }
 }
 
@@ -111,6 +79,10 @@ figure {
 
 .sup-right {
   padding-left: 2px;
+}
+
+h1:not(#title) {
+  margin-top: 2rem;
 }
 
 h1, h2, h3 {
