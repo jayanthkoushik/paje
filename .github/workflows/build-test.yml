@@ -14,8 +14,9 @@ jobs:
       with:
         setupscript: |
           cp test/index.md /www/
-          cp test/appendix1.md /www/_includes/
-          cp test/appendix2.md /www/_includes/
-          cp test/references.bib /www/_includes/
+          cp test/_includes/appendix1.md /www/_includes/
+          cp test/_includes/appendix2.md /www/_includes/
+          cp test/_includes/references.bib /www/_includes/
+          cp test/_includes/commands.md /www/_includes/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

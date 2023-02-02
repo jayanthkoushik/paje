@@ -79,6 +79,11 @@ layout: compress
 {% endif %}
 
 {% capture allcontent %}
+{% if page.includes %}
+{% for inc in page.includes %}
+  {% include {{ inc }} %}
+{% endfor %}
+{% endif %}
 {{ page.content }}
 {% if page.appendices %}
 <section id="appendices">

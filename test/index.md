@@ -7,6 +7,8 @@ abstract: Test _markdown_ in abstract. $x+2$.
 appendices:
 - appendix1.md
 - appendix2.md
+includes:
+- commands.md
 ---
 
 # Test sections
@@ -64,6 +66,13 @@ $$
 ### Commands
 $$
 \P{}{x \in \X}
+$$
+
+### External commands
+$\argmin$ $\R$
+
+$$
+\der{f(x)}{x}
 $$
 
 ### Equations
