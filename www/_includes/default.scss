@@ -113,6 +113,10 @@ figure {
   padding-left: 2px;
 }
 
+h1:not(#title) {
+  margin-top: 2rem;
+}
+
 h1, h2, h3 {
   .header-section-number {
     font-size: smaller;
