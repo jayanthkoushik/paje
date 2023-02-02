@@ -16,7 +16,7 @@ RUN pacman -S rsync --noconfirm
 
 RUN truncate -s 0 /etc/ImageMagick-7/policy.xml
 
-RUN pip install shinymdc
+RUN pip install git+https://github.com/jayanthkoushik/mdc.git
 
 ADD main.sh /main.sh
 ADD www /www
