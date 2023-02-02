@@ -1,5 +1,5 @@
 $('#theme-switch').on('click', function () {
-    var newTheme = $('body').hasClass('dark-theme') ? 'light' : 'dark';
+    var newTheme = $('html').attr('data-bs-theme') === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
 });
 
@@ -17,14 +17,13 @@ $(document).ready(function () {
     } else {
         setTheme('light', modLinks=false);
     }
+
+    $('table').addClass('table mx-auto w-auto');
+    $('tbody').addClass('table-group-divider');
 });
 
 function setTheme(theme, modLinks=true) {
-    if (theme === 'dark') {
-        $('body').addClass('dark-theme');
-    } else {
-        $('body').removeClass('dark-theme');
-    }
+    $('html').attr('data-bs-theme', theme);
 
     var otherTheme = theme === 'dark' ? 'light' : 'dark';
     // svg sources from https://github.com/tabler/tabler-icons
