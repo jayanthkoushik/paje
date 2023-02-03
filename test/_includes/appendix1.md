@@ -16,4 +16,6 @@ Col1       Col2     Col3
 
 * @fig:exa
 * @tbl:exb
-* @2012.Seeger.Srinivas
+
+# Test appendix citations
+@knuthwebsite\.

@@ -73,32 +73,9 @@ layout: compress
 
 {% endif %}
 
-{% if page.abstract %}
-<h1>Abstract</h1>
-<p id="abstract">{{- page.abstract | pandoc -}}</p>
-{% endif %}
+{{ content }}
 
-{% capture allcontent %}
-{% if page.includes %}
-{% for inc in page.includes %}
-  {% include {{ inc }} %}
-{% endfor %}
-{% endif %}
-{{ page.content }}
-{% if page.appendices %}
-<section id="appendices">
-{% for appendix in page.appendices %}
-<div class="appendix">
-{% include {{ appendix }} %}
 </div>
-{% endfor %}
-</section>
-{% endif %}
-{% endcapture %}
-
-{{- allcontent | pandoc -}}
-
-</section>
 </div>
 </div>
 
