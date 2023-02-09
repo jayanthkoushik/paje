@@ -54,25 +54,20 @@ In mollis tortor vel ante cursus, ac consectetur nibh commodo. Aenean ultricies 
 ## Inline math
 $\int_0^\infty \exp^{-x^2}\,\mathrm{d}x$
 
-\newcommand{\PP}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
-\newcommand{\XX}{\mathcal{X}}
-\newcommand{\EE}[2]{\mathbb{E}_{#1}\left[{#2}\right]}
-
 ## Block math
 $$
 \int_0^\infty \exp^{-x^2}\,\mathrm{d}x
 $$
 
+\newcommand{\PP}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\EE}[2]{\mathbb{E}_{#1}\left[{#2}\right]}
+
 ### Commands
+Commands defined inline:
+
 $$
 \PP{}{x \in \XX}
-$$
-
-### External commands
-$\argmin$ $\R$
-
-$$
-\der{f(x)}{x}
 $$
 
 ### Equations
@@ -138,6 +133,7 @@ Short citation\ [@einstein]. Long citation: @latexcompanion,. Multiple citations
 # Includes
 
 ## Metadata includes
+Commands from file included in metadata.
 $\argmin$ $\R$
 
 $$
