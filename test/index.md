@@ -54,9 +54,9 @@ In mollis tortor vel ante cursus, ac consectetur nibh commodo. Aenean ultricies 
 ## Inline math
 $\int_0^\infty \exp^{-x^2}\,\mathrm{d}x$
 
-\renewcommand{\P}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
-\newcommand{\X}{\mathcal{X}}
-\newcommand{\E}[2]{\mathbb{E}_{#1}\left[{#2}\right]}
+\newcommand{\PP}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
+\newcommand{\XX}{\mathcal{X}}
+\newcommand{\EE}[2]{\mathbb{E}_{#1}\left[{#2}\right]}
 
 ## Block math
 $$
@@ -65,7 +65,7 @@ $$
 
 ### Commands
 $$
-\P{}{x \in \X}
+\PP{}{x \in \XX}
 $$
 
 ### External commands
@@ -79,7 +79,7 @@ $$
 @eq:ex.
 
 $$
-\E{}{x \geq 0}
+\EE{}{x \geq 0}
 $$ {#eq:ex}
 
 # Footnote
