@@ -92,15 +92,15 @@ Pointer to a footnote.\ [^1]
 ## Figures
 References to figures: @fig:exa, @fig:exb, @fig:exc. References to sub-figures: @fig:exc1, @fig:exc2.
 
-![Example figure A](https://upload.wikimedia.org/wikipedia/commons/5/56/Latin_letter_A_%28small_cap_as_small_form%29.svg){#fig:exa width=2in}
+![Example figure A.](cat.png){#fig:exa}
 
-![Example figure B](https://upload.wikimedia.org/wikipedia/commons/5/5f/Latin_letter_B_%28small_cap_as_small_form%29.svg){#fig:exb}
+![Example figure B with fixed width.](globe.png){#fig:exb width=2in}
 
 <div id="fig:exc">
 
-![Example subfigure 1](https://upload.wikimedia.org/wikipedia/commons/c/c6/Latin_letter_C.svg){#fig:exc1 width=2in height=2in}
+![Example subfigure 1 without extension](airplane){#fig:exc1 width=2in height=2in}
 \qquad
-![Example subfigure 2](https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg){#fig:exc2 width=2in height=2in}
+![Example subfigure 2](c.png){#fig:exc2 width=2in height=2in}
 
 Example figure C
 </div>
