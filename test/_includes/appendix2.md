@@ -15,4 +15,13 @@ Col1       Col2     Col3
 11           22     33
 111         222     333
 
-: Appendix table {#tbl:appex1}
+: Appendix table {#tbl:app2ex1}
+
+<div id="fig:app2ex1">
+
+![Figure with implicit dark version](figures/lines.png){#fig:app2ex1a}
+\qquad
+![Figure with suppressed dark version](figures/lines.png){#fig:app2ex1b darksrc=""}
+
+Sub-figures with non-default extension
+</div>

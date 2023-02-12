@@ -106,7 +106,8 @@ $$ {#eq:ex2}
 
 * Section: @sec:math
 * Appendix section: @sec:app1
-* Appendix figure: @fig:appex1
+* Appendix figure: @fig:app1ex1, @fig:app2ex1, @fig:app2ex1a, @fig:app2ex1b
+* Appendix table: @tbl:app2ex1
 * Short citation[@einstein].
 * Long citation: @latexcompanion
 * Multiple citations[@einstein; @knuthwebsite].
@@ -149,20 +150,17 @@ Col1       Col2     Col3     Col4
 
 * @fig:ex1
 * @fig:ex2
-* @fig:ex3
-* @fig:ex4, @fig:ex4a, @fig:ex4b
+* @fig:ex3, @fig:ex3a, @fig:ex3b
 
-![Figure with light/dark versions](figures/anscombe.svg){#fig:ex1 darksrc="figures/anscombe_dark.svg"}
+![Figure with explicit dark version](figures/anscombe){#fig:ex1 darksrc="figures/anscombe_dark.svg"}
 
-![Figure with no dark version](figures/diamonds.svg){#fig:ex2 darksrc=""}
+![Figure with no dark version](figures/diamonds){#fig:ex2 darksrc=""}
 
-![Figure with auto dark version](figures/gaussian2d.svg){#fig:ex3}
+<div id="fig:ex3">
 
-<div id="fig:ex4">
-
-![Figure with non-default extension](figures/penguins.png){#fig:ex4a darksrc=""}
+![Figure with specific width, height](figures/gaussian2d){#fig:ex3a width=3in height=3in}
 \qquad
-![Figure with specific height](figures/densities.svg){#fig:ex4b height=3in}
+![Figure with specific height](figures/densities){#fig:ex3b height=3in}
 
-Figure with subfigures
+Sub-figures with auto dark versions
 </div>

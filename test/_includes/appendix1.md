@@ -9,8 +9,7 @@ efficitur. Nulla a semper libero. Praesent pharetra ullamcorper massa vel
 tincidunt. Sed dignissim magna et tellus efficitur, vitae sollicitudin lorem
 tincidunt. Nam non velit et enim rutrum euismod.
 
-![Appendix figure](figures/anscombe.svg){#fig:appex1}
-
+![Figure with implicit dark version](figures/anscombe){#fig:app1ex1}
 
 ## References
 
@@ -18,4 +17,4 @@ tincidunt. Nam non velit et enim rutrum euismod.
 * @tbl:ex2
 * @knuthwebsite
 * @sec:app2
-* @tbl:appex1
+* @tbl:app2ex1
