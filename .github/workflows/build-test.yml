@@ -11,7 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: |
-        sed -i '' "s|image:.*$|image: 'Dockerfile'|" action.yml
+        perl -pi -e "s/image: .*$/image: 'Dockerfile'/g" action.yml
+        cat action.yml
     - uses: ./
       with:
         setupscript: |
