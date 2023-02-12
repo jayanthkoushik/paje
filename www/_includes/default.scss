@@ -1,7 +1,9 @@
 html[data-bs-theme="dark"] {
-  figure img, .subfigures img {
-    filter: invert(90%);
-    border: 1px solid black;
+  figure, .subfigures {
+    img:not([data-darksrc]) {
+      filter: invert(90%);
+      border: 1px solid black;
+    }
   }
 }
 

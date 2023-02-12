@@ -11,6 +11,15 @@ function getPreferedTheme() {
 
 function setTheme(theme) {
     $('html').attr('data-bs-theme', theme);
+
+    // update source for images with dark/light versions
+    $('img[data-lightsrc]').attr(
+        'src',
+        function(){
+            return $(this).attr(theme === 'dark' ? 'data-darksrc' : 'data-lightsrc');
+        }
+    );
+
     var otherTheme = theme === 'dark' ? 'light' : 'dark';
     // svg sources from https://github.com/tabler/tabler-icons
     if (otherTheme === 'dark') {
@@ -23,9 +32,10 @@ function setTheme(theme) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    setTheme(getPreferedTheme());
+    $('img[data-darksrc][data-darksrc!=""]').attr('data-lightsrc', function(){return $(this).attr('src')});
     $('table').addClass('table mx-auto w-auto');
     $('tbody').addClass('table-group-divider');
+    setTheme(getPreferedTheme());
 });
 
 document.getElementById('theme-switch').addEventListener('click', () => {

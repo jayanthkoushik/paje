@@ -152,15 +152,15 @@ Col1       Col2     Col3     Col4
 * @fig:ex3
 * @fig:ex4, @fig:ex4a, @fig:ex4b
 
-![Figure with light/dark versions](figures/anscombe.svg){#fig:ex1}
+![Figure with light/dark versions](figures/anscombe.svg){#fig:ex1 darksrc="figures/anscombe_dark.svg"}
 
-![Figure with no dark version](figures/diamonds.svg){#fig:ex2}
+![Figure with no dark version](figures/diamonds.svg){#fig:ex2 darksrc=""}
 
 ![Figure with auto dark version](figures/gaussian2d.svg){#fig:ex3}
 
 <div id="fig:ex4">
 
-![Figure with non-default extension](figures/penguins.png){#fig:ex4a}
+![Figure with non-default extension](figures/penguins.png){#fig:ex4a darksrc=""}
 \qquad
 ![Figure with specific height](figures/densities.svg){#fig:ex4b height=3in}
 
