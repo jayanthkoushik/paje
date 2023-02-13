@@ -21,7 +21,7 @@ Actions](https://github.com/features/actions) workflow to deploy the site using
 3. Create a file named `index.md` at the root of your repository. This file will
    contain the root of your site. For now, just add a title:
 
-   ```markdown
+   ```yaml
    ---
    title: Hello, World
    ---
@@ -167,7 +167,7 @@ extjs:
 _paje_ supports typesetting math using [KaTeX](https://katex.org). Inline and
 block expressions can be added as shown below:
 
-```txt
+```latex
 This is an inline expression: $f(x) = x^2 + 2x + 1$.
 This is a block expression:
 
@@ -191,7 +191,7 @@ Equations can be referenced (@eq:ex) using tags.
 Definitions are supported, and can be added in any page directly, or in a
 separate file that's included (via `includes` in the metadata):
 
-```txt
+```latex
 \newcommand{\PP}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
 \newcommand{\XX}{\mathcal{X}}
 \newcommand{\RR}{\mathbb{R}}
@@ -212,7 +212,7 @@ syntax used to make citations.
 
 Images can be added as figures with captions and links:
 
-```txt
+```markdown
 This is a figure:
 
 ![This is the figure caption.](img_path){#fig:figid}
@@ -231,7 +231,7 @@ dark theme. For a figure with source '/path/to/fig.ext', if there is a file
 '/path/to/fig_dark.ext', it will be used automatically. A dark mode image can
 also be specified explicity by setting 'darksrc' for the figure:
 
-```txt
+```markdown
 ![This figure will use `alt_img.png` in dark mode](img.png){#fig:figid darksrc='alt_img.png'}
 ```
 
@@ -241,7 +241,7 @@ regardless of mode.
 
 Sub-figures can be created by wrapping figures in a `div`:
 
-```txt
+```markdown
 <div id="fig:subs">
 
 ![Sub-figure 1. You can specify the width](img1){#fig:sub1 width=2in}
@@ -258,7 +258,7 @@ sub-figures (@fig:sub1,@fig:sub2).
 ### Tables
 Note that support for tables is finicky. They can be added as such:
 
-```txt
+```markdown
 This is a table:
 
 Header    col1   col2    col3
@@ -274,14 +274,14 @@ Note the empty lines surrounding the table (@tbl:tblid).
 
 Acronyms can be defined using `\acrodef`:
 
-```txt
+```latex
 \acrodef{CMU}{Carnegie Mellon University}
 \acrodef{USA}{United States of America}
 ```
 
 These can be used using `\ac` and `\acs`:
 
-```txt
+```latex
 This will be shown with the definition in brackets since it is the first time
 the abbreviation is used: \ac{CMU}.
 This will now be shown only as the abbreviation: \ac{CMU}.
