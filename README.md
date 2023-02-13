@@ -113,15 +113,19 @@ description: page description meta data (not displayed)
 
 author:  # author list, will be displayed below sub-title
 - name: Author1 Name
-  affiliation.id: 1  # link to an id in the institute list
+  affiliation:
+  - 1  # link to an id in the institute list
   equalcontrib: true  # whether the author is an equal main contributor
 
 - name: Author2 Name
-  affiliation.id: 2  # will be shown as a super-script after the name
+  affiliation:
+  - 2  # will be shown as a super-script after the name
   equalcontrib: true  # will be indicated with a '*'
 
 - name: Author3 Name
-  affiliation.id: 1
+  affiliation:
+  - 1
+  - 2  # multiple affiliations will be separated by ','
 
 institute:  # institute list, displayed below authors
 - id: 1  # will be shown as a super-script before the name
