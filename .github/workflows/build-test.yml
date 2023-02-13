@@ -23,5 +23,7 @@ jobs:
           cp test/_includes/references.bib /www/_includes/
           cp test/_includes/commands.md /www/_includes/
           cp test/_includes/ext.md /www/_includes/
+          cp test/_includes/local.scss /www/_includes/
+          cp test/_includes/local.js /www/_includes/
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
