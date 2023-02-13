@@ -1,4 +1,3 @@
-
 # Appendix 1 {#sec:app1}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nisi purus,
