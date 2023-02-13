@@ -83,11 +83,11 @@ figure {
   padding-left: 2px;
 }
 
-h1:not(#title) {
+h2 {
   margin-top: 2rem;
 }
 
-h1, h2, h3 {
+h2, h3, h4 {
   .header-section-number {
     font-size: smaller;
     font-weight: normal;
@@ -97,7 +97,7 @@ h1, h2, h3 {
   }
 }
 
-h4, h5, h6 {
+h5, h6 {
   .header-section-number {
     display: none;
   }

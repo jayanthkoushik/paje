@@ -33,10 +33,28 @@ function setTheme(theme) {
     );
 }
 
+function replaceTag(target, repl) {
+    $(target).replaceWith(function() {
+        var replElem = $("<" + repl + ">");
+        replElem.html($(this).html());
+        var thisAttrs = $(this).prop("attributes");
+        $.each(thisAttrs, function() {
+            replElem.attr(this.name, this.value);
+        });
+        return replElem;
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferedTheme());
     $('table').addClass('table mx-auto w-auto');
     $('tbody').addClass('table-group-divider');
+    replaceTag("h5", "h6");
+    replaceTag("h4", "h5");
+    replaceTag("h3", "h4");
+    replaceTag("h2", "h3");
+    replaceTag("h1:not('#title')", "h2");
+    replaceTag("section#footnotes", "div");
 });
 
 document.getElementById('theme-switch').addEventListener('click', () => {
