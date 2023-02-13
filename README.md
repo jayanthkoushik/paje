@@ -242,13 +242,13 @@ regardless of mode.
 Sub-figures can be created by wrapping figures in a `div`:
 
 ```txt
-<div>
+<div id="fig:subs">
 
 ![Sub-figure 1. You can specify the width](img1){#fig:sub1 width=2in}
-\qqad
+
 ![Sub-figure 2. You can specify both the width and height](img2){#fig:sub2 width=3in height=2in}
 
-This is the caption for the whole figure. {#fig:subs}
+This is the caption for the whole figure.
 </div>
 
 You can refer to either the whole figure (@fig:subs), or to individual

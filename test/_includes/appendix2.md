@@ -19,7 +19,7 @@ Col1       Col2     Col3
 <div id="fig:app2ex1">
 
 ![Figure with implicit dark version](figures/lines.png){#fig:app2ex1a}
-\qquad
+
 ![Figure with suppressed dark version](figures/lines.png){#fig:app2ex1b darksrc=""}
 
 Sub-figures with non-default extension

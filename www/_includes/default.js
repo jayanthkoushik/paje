@@ -55,6 +55,17 @@ window.addEventListener('DOMContentLoaded', () => {
     replaceTag("h2", "h3");
     replaceTag("h1:not('#title')", "h2");
     replaceTag("section#footnotes", "div");
+
+    $(".subfigures").each(function() {
+        var figs = $(this).children("figure");
+        figs.addClass("subfigure");
+        var cap = $(this).children("figcaption");
+        var figsDiv = $("<div>");
+        figsDiv.addClass("d-flex justify-content-evenly");
+        figsDiv.html(figs);
+        $(this).html(figsDiv);
+        $(this).append(cap);
+    });
 });
 
 document.getElementById('theme-switch').addEventListener('click', () => {

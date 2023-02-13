@@ -60,19 +60,17 @@ table {
 
 figure {
   text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
   img {
     max-width: 100%;
     height: auto;
   }
-  figcaption {
+  &:not(.subfigure) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  &:not(.subfigures) figcaption {
     margin-top: 1rem;
   }
-}
-
-.subfigures p {
-  text-align: center;
 }
 
 .sup-left {
