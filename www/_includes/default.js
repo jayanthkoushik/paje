@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
         figs.addClass("subfigure");
         var cap = $(this).children("figcaption");
         var figsDiv = $("<div>");
-        figsDiv.addClass("d-flex justify-content-evenly");
+        figsDiv.addClass("d-md-flex justify-content-md-evenly");
         figsDiv.html(figs);
         $(this).html(figsDiv);
         $(this).append(cap);
