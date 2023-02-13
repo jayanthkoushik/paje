@@ -183,9 +183,9 @@ Col1       Col2     Col3     Col4
 
 <div id="fig:ex3">
 
-![Figure with specific width, height](figures/gaussian2d){#fig:ex3a width=3in height=3in}
+![Figure with 'width=3in'](figures/gaussian2d){#fig:ex3a width=3in}
 
-![Figure with specific height](figures/densities){#fig:ex3b height=3in}
+![Figure with 'width=5in'](figures/densities){#fig:ex3b width=5in}
 
 Sub-figures with auto dark versions
 </div>
