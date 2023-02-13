@@ -4,6 +4,13 @@ on:
   push:
     branches:
     - master
+    paths:
+    - '.github/workflows/build-test.yml'
+    - 'test/**'
+    - 'www/**'
+    - 'Dockerfile'
+    - 'action.yml'
+    - 'main.sh'
 
 jobs:
   main:
