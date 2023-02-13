@@ -90,6 +90,12 @@ docs](https://jekyllrb.com/docs/) for details.
 >:warning: Note that any files added to the site should be copied to `/www` in
 _setup.sh_.
 
+### References
+
+_paje_ using [pandoc-crossref](https://lierdakil.github.io/pandoc-crossref/) to
+process references to figures, tables, equations. Refer to the docs for details
+on syntax.
+
 ### Additional files
 
 You can create additional markdown files to add pages to your site. For each new
