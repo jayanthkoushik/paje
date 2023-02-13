@@ -9,7 +9,7 @@ module Pandoc
       content = content.gsub(/\\acs?p?\{(#{acro[0]})\}/){|r| "<abbr title='#{acro[1]}'>#{r[$1]}" + (r[3] == "p" || r[4] == "p" ? "s" : "") + "</abbr>"}
     end
 
-    content = content.gsub(/(\!\[.*?\]\((.+?)(\..+?)?\))\{(((?!darksrc).)*?)\}/){|r|
+    content = content.gsub(/(\!\[.*?\]\((.+?)(\..+?)?\))\{(((?!darksrc).)*?)\}/m){|r|
       darkf = r[$2] + "_dark" + ($3.nil? ? ".svg" : r[$3])
       extra_attr = (File.exists? darkf) ? " data-darksrc='#{darkf}'" : ""
       "#{r[$1]}{#{r[$4]}#{extra_attr}}"
