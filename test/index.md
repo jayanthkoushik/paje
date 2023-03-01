@@ -20,8 +20,6 @@ institute:
   name: Institute1
 - id: 2
   name: Institute2
-permalink: "index"
-nomath: false
 abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:math. Reference[@latexcompanion].
 appendices:
 - appendix1.md

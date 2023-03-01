@@ -1,5 +1,6 @@
 require "jekyll"
 require "pandoc-ruby"
+require "nokogiri"
 
 module Pandoc
   def pandoc(content)
@@ -8,12 +9,6 @@ module Pandoc
       content = content.sub(/\\acp?\{(#{acro[0]})\}/){|r| "#{acro[1]}" + (r[3] == "p" ? "s" : "") + " (<span class='abbr'>#{r[$1]}" + (r[3] == "p" ? "s" : "") + "</span>)"}
       content = content.gsub(/\\acs?p?\{(#{acro[0]})\}/){|r| "<abbr title='#{acro[1]}'>#{r[$1]}" + (r[3] == "p" || r[4] == "p" ? "s" : "") + "</abbr>"}
     end
-
-    content = content.gsub(/(\!\[.*?\]\((.+?)(\..+?)?\))\{(((?!darksrc).)*?)\}/m){|r|
-      darkf = r[$2] + "_dark" + ($3.nil? ? ".svg" : r[$3])
-      extra_attr = (File.exists? darkf) ? " data-darksrc='#{darkf}'" : ""
-      "#{r[$1]}{#{r[$4]}#{extra_attr}}"
-    }
 
     @converter = PandocRuby.new(content, :from => :"markdown")
     content = @converter.to_html(
@@ -37,8 +32,58 @@ module Pandoc
       "-M secPrefix=Section",
     )
 
-    content = content.gsub(/<table.*?<\/table>/m){|r| "<div class='table-responsive'>" + r + "</div>"}
-    content = content.gsub(/<span class="math display">.*?<\/span>/m){|r| "<span class='math-display-wrap'>" + r + "</span>"}
+    doc = Nokogiri::HTML.parse(content)
+
+    (5).downto(2).each do |i|
+      hi, hii = "h#{i}", "h#{i + 1}"
+      doc.xpath("//#{hi}").each do |h|
+        h.name = hii
+      end
+    end
+    doc.css("h1:not(#title)").each do |h|
+      h.name = "h2"
+    end
+    doc.css("section#footnotes").each do |sec|
+      sec.name = "div"
+    end
+
+    doc.xpath("//img").each do |img|
+      src = img["src"]
+
+      if img.key?("data-darksrc")
+        darksrc = img["data-darksrc"]
+        if darksrc.empty?
+          img["data-darksrc"] = src
+        end
+        img["data-lightsrc"] = src
+      else
+        base, hasdot, ext = src.rpartition(".")
+        darksrc = base.empty? ? (src + "_dark.svg") : (base + "_dark." + ext)
+        if File.exists? darksrc
+          img["data-darksrc"] = darksrc
+          img["data-lightsrc"] = src
+        end
+      end
+    end
+
+    tables = doc.xpath("//table")
+    tables.wrap("<div class='table-responsive'></div>")
+    tables.add_class("table mx-auto w-auto")
+
+    doc.xpath("//tbody").add_class("table-group-divider")
+    doc.css("span.math.display").wrap("<span class='math-display-wrap'></span>")
+    doc.css("figure img").wrap("<div style='overflow-x: scroll'></div>")
+
+    doc.css(".subfigures").each do |subfig|
+      figs = subfig > "figure"
+      figs.add_class("subfigure")
+      div = figs.last.add_next_sibling("<div class='d-md-flex justify-content-md-evenly'></div>").first
+      figs.each do |fig|
+        fig.parent = div
+      end
+    end
+
+    content = doc.to_html
   end
 end
 

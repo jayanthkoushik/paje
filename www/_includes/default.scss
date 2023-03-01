@@ -7,12 +7,6 @@ html[data-bs-theme="dark"] {
   }
 }
 
-.container {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  overflow-x: hidden;
-}
-
 .math-display-wrap {
   display: block;
   overflow-x: auto;
@@ -60,10 +54,6 @@ table {
 
 figure {
   text-align: center;
-  img {
-    max-width: 100%;
-    height: auto;
-  }
   &:not(.subfigure) {
     margin-top: 2rem;
     margin-bottom: 2rem;
