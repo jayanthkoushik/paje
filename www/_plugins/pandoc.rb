@@ -1,6 +1,7 @@
 require "jekyll"
 require "pandoc-ruby"
 require "nokogiri"
+require "katex"
 
 module Pandoc
   def pandoc(content)
@@ -12,7 +13,7 @@ module Pandoc
 
     @converter = PandocRuby.new(content, :from => :"markdown")
     content = @converter.to_html(
-      :mathjax,
+      :katex,
       :N,
       {
         :bibliography => :"_includes/references.bib",
@@ -66,14 +67,19 @@ module Pandoc
       end
     end
 
+    doc.css("span.math").each do |math|
+      math.inner_html = Katex.render(math.text, :display_mode => math.matches?(".display"))
+      if math.matches?(".display")
+        math.wrap("<span class='math-display-wrap'></span>")
+      end
+    end
+
     tables = doc.xpath("//table")
     tables.wrap("<div class='table-responsive'></div>")
     tables.add_class("table mx-auto w-auto")
-
     doc.xpath("//tbody").add_class("table-group-divider")
-    doc.css("span.math.display").wrap("<span class='math-display-wrap'></span>")
-    doc.css("figure img").wrap("<div style='overflow-x: scroll'></div>")
 
+    doc.css("figure img").wrap("<div style='overflow-x: scroll'></div>")
     doc.css(".subfigures").each do |subfig|
       figs = subfig > "figure"
       figs.add_class("subfigure")
