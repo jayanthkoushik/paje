@@ -50,7 +50,7 @@ layout: compress
 <ul class="list-inline">
 {% assign has_equal_contribs = false %}
 {% for author in page.author %}
-  <li class="list-inline-item">{{- author.name -}}<sup class="sup-right">
+<li class="list-inline-item">{%- if author.email -%}<a href="mailto:{{- author.email -}}">{%- endif -%}{{- author.name -}}{%- if author.email -%}</a>{%- endif -%}<sup class="sup-right">
     {%- for iid in author.affiliation -%}{{- iid -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
     {%- unless page.skipequal -%}
       {%- if author.equalcontrib -%},*{%- assign has_equal_contribs = true -%}{%- endif -%}

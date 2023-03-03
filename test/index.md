@@ -7,6 +7,7 @@ author:
   affiliation:
   - 1
   equalcontrib: True
+  email: 'author1@institute1.edu'
 - name: Author2
   affiliation:
   - 1
@@ -15,6 +16,7 @@ author:
 - name: Author3
   affiliation:
   - 2
+  email: 'author3a@institute2.edu'
 institute:
 - id: 1
   name: Institute1
