@@ -61,13 +61,13 @@ layout: compress
 
 <ul class="list-inline">
 {% for institute in page.institute %}
-  <li class="list-inline-item"><sup class="sup-left">{{- institute.id -}}</sup>{{- institute.name -}}</li>
+  <li class="list-inline-item"><sup class="sup-left">{{- institute.id -}}&nbsp;</sup>{{- institute.name -}}</li>
 {% endfor %}
 </ul>
 
 {% unless page.skipequal %}
 {% if has_equal_contribs == true %}
-<p class="small"><sup class="sup-left">*</sup>Equal contribution</p>
+<p class="small"><sup class="sup-left">*&nbsp;</sup>Equal contribution</p>
 {% endif %}
 {% endunless %}
 
