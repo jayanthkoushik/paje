@@ -17,7 +17,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://jayanthkoushik/paje:v3.3.0'
+  image: 'docker://jayanthkoushik/paje:v3.3.1'
   entrypoint: '/main.sh'
 
 branding:
