@@ -79,7 +79,7 @@ module Pandoc
     tables.add_class("table mx-auto w-auto")
     doc.xpath("//tbody").add_class("table-group-divider")
 
-    doc.css("figure img").wrap("<div style='overflow-x: scroll'></div>")
+    doc.css("figure img").wrap("<div style='overflow-x: auto'></div>")
     doc.css(".subfigures").each do |subfig|
       figs = subfig > "figure"
       figs.add_class("subfigure")
