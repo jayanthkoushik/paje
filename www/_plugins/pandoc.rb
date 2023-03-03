@@ -89,6 +89,20 @@ module Pandoc
       end
     end
 
+    doc.css("a.footnote-ref").each do |cit|
+      if cit.parent.matches?("span.citation")
+        refs = doc.css("#{cit['href']} a[role='doc-biblioref']")
+        reftexts = refs.map { |ref| ref.inner_html.gsub("\n", " ") }
+        reftext = reftexts.join("<br><br>")
+      else
+        reftext = doc.css("#{cit['href']}").xpath(".//text()")[0]
+      end
+      cit["data-bs-title"] = reftext
+      cit["data-bs-toggle"] = "tooltip"
+      cit["data-bs-container"] = "body"
+      cit["data-bs-html"] = "true"
+    end
+
     content = doc.to_html
   end
 end

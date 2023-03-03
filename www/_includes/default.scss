@@ -67,7 +67,7 @@ figure {
   padding-right: 2px;
 }
 
-.sup-right {
+.sup-right, .footnote-ref {
   padding-left: 2px;
 }
 
@@ -95,7 +95,7 @@ h5, h6 {
   }
 }
 
-.citation a {
+.footnote-ref {
   text-decoration: none;
 }
 
@@ -111,5 +111,9 @@ h5, h6 {
 }
 
 table caption, figcaption {
+  font-size: smaller;
+}
+
+.tooltip-inner {
   font-size: smaller;
 }

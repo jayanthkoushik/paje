@@ -31,6 +31,8 @@ function setTheme(theme) {
 
 window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferedTheme());
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 });
 
 document.getElementById('theme-switch').addEventListener('click', () => {
