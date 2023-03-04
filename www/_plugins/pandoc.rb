@@ -92,7 +92,14 @@ module Pandoc
     doc.css("a.footnote-ref").each do |cit|
       if cit.parent.matches?("span.citation")
         refs = doc.css("#{cit['href']} a[role='doc-biblioref']")
-        reftexts = refs.map { |ref| ref.inner_html.gsub("\n", " ") }
+        reftexts = refs.map { |ref|
+          bib = ref["href"]
+          loop do
+            txt = ref.inner_html.gsub("\n", " ")
+            break txt if txt != "Ibid."
+            ref = ref.parent.parent.previous_element.css("a[href='#{bib}']").first
+          end
+        }
         reftext = reftexts.join("<br><br>")
       else
         reftext = doc.css("#{cit['href']}").xpath(".//text()")[0]

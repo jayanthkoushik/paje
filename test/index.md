@@ -22,7 +22,7 @@ institute:
   name: Institute1
 - id: 2
   name: Institute2
-abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:math. Reference[@latexcompanion].
+abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:math. Reference[@texbook].
 appendices:
 - appendix1.md
 - appendix2.md
@@ -131,10 +131,11 @@ $$ {#eq:ex2}
 * Appendix section: @sec:app1
 * Appendix figure: @fig:app1ex1, @fig:app2ex1, @fig:app2ex1a, @fig:app2ex1b
 * Appendix table: @tbl:app2ex1
-* Short citation[@einstein].
-* Long citation: @latexcompanion
-* Multiple citations[@einstein; @knuthwebsite].
-* Pointer to a footnote[^1].
+* Short citation[@latex:companion]
+* Long citation: @latex2e
+* Repeated citation[@latex2e]
+* Multiple citations[@latex2e; @knuth:1984; @lesk:1977]
+* Pointer to a footnote[^1]
 
 [^1]: Example footnote text.
 
