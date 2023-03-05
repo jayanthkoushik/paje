@@ -132,9 +132,9 @@ $$ {#eq:ex2}
 * Appendix figure: @fig:app1ex1, @fig:app2ex1, @fig:app2ex1a, @fig:app2ex1b
 * Appendix table: @tbl:app2ex1
 * Short citation[@latex:companion]
-* Long citation: @latex2e
-* Repeated citation[@latex2e]
-* Multiple citations[@latex2e; @knuth:1984; @lesk:1977]
+* Long citation: @latex:companion, @lesk:1977
+* Repeated citation[@lesk:1977]
+* Multiple citations[@lesk:1977; @knuth:1984; @latex:companion]
 * Pointer to a footnote[^1]
 
 [^1]: Example footnote text.

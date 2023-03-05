@@ -14,6 +14,6 @@ tincidunt. Nam non velit et enim rutrum euismod.
 
 * @fig:ex1
 * @tbl:ex2
-* @knuthwebsite
+* @knuth:1984
 * @sec:app2
 * @tbl:app2ex1

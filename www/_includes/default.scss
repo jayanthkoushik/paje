@@ -67,7 +67,7 @@ figure {
   margin-right: -2px;
 }
 
-.sup-right, .footnote-ref {
+.sup-right, .footnote-ref sup, .citation sup {
   padding-left: 2px;
 }
 
@@ -95,25 +95,14 @@ h5, h6 {
   }
 }
 
-.footnote-ref {
+a.footnote-ref, .citation a {
   text-decoration: none;
 }
 
-#refs {
-  font-size: smaller;
-  div {
-    margin: 1rem 0;
-  }
+#refs li {
+  margin: 1rem 0;
 }
 
-.footnotes {
-  font-size: smaller;
-}
-
-table caption, figcaption {
-  font-size: smaller;
-}
-
-.tooltip-inner {
+.footnotes, table caption, figcaption, .tooltip-inner {
   font-size: smaller;
 }

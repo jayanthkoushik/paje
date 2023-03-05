@@ -100,28 +100,46 @@ module Pandoc
       end
     end
 
-    # Add popovers for foornote references.
-    doc.css("a.footnote-ref").each do |footref|
-      if footref.parent.matches?("span.citation")
-        # If reference is a citation, replace ibids with the actual value.
-        cits = doc.css("#{footref['href']} a[role='doc-biblioref']")
-        reftexts = cits.map { |cit|
-          bib = cit["href"]
-          loop do
-            txt = cit.inner_html.gsub("\n", " ")
-            break txt if txt != "Ibid."
-            cit = cit.parent.parent.previous_element.css("a[href='#{bib}']").first
-          end
-        }
-        reftext = reftexts.join("<br><br>")
+    # Replace citation link text with number, and add popover for reference.
+    doc.css(".citation a").each do |citlink|
+      citnum = citlink.xpath(".//sup")[0].text
+      citlink.inner_html = citnum
+
+      ref = doc.at_css("*[id='#{citlink['href'][1..]}']")
+      reftext = ref.inner_html.gsub("\n", " ")
+
+      citlink["data-bs-title"] = reftext
+      citlink["data-bs-toggle"] = "tooltip"
+      citlink["data-bs-container"] = "body"
+      citlink["data-bs-html"] = "true"
+    end
+
+    doc.css(".citation").each do |citation|
+      cittext = citation.xpath(".//text()")[0].to_s()
+      citlinks = citation.xpath(".//a")
+      # Superscript citation numbers.
+      sup_citlinks = "<sup>" + citlinks.map(&:to_s).join(",") + "</sup>"
+      if cittext != citlinks[0].text.to_s()
+        # Remove extra space from long citations.
+        citation.inner_html = cittext.rstrip() + sup_citlinks
       else
-        # If reference is a footnote, get the footnote text.
-        reftext = doc.css("#{footref['href']}").xpath(".//text()")[0]
+        citation.inner_html = sup_citlinks
       end
+    end
+
+    # Add popovers for footnote references.
+    doc.css("a.footnote-ref").each do |footref|
+      reftext = doc.css("#{footref['href']}").xpath(".//text()")[0]
       footref["data-bs-title"] = reftext
       footref["data-bs-toggle"] = "tooltip"
       footref["data-bs-container"] = "body"
       footref["data-bs-html"] = "true"
+    end
+
+    # Convert bibliography to list.
+    doc.css("#refs")[0].name = "ol"
+    doc.css("#refs div.csl-entry").each do |bibentry|
+      bibentry.name = "li"
     end
 
     content = doc.to_html
