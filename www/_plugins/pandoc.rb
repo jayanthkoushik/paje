@@ -137,9 +137,12 @@ module Pandoc
     end
 
     # Convert bibliography to list.
-    doc.css("#refs")[0].name = "ol"
-    doc.css("#refs div.csl-entry").each do |bibentry|
-      bibentry.name = "li"
+    refs = doc.css("#refs")
+    if refs.length > 0
+      refs[0].name = "ol"
+      doc.css("#refs div.csl-entry").each do |bibentry|
+        bibentry.name = "li"
+      end
     end
 
     content = doc.to_html
