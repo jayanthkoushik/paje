@@ -33,6 +33,8 @@ window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferedTheme());
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    $(".citation a, a.footnote-ref").removeAttr("href");
+    $("#footnotes").remove();
 });
 
 document.getElementById('theme-switch').addEventListener('click', () => {

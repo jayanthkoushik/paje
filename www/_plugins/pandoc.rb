@@ -96,8 +96,6 @@ module Pandoc
 
       ref = doc.at_css("*[id='#{citlink['href'][1..]}']")
       reftext = ref.inner_html.gsub("\n", " ").strip()
-
-      citlink.delete("href")
       citlink.add_class("btn-link")
 
       citlink["data-bs-title"] = reftext
@@ -122,14 +120,12 @@ module Pandoc
     # Add popovers for footnote references.
     doc.css("a.footnote-ref").each do |footref|
       reftext = doc.at_css("#{footref['href']}").at_xpath(".//text()")
-      footref.delete("href")
       footref.add_class("btn-link")
       footref["data-bs-title"] = reftext
       footref["data-bs-toggle"] = "tooltip"
       footref["data-bs-container"] = "body"
       footref["data-bs-html"] = "true"
     end
-    doc.at_css("#footnotes")&.remove()
 
     # Convert bibliography to list.
     refs = doc.at_css("#refs")
