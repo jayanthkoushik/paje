@@ -145,6 +145,12 @@ module Pandoc
       doc.css("#refs div.csl-entry").each do |bibentry|
         bibentry.name = "li"
       end
+
+      # Move appendices to after bibliography.
+      appendices = doc.at_css("#appendices")
+      unless appendices.nil?
+        refs.after(appendices)
+      end
     end
 
     content = doc.to_html
