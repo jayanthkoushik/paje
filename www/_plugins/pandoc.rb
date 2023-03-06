@@ -33,7 +33,7 @@ module Pandoc
       "-M secPrefix=Section",
     )
 
-    doc = Nokogiri::HTML.parse(content)
+    doc = Nokogiri::HTML.parse(content).xpath("//body")
 
     # Replace h5 with h6, h4 with h5, h3 with h4, h2 with h3.
     (5).downto(2).each do |i|
@@ -128,7 +128,7 @@ module Pandoc
 
     # Add popovers for footnote references.
     doc.css("a.footnote-ref").each do |footref|
-      reftext = doc.css("#{footref['href']}").xpath(".//text()")[0]
+      reftext = doc.at_css("#{footref['href']}").at_xpath(".//text()")
       footref.delete("href")
       footref.add_class("btn-link")
       footref["data-bs-title"] = reftext
@@ -139,9 +139,9 @@ module Pandoc
     doc.at_css("#footnotes")&.remove()
 
     # Convert bibliography to list.
-    refs = doc.css("#refs")
-    if refs.length > 0
-      refs[0].name = "ol"
+    refs = doc.at_css("#refs")
+    unless refs.nil?
+      refs.name = "ol"
       doc.css("#refs div.csl-entry").each do |bibentry|
         bibentry.name = "li"
       end
