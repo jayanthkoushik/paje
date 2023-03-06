@@ -91,7 +91,10 @@ module Pandoc
 
     # Replace citation link text with number, and add popover for reference.
     doc.css(".citation a").each do |citlink|
-      citnum = citlink.at_xpath(".//sup").text
+      citnum = citlink.at_xpath(".//sup")&.text
+      if citnum.nil?
+        next
+      end
       citlink.inner_html = citnum
 
       ref = doc.at_css("*[id='#{citlink['href'][1..]}']")
