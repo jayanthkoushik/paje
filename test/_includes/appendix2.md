@@ -1,4 +1,4 @@
-# Appendix 2 {#sec:app2}
+# Appendix 2 {#sec:app2ex1}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nisi purus,
 bibendum non neque sed, lacinia tristique tortor. Vestibulum eu lectus sed velit
@@ -8,6 +8,10 @@ efficitur. Nulla a semper libero. Praesent pharetra ullamcorper massa vel
 tincidunt. Sed dignissim magna et tellus efficitur, vitae sollicitudin lorem
 tincidunt. Nam non velit et enim rutrum euismod.
 
+## Appendix tables
+
+* @tbl:app2ex1
+
 Col1       Col2     Col3
 ------   ------    ------
 1             2     3
@@ -16,11 +20,39 @@ Col1       Col2     Col3
 
 : Appendix table {#tbl:app2ex1}
 
-<div id="fig:app2ex1">
+## Appendix figures
 
-![Figure with implicit dark version](figures/lines.png){#fig:app2ex1a}
+* @fig:app2ex1
+* @fig:app2ex2, @fig:app2ex2b
 
-![Figure with suppressed dark version](figures/lines.png){#fig:app2ex1b darksrc=""}
+![Figure with implicit dark version](figures/anscombe){#fig:app2ex1}
+
+<div id="fig:app2ex2">
+
+![Figure with implicit dark version](figures/lines.png){#fig:app2ex2a}
+
+![Figure with suppressed dark version](figures/lines.png){#fig:app2ex2b darksrc=""}
 
 Sub-figures with non-default extension
 </div>
+
+## Appendix math
+
+$$
+\begin{align*}
+    x &= 1\\
+    x + y &= 10\\
+\end{align*}
+$$ {#eq:app2ex1}
+
+$$
+\int_0^\infty \exp^{-x^2}\,\mathrm{d}x
+$$ {#eq:app2ex2}
+
+* @eq:app2ex1
+* @eq:app2ex2
+* Without tag:
+
+$$
+x + y + z = 100
+$$

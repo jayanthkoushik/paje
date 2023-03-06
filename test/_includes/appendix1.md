@@ -1,4 +1,4 @@
-# Appendix 1 {#sec:app1}
+# Appendix 1 {#sec:app1ex1}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nisi purus,
 bibendum non neque sed, lacinia tristique tortor. Vestibulum eu lectus sed velit
@@ -8,12 +8,26 @@ efficitur. Nulla a semper libero. Praesent pharetra ullamcorper massa vel
 tincidunt. Sed dignissim magna et tellus efficitur, vitae sollicitudin lorem
 tincidunt. Nam non velit et enim rutrum euismod.
 
-![Figure with implicit dark version](figures/anscombe){#fig:app1ex1}
+## Appendix subsection
 
-## References
+### Appendix subsubsection {#sec:app1ex1.1.1}
 
-* @fig:ex1
-* @tbl:ex2
-* @knuth:1984
-* @sec:app2
-* @tbl:app2ex1
+Proin eleifend lorem semper, commodo tellus nec, porta purus. Nullam commodo
+lectus nibh, consequat maximus lorem faucibus in. Nam purus eros, rutrum in
+sapien et, condimentum lacinia nibh.
+
+## Appendix links
+
+* Appendix section: @sec:app1ex1.1.1, @sec:app2ex1
+* Main body section: @sec:ex1
+* Main body figure: @fig:ex1
+* Main body table: @tbl:ex1
+* Main body equation: @eq:ex1
+* Citation: @knuth:1984
+
+## Appendix includes
+
+* Commands from metadata include: $\argmin$ $\R$
+* Include command in body:
+
+{% include ext.md %}

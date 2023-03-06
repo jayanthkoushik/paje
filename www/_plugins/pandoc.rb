@@ -31,6 +31,7 @@ module Pandoc
       "-M tblPrefix=Table",
       "-M lstPrefix=List",
       "-M secPrefix=Section",
+      "-M equationNumberTeX=\\\\tag",
     )
 
     doc = Nokogiri::HTML.parse(content).xpath("//body")
@@ -71,14 +72,6 @@ module Pandoc
       end
     end
 
-    # Render math with Katex.
-    doc.css("span.math").each do |math|
-      math.inner_html = Katex.render(math.text, :display_mode => math.matches?(".display"))
-      if math.matches?(".display")
-        math.wrap("<span class='math-display-wrap'></span>")
-      end
-    end
-
     # Bootstrap-ify tables.
     tables = doc.xpath("//table")
     tables.wrap("<div class='table-responsive'></div>")
@@ -98,7 +91,7 @@ module Pandoc
 
     # Replace citation link text with number, and add popover for reference.
     doc.css(".citation a").each do |citlink|
-      citnum = citlink.xpath(".//sup")[0].text
+      citnum = citlink.at_xpath(".//sup").text
       citlink.inner_html = citnum
 
       ref = doc.at_css("*[id='#{citlink['href'][1..]}']")
@@ -114,7 +107,7 @@ module Pandoc
     end
 
     doc.css(".citation").each do |citation|
-      cittext = citation.xpath(".//text()")[0].to_s()
+      cittext = citation.at_xpath(".//text()").to_s()
       citlinks = citation.xpath(".//a")
       # Superscript citation numbers.
       sup_citlinks = "<sup>" + citlinks.map(&:to_s).join(",") + "</sup>"
@@ -150,6 +143,103 @@ module Pandoc
       appendices = doc.at_css("#appendices")
       unless appendices.nil?
         refs.after(appendices)
+      end
+    end
+
+    # Renumber appendices.
+    doc.css(".appendix").each_with_index do |appendix, i|
+      appno = ((i % 26) + 65).chr * ((i / 26) + 1)
+
+      # Change headings.
+      appendix.css(".header-section-number").each do |h|
+        hparts = h.content.split(".", 2)
+        hno = appno + (hparts.length > 1 ? ".#{hparts[1]}" : "")
+        h.content = hno
+
+        # Change links that point to this heading.
+        hid = h.parent["id"]
+        if hid.nil?
+          hid = appendix["id"]
+        end
+        doc.css("*[href='\##{hid}']").each do |a|
+          a.content = "Appendix #{hno}"
+        end
+      end
+
+      # Change figures.
+      j = 0
+      appendix.xpath(".//figcaption").each do |figcap|
+        if figcap.parent.matches?(".subfigure")
+          next
+        end
+        j += 1
+        figno = appno + j.to_s()
+
+        figdesc = figcap.content.split(": ", 2)[1]
+        figcap.content = "Figure #{figno}: #{figdesc}"
+
+        # Change links that point to this.
+        figid = figcap.parent["id"]
+        doc.css("*[href='\##{figid}']").each do |a|
+          a.content = "Figure #{figno}"
+        end
+
+        # Change links to subfigures.
+        figcap.parent.css(".subfigure").each do |subfig|
+          subfigid = subfig["id"]
+          subfigcap = subfig.at_xpath(".//figcaption")
+          doc.css("*[href='\##{subfigid}']").each do |a|
+            a.content = "Figure #{figno} (#{subfigcap.content})"
+          end
+        end
+      end
+
+      # Change tables.
+      appendix.xpath(".//table").each_with_index do |tab, j|
+        tabno = appno + (j + 1).to_s()
+
+        tabcap = tab.at_xpath(".//caption")
+        tabdesc = tabcap.content.split(": ", 2)[1]
+        tabcap.content = "Table #{tabno}: #{tabdesc}"
+
+        # Change links to this.
+        tabid = tab.parent.parent["id"]
+        doc.css("*[href='\##{tabid}']").each do |a|
+          a.content = "Table #{tabno}"
+        end
+      end
+
+      # Change equations.
+      j = 0
+      appendix.css(".math.display").each do |eqn|
+        neweq = eqn.content.gsub(/(?<=\\tag\{)\([0-9]+\)(?=\})/) { |t|
+          j += 1
+          appno + j.to_s()
+        }
+        if neweq == eqn.content
+          next
+        end
+        eqn.content = neweq
+
+        # Change links to this.
+        eqnid = eqn.parent["id"]
+        eqno = appno + j.to_s()
+        doc.css("*[href='\##{eqnid}']").each do |a|
+          a.content = "Equation #{eqno}"
+        end
+      end
+    end
+
+    # Remove extra `()` from equation tags.
+    doc.css(".math.display").each do |eqn|
+      eqn.content = eqn.content.gsub(/(?<=\\tag\{)\(([0-9]+)\)(?=\})/, '\1')
+    end
+
+    # Render math with Katex.
+    doc.css("span.math").each do |math|
+      math.inner_html = Katex.render(math.text, :display_mode => math.matches?(".display"))
+      if math.matches?(".display")
+        math.wrap("<span class='math-display-wrap'></span>")
       end
     end
 

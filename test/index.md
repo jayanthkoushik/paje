@@ -22,7 +22,7 @@ institute:
   name: Institute1
 - id: 2
   name: Institute2
-abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:math. Reference[@texbook].
+abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:ex1. Reference[@texbook].
 appendices:
 - appendix1.md
 - appendix2.md
@@ -35,7 +35,7 @@ extjs:
 ---
 
 
-# Section
+# Section {#sec:ex1}
 
 Integer at enim eu tellus malesuada scelerisque. Ut sed rhoncus ipsum, at tempor
 nisl. Vivamus vitae pulvinar leo, at pharetra massa. Ut lobortis odio non nulla
@@ -53,7 +53,7 @@ Praesent a tempor ex, eget iaculis mauris. Integer turpis nunc, varius ac
 posuere consequat, molestie sed felis. Fusce cursus velit eu magna pellentesque
 posuere sed eget ex. Vivamus in gravida quam, in volutpat erat.
 
-## Subsection 2
+## Subsection 2 {#sec:ex1.2}
 
 ### Subsubsection 1
 
@@ -101,20 +101,20 @@ sapien et, condimentum lacinia nibh.
 * Repeated after forced short: \ac{USA}
 
 
-# Math {#sec:math}
+# Math
 
 \newcommand{\PP}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
 \newcommand{\XX}{\mathcal{X}}
 \newcommand{\EE}[2]{\mathbb{E}_{#1}\left[{#2}\right]}
 
-* Inline: $\int_0^\infty \exp^{-x^2}\,\mathrm{d}x$
-* Block: @eq:ex1
-* Aligned: @eq:ex2
-* Commands defined in body: $\PP{}{x \in \XX}$
-
 $$
 \int_0^\infty \exp^{-x^2}\,\mathrm{d}x
 $$ {#eq:ex1}
+
+* Inline: $\int_0^\infty \exp^{-x^2}\,\mathrm{d}x$
+* Block: @eq:ex1
+* Commands defined in body: $\PP{}{x \in \XX}$
+* Aligned:
 
 $$
 \begin{align*}
@@ -122,19 +122,20 @@ $$
     x + y &= 10\\
     x + y + z &= 100
 \end{align*}
-$$ {#eq:ex2}
+$$
 
 
-# References
+# Links
 
-* Section: @sec:math
-* Appendix section: @sec:app1
-* Appendix figure: @fig:app1ex1, @fig:app2ex1, @fig:app2ex1a, @fig:app2ex1b
+* Section: @sec:ex1, @sec:ex1.2
+* Appendix section: @sec:app2ex1, @sec:app1ex1.1.1
+* Appendix figure: @fig:app2ex1, @fig:app2ex2a
 * Appendix table: @tbl:app2ex1
+* Appendix math: @eq:app2ex1
 * Short citation[@latex:companion]
 * Long citation: @latex:companion, @lesk:1977
 * Repeated citation[@lesk:1977]
-* Multiple citations[@lesk:1977; @knuth:1984; @latex:companion]
+* Multiple citation[@lesk:1977; @knuth:1984; @latex:companion]
 * Pointer to a footnote[^1]
 
 [^1]: Example footnote text.
