@@ -46,10 +46,6 @@ module Pandoc
     doc.css("h1:not(#title)").each do |h|
       h.name = "h2"
     end
-    # Change footnote wrapper from section to div.
-    doc.css("section#footnotes").each do |sec|
-      sec.name = "div"
-    end
 
     # Set dark/light sources for images.
     doc.xpath("//img").each do |img|
@@ -140,6 +136,7 @@ module Pandoc
       footref["data-bs-container"] = "body"
       footref["data-bs-html"] = "true"
     end
+    doc.at_css("#footnotes")&.remove()
 
     # Convert bibliography to list.
     refs = doc.css("#refs")
