@@ -97,6 +97,9 @@ h5, h6 {
 
 a.footnote-ref, .citation a {
   text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #refs li {
