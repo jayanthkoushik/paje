@@ -31,6 +31,11 @@ function setTheme(theme) {
 
 window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferedTheme());
+    $(".author a").attr({
+        tabindex: "0",
+        role: "button",
+        class: "author-link"
+    })
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
