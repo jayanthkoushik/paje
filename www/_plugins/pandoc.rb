@@ -96,6 +96,8 @@ module Pandoc
         next
       end
       citlink.inner_html = citnum
+      citlink["tabindex"] = "0"
+      citlink["role"] = "button"
 
       ref = doc.at_css("*[id='#{citlink['href'][1..]}']")
       reftext = ref.inner_html.gsub("\n", " ").strip()
@@ -124,6 +126,8 @@ module Pandoc
     doc.css("a.footnote-ref").each do |footref|
       reftext = doc.at_css("#{footref['href']}").at_xpath(".//text()")
       footref.add_class("btn-link")
+      footref["tabindex"] = "0"
+      footref["role"] = "button"
       footref["data-bs-title"] = reftext
       footref["data-bs-toggle"] = "tooltip"
       footref["data-bs-container"] = "body"
