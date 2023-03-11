@@ -113,8 +113,13 @@ $$
 \int_0^\infty \exp^{-x^2}\,\mathrm{d}x
 $$ {#eq:ex1}
 
+$$
+a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+$$ {#eq:ex2}
+
 * Inline: $\int_0^\infty \exp^{-x^2}\,\mathrm{d}x$
-* Block: @eq:ex1
+* Block: @eq:ex1, @eq:ex2
 * Commands defined in body: $\PP{}{x \in \XX}$
 * Aligned:
 

@@ -242,7 +242,12 @@ module Pandoc
     doc.css("span.math").each do |math|
       math.inner_html = Katex.render(math.text, :display_mode => math.matches?(".display"))
       if math.matches?(".display")
-        math.wrap("<span class='math-display-wrap'></span>")
+        bases = math.css(".base")
+        basewrap = bases.last.add_next_sibling("<span class='mx-auto my-2'></span>").first
+        basewrap.wrap("<span class='d-inline-flex w-75 overflow-x-auto'></span>")
+        bases.each do |base|
+          base.parent = basewrap
+        end
       end
     end
 

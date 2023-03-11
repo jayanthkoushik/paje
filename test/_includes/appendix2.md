@@ -46,7 +46,7 @@ $$
 $$ {#eq:app2ex1}
 
 $$
-\int_0^\infty \exp^{-x^2}\,\mathrm{d}x
+\frac{\int_0^\infty \exp^{-x^2}\,\mathrm{d}x}{1 + \frac{1}{\int_0^1 \sin^2(x)\,\mathrm{d}x}}
 $$ {#eq:app2ex2}
 
 * @eq:app2ex1

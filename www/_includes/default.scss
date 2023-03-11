@@ -7,15 +7,6 @@ html[data-bs-theme="dark"] {
   }
 }
 
-.math-display-wrap {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
-  .katex-display {
-    margin: 0.5em 0;
-  }
-}
-
 svg {
   stroke: currentColor;
   stroke-linecap: round;
