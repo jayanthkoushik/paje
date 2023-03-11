@@ -17,6 +17,8 @@ author:
   affiliation:
   - 2
   email: 'author3a@institute2.edu'
+- name: Author4
+  email: 'author4@author4.com'
 institute:
 - id: 1
   name: Institute1

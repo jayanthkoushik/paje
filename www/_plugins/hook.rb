@@ -18,4 +18,14 @@ Jekyll::Hooks.register :pages, :post_init do |page|
     end
     page.content = page.content + "</div>\n"
   end
+
+  institutes = Hash[*(page.data["institute"] || []).collect {
+    |inst| [inst["id"], inst["name"]] }.flatten
+  ]
+
+  for author in (page.data["author"] || [])
+    if author["affiliation"]
+      author["institutes"] = (author["affiliation"] || []).map { |aff| institutes[aff] }
+    end
+  end
 end

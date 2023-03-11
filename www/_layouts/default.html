@@ -50,20 +50,29 @@ layout: compress
 <ul class="list-inline">
 {% assign has_equal_contribs = false %}
 {% for author in page.author %}
-<li class="list-inline-item">{%- if author.email -%}<a href="mailto:{{- author.email -}}">{%- endif -%}{{- author.name -}}{%- if author.email -%}</a>{%- endif -%}<sup class="sup-right">
-    {%- for iid in author.affiliation -%}{{- iid -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
-    {%- unless page.skipequal -%}
-      {%- if author.equalcontrib -%},*{%- assign has_equal_contribs = true -%}{%- endif -%}
-    {%- endunless -%}
-  </sup></li>
+  {%- capture authorpopover -%}
+  {%- if author.institutes -%}
+  <ul class="list-inline">
+  {%- for inst in author.institutes -%}
+    <li class="list-inline-item">{{- inst -}}</li>
+  {%- endfor -%}
+  </ul>
+  {%- endif -%}
+  {%- if author.email -%}<a href="mailto:{{- author.email -}}">{{- author.email -}}</a>{%- endif -%}
+  {%- endcapture -%}
+  <li class="list-inline-item">
+    <a tabindex="0" role="button" class="author-link" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true" data-bs-title="{{- author.name -}}" data-bs-container="body" data-bs-content="{{- authorpopover | escape -}}">{{- author.name -}}</a>{%- if author.affiliation -%}<sup class="inst-nojs">{%- for aff in author.affiliation -%}{{- aff -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}</sup>{%- endif -%}{%- unless page.skipequal -%}{%- if author.equalcontrib -%}<sup class="sup-right">*</sup>{%- assign has_equal_contribs = true -%}{%- endif -%}{%- endunless -%}
+  </li>
 {% endfor %}
 </ul>
 
-<ul class="list-inline">
+{% if page.institute %}
+<ul class="inst-nojs list-inline">
 {% for institute in page.institute %}
   <li class="list-inline-item"><sup class="sup-left">{{- institute.id -}}&nbsp;</sup>{{- institute.name -}}</li>
 {% endfor %}
 </ul>
+{% endif %}
 
 {% unless page.skipequal %}
 {% if has_equal_contribs == true %}

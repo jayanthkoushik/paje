@@ -33,8 +33,11 @@ window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferedTheme());
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
     [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
     $(".citation a, a.footnote-ref").removeAttr("href");
     $("#footnotes").remove();
+    $(".inst-nojs").remove();
 });
 
 document.getElementById('theme-switch').addEventListener('click', () => {
