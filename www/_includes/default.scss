@@ -7,25 +7,33 @@ html[data-bs-theme="dark"] {
   }
 }
 
-svg {
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 #title {
   margin-bottom: 1rem;
 }
 
-#theme-switch {
+#theme-selector {
+  .dropdown-toggle {
+    color: currentColor;
+    border: 0px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .dropdown-menu {
+    min-width: 7rem !important;
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+    .dropdown-item {
+      border-radius: .25rem;
+      --bs-dropdown-item-padding-x: .5rem;
+    }
+  }
   svg {
-    width: 24px;
-    height: 24px;
+    fill: currentColor;
   }
-  &:hover {
-    cursor: pointer;
-  }
-  margin-left: 2rem;
 }
 
 abbr, .abbr {
