@@ -100,13 +100,18 @@ module Pandoc
       citlink["role"] = "button"
 
       ref = doc.at_css("*[id='#{citlink['href'][1..]}']")
-      reftext = ref.inner_html.gsub("\n", " ").strip()
-      citlink.add_class("btn-link")
+      shortref = ref.at_css(".csl-right-inline").inner_html.gsub("\n", " ").strip()
 
-      citlink["data-bs-title"] = reftext
+      citlink.add_class("btn-link")
+      citlink["data-bs-title"] = shortref
       citlink["data-bs-toggle"] = "tooltip"
       citlink["data-bs-container"] = "body"
       citlink["data-bs-html"] = "true"
+    end
+
+    # Remove short references from bibliography.
+    doc.css("#refs .csl-entry").each do |ref|
+      ref.inner_html = ref.at_css(".csl-left-margin").inner_html.gsub("\n", " ").strip()
     end
 
     doc.css(".citation").each do |citation|
