@@ -82,8 +82,9 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.citation a, a.footnote-ref').forEach((citLink) => {
         citLink.removeAttribute('href');
     });
-    document.getElementById('footnotes').remove();
-    document.querySelectorAll('.inst-nojs').forEach((nojsElem) => { nojsElem.remove(); });
+    document.querySelectorAll('#footnotes, .inst-nojs').forEach((nojsElem) => {
+        nojsElem.remove(); }
+    );
 });
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
