@@ -66,13 +66,11 @@ module Pandoc
       if img.key?("data-darksrc")
         # Image has an explicit dark source.
         darksrc = img["data-darksrc"]
+        img["data-lightsrc"] = src
         if darksrc.empty?
           img["data-darksrc"] = src
-        else
-          # Prevent loading the image before theme is known.
-          img.wrap("<noscript class='img-noscript'></noscript>")
+          next
         end
-        img["data-lightsrc"] = src
       else
         # Image does not have an explicit dark source. Check if a file with
         # the same name as the source plus '_dark' exists, and if it does,
@@ -82,9 +80,17 @@ module Pandoc
         if File.exists? darksrc
           img["data-darksrc"] = darksrc
           img["data-lightsrc"] = src
-          img.wrap("<noscript class='img-noscript'></noscript>")
+        else
+          next
         end
       end
+
+      # Prevent loading the image before theme is known.
+      noscript_img = img.clone()  # show default image when JS isn't available
+      img.next = noscript_img
+      noscript_img.wrap("<noscript></noscript>")
+      img.delete("src")
+      img.add_class("hidden")
     end
 
     # Bootstrap-ify tables.

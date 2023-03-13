@@ -25,6 +25,7 @@ function setTheme(theme) {
         const newSrc = img.getAttribute(themeSrc);
         if (img.getAttribute('src') !== newSrc) {
             img.setAttribute('src', newSrc);
+            img.classList.remove('hidden');
         }
     });
 
@@ -43,17 +44,6 @@ function setTheme(theme) {
 window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('theme-selector').classList.remove('hidden');
     setTheme(getPreferredTheme());
-
-    const domParser = new DOMParser();
-    const coreTheme = document.documentElement.getAttribute('data-bs-theme');
-    const themeSrc = coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc';
-    document.querySelectorAll('.img-noscript').forEach((noscript) => {
-        const img = domParser.parseFromString(
-            noscript.innerText, 'text/html'
-        ).getElementsByTagName('img')[0];
-        img.setAttribute('src', img.getAttribute(themeSrc));
-        noscript.replaceWith(img);
-    });
 
     document.querySelectorAll('.author a').forEach((authorLink) => {
         authorLink.setAttribute('tabindex', '0');
