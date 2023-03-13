@@ -122,19 +122,20 @@ author:  # author list, will be displayed below sub-title
   affiliation:
   - 1  # link to an id in the institute list
   equalcontrib: true  # whether the author is an equal main contributor
+  email: author1@institute1.edu  # author email (shown in popover)
 
 - name: Author2 Name
   affiliation:
-  - 2  # will be shown as a super-script after the name
+  - 2
   equalcontrib: true  # will be indicated with a '*'
 
 - name: Author3 Name
   affiliation:
   - 1
-  - 2  # multiple affiliations will be separated by ','
+  - 2
 
-institute:  # institute list, displayed below authors
-- id: 1  # will be shown as a super-script before the name
+institute:  # institute list
+- id: 1  # will be shown in a popover for all authors with this affiliation
   name: Institute 1
 
 - id: 2
