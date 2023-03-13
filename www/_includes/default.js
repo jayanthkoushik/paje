@@ -1,5 +1,5 @@
 function getPreferedTheme() {
-    var storedTheme = localStorage.getItem('theme');
+    const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'dark' || storedTheme === 'light') {
         return storedTheme;
     }
@@ -17,53 +17,60 @@ function setTheme(theme) {
     }
 
     // Set global theme.
-    $('html').attr('data-bs-theme', coreTheme);
+    document.documentElement.setAttribute('data-bs-theme', coreTheme);
 
     // Update themed images.
-    $('img[data-darksrc]').attr(
-        'src',
-        function() {
-            return $(this).attr(coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc');
-        }
-    );
+    const themeSrc = coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc';
+    document.querySelectorAll('img[data-darksrc]').forEach((img) => {
+        img.setAttribute('src', img.getAttribute(themeSrc));
+    });
 
     // Update theme selector.
-    $('[data-bs-theme-value]').each(function() {
-        if ($(this).attr('data-bs-theme-value') === theme) {
-            $(this).addClass("active");
-            $("#active-theme-button").html($(this).children("svg").clone());
+    document.querySelectorAll('.theme-button').forEach((themeBtn) => {
+        if (themeBtn.getAttribute('data-bs-theme-value') === theme) {
+            themeBtn.classList.add('active');
+            const themeSvg = themeBtn.querySelector('svg').cloneNode(true);
+            document.getElementById('active-theme-button').replaceChildren(themeSvg);
         } else {
-            $(this).removeClass("active");
+            themeBtn.classList.remove('active');
         }
     });
 }
 
-$(".theme-button").on("click", function () {
-    var theme = $(this).attr('data-bs-theme-value');
-    if (theme === 'dark' || theme === 'light') {
-        localStorage.setItem('theme', theme);
-    } else {
-        localStorage.removeItem('theme');
-    }
-    setTheme(theme);
+document.querySelectorAll('.theme-button').forEach((themeBtn) => {
+    themeBtn.addEventListener('click', function () {
+        const theme = this.getAttribute('data-bs-theme-value');
+        if (theme === 'dark' || theme === 'light') {
+            localStorage.setItem('theme', theme);
+        } else {
+            localStorage.removeItem('theme');
+        }
+        setTheme(theme);
+    });
 });
 
 window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferedTheme());
-    $(".author a").attr({
-        tabindex: "0",
-        role: "button",
-        class: "author-link"
-    });
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-    [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-    $(".citation a, a.footnote-ref").removeAttr("href");
-    $("#footnotes").remove();
-    $(".inst-nojs").remove();
-});
 
+    document.querySelectorAll('.author a').forEach((authorLink) => {
+        authorLink.setAttribute('tabindex', '0');
+        authorLink.setAttribute('role', 'button');
+        authorLink.setAttribute('class', 'author-link');
+    });
+
+    const tooltips = [...document.querySelectorAll('[data-bs-toggle="tooltip"]')].map(
+        tooltipTrigger => new bootstrap.Tooltip(tooltipTrigger)
+    );
+    const popovers = [...document.querySelectorAll('[data-bs-toggle="popover"]')].map(
+        popoverTrigger => new bootstrap.Popover(popoverTrigger)
+    );
+
+    document.querySelectorAll('.citation a, a.footnote-ref').forEach((citLink) => {
+        citLink.removeAttribute('href');
+    });
+    document.getElementById('footnotes').remove();
+    document.querySelectorAll('.inst-nojs').forEach((nojsElem) => { nojsElem.remove(); });
+});
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     if (getPreferedTheme() === 'auto') {

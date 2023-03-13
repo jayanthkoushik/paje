@@ -1,3 +1,3 @@
 window.addEventListener('DOMContentLoaded', () => {
-    $("#sec\\:includes + p").prepend("Added by 'local.js'. ")
+    document.querySelector('#sec\\:includes + p').prepend("Added by 'local.js'.");
 });
