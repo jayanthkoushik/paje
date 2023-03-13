@@ -1,4 +1,4 @@
-function getPreferedTheme() {
+function getPreferredTheme() {
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'dark' || storedTheme === 'light') {
         return storedTheme;
@@ -50,7 +50,7 @@ document.querySelectorAll('.theme-button').forEach((themeBtn) => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-    setTheme(getPreferedTheme());
+    setTheme(getPreferredTheme());
 
     document.querySelectorAll('.author a').forEach((authorLink) => {
         authorLink.setAttribute('tabindex', '0');
@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if (getPreferedTheme() === 'auto') {
+    if (getPreferredTheme() === 'auto') {
         setTheme('auto');
     }
 });
