@@ -40,19 +40,8 @@ function setTheme(theme) {
     });
 }
 
-document.querySelectorAll('.theme-button').forEach((themeBtn) => {
-    themeBtn.addEventListener('click', function () {
-        const theme = this.getAttribute('data-bs-theme-value');
-        if (theme === 'dark' || theme === 'light') {
-            localStorage.setItem('theme', theme);
-        } else {
-            localStorage.removeItem('theme');
-        }
-        setTheme(theme);
-    });
-});
-
 window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('theme-selector').classList.remove('hidden');
     setTheme(getPreferredTheme());
 
     const domParser = new DOMParser();
@@ -85,10 +74,22 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#footnotes, .inst-nojs').forEach((nojsElem) => {
         nojsElem.remove(); }
     );
-});
 
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if (getPreferredTheme() === 'auto') {
-        setTheme('auto');
-    }
+    document.querySelectorAll('.theme-button').forEach((themeBtn) => {
+        themeBtn.addEventListener('click', function () {
+            const theme = this.getAttribute('data-bs-theme-value');
+            if (theme === 'dark' || theme === 'light') {
+                localStorage.setItem('theme', theme);
+            } else {
+                localStorage.removeItem('theme');
+            }
+            setTheme(theme);
+        });
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getPreferredTheme() === 'auto') {
+            setTheme('auto');
+        }
+    });
 });
