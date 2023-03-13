@@ -27,7 +27,7 @@ sapien et, condimentum lacinia nibh.
 
 ## Appendix includes
 
-* Commands from metadata include: $\argmin$ $\R$
-* Include command in body:
+* Commands from metadata include (argmin R): $\argmin$ $\R$
+* Include command in body  (there should be text after this):
 
-{% include ext.md %}
+{% include utils/ext.md %}

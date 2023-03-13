@@ -26,14 +26,14 @@ institute:
   name: Institute2
 abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:ex1. Reference[@texbook].
 appendices:
-- appendix1.md
-- appendix2.md
+- sections/appendix1.md
+- sections/appendix2.md
 includes:
-- commands.md
+- utils/commands.md
 extcss:
-- local.scss
+- utils/local.scss
 extjs:
-- local.js
+- utils/local.js
 ---
 
 
@@ -72,129 +72,12 @@ Fusce bibendum maximus ligula, id gravida felis dictum a. In dapibus nulla eget
 volutpat vulputate. Quisque congue erat quis nibh molestie, eget varius eros
 ultrices.
 
-#### Paragraph
+#### Subsubsubsection
 
 Proin eleifend lorem semper, commodo tellus nec, porta purus. Nullam commodo
 lectus nibh, consequat maximus lorem faucibus in. Nam purus eros, rutrum in
 sapien et, condimentum lacinia nibh.
 
+{% include sections/main1.md %}
 
-# Typography
-
-* **Bold**
-* _Italic_
-* **_Bold italic_**.
-
-
-# Numbers
-
-* Normal: 0123456789
-* Math: $0123456789$
-
-
-# Acronyms
-
-\acrodef{CMU}{Carnegie Mellon University}
-\acrodef{USA}{United States of America}
-
-* Default: \ac{CMU}
-* Repeated: \ac{CMU}
-* Forced short: \acs{USA}
-* Repeated after forced short: \ac{USA}
-
-
-# Math
-
-\newcommand{\PP}[2]{\mathbb{P}_{#1}\left[{#2}\right]}
-\newcommand{\XX}{\mathcal{X}}
-\newcommand{\EE}[2]{\mathbb{E}_{#1}\left[{#2}\right]}
-
-$$
-\int_0^\infty \exp^{-x^2}\,\mathrm{d}x
-$$ {#eq:ex1}
-
-$$
-a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
-A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
-$$ {#eq:ex2}
-
-* Inline: $\int_0^\infty \exp^{-x^2}\,\mathrm{d}x$
-* Block: @eq:ex1, @eq:ex2
-* Commands defined in body: $\PP{}{x \in \XX}$
-* Aligned:
-
-$$
-\begin{align*}
-    x &= 1\\
-    x + y &= 10\\
-    x + y + z &= 100
-\end{align*}
-$$
-
-
-# Links
-
-* Section: @sec:ex1, @sec:ex1.2
-* Appendix section: @sec:app2ex1, @sec:app1ex1.1.1
-* Appendix figure: @fig:app2ex1, @fig:app2ex2a
-* Appendix table: @tbl:app2ex1
-* Appendix math: @eq:app2ex1
-* Short citation[@latex:companion]
-* Long citation: @latex:companion, @lesk:1977
-* Repeated citation[@lesk:1977]
-* Multiple citation[@lesk:1977; @knuth:1984; @latex:companion]
-* Pointer to a footnote[^1]
-
-[^1]: Example footnote text.
-
-
-# Includes {#sec:includes}
-
-**There should be text before/after this**.
-
-* Commands from metadata include: $\argmin$ $\R$
-* Include command in body:
-
-{% include ext.md %}
-
-
-# Tables
-
-* @tbl:ex1
-* @tbl:ex2
-
-Col1       Col2     Col3     Col4
-------   ------    ------    ------
-1             2     3        4
-11           22     33       44
-111         222     333      444
-
-: Short table {#tbl:ex1}
-
- Col1      Col2      Col3      Col4     Col5      Col6      Col7      Col8
------     -----     -----     -----    -----     -----     -----     -----
-    a         1         2         3      123      abcd      1234       444
-    b        11        22        33      456      efgh       567        44
-    c       111       222       333      789      ijkl        89         4
-
-: Wide table {#tbl:ex2}
-
-
-# Figures
-
-* @fig:ex1
-* @fig:ex2
-* @fig:ex3, @fig:ex3a, @fig:ex3b
-
-![Figure with explicit dark version](figures/anscombe){#fig:ex1 darksrc="figures/anscombe_dark.svg"}
-
-![Figure with no dark version](figures/diamonds){#fig:ex2 darksrc=""}
-
-<div id="fig:ex3">
-
-![Figure with 'width=3in'](figures/gaussian2d){#fig:ex3a width=3in}
-
-![Figure with 'width=5in'](figures/densities){#fig:ex3b width=5in}
-
-Sub-figures with auto dark versions
-</div>
+{% include sections/main2.md %}

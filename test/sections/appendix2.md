@@ -51,7 +51,7 @@ $$ {#eq:app2ex2}
 
 * @eq:app2ex1
 * @eq:app2ex2
-* Without tag:
+* Block without tag:
 
 $$
 x + y + z = 100
