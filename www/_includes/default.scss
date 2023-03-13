@@ -12,6 +12,10 @@ html[data-bs-theme="dark"] {
 }
 
 #theme-selector {
+  svg {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
   .dropdown-toggle {
     color: currentColor;
     border: 0px;

@@ -33,8 +33,8 @@ function setTheme(theme) {
     document.querySelectorAll('.theme-button').forEach((themeBtn) => {
         if (themeBtn.getAttribute('data-bs-theme-value') === theme) {
             themeBtn.classList.add('active');
-            const themeSvg = themeBtn.querySelector('svg').cloneNode(true);
-            document.getElementById('active-theme-button').replaceChildren(themeSvg);
+            const themeSvg = themeBtn.querySelector('svg');
+            document.querySelector('#active-theme-button svg').innerHTML = themeSvg.innerHTML;
         } else {
             themeBtn.classList.remove('active');
         }
