@@ -22,7 +22,10 @@ function setTheme(theme) {
     // Update themed images.
     const themeSrc = coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc';
     document.querySelectorAll('img[data-darksrc]').forEach((img) => {
-        img.setAttribute('src', img.getAttribute(themeSrc));
+        const newSrc = img.getAttribute(themeSrc);
+        if (img.getAttribute('src') !== newSrc) {
+            img.setAttribute('src', newSrc);
+        }
     });
 
     // Update theme selector.
@@ -51,6 +54,17 @@ document.querySelectorAll('.theme-button').forEach((themeBtn) => {
 
 window.addEventListener('DOMContentLoaded', () => {
     setTheme(getPreferredTheme());
+
+    const domParser = new DOMParser();
+    const coreTheme = document.documentElement.getAttribute('data-bs-theme');
+    const themeSrc = coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc';
+    document.querySelectorAll('.img-noscript').forEach((noscript) => {
+        const img = domParser.parseFromString(
+            noscript.innerHTML, 'text/html'
+        ).getElementsByTagName('img')[0];
+        img.setAttribute('src', img.getAttribute(themeSrc));
+        noscript.replaceWith(img);
+    });
 
     document.querySelectorAll('.author a').forEach((authorLink) => {
         authorLink.setAttribute('tabindex', '0');

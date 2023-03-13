@@ -48,6 +48,17 @@ module Pandoc
       h.name = "h2"
     end
 
+    # Bootstrap-ify figures.
+    doc.css("figure img").wrap("<div style='overflow-x: auto'></div>")
+    doc.css(".subfigures").each do |subfig|
+      figs = subfig > "figure"
+      figs.add_class("subfigure")
+      div = figs.last.add_next_sibling("<div class='d-md-flex justify-content-md-evenly'></div>").first
+      figs.each do |fig|
+        fig.parent = div
+      end
+    end
+
     # Set dark/light sources for images.
     doc.xpath("//img").each do |img|
       src = img["src"]
@@ -57,6 +68,9 @@ module Pandoc
         darksrc = img["data-darksrc"]
         if darksrc.empty?
           img["data-darksrc"] = src
+        else
+          # Prevent loading the image before theme is known.
+          img.wrap("<noscript class='img-noscript'></noscript>")
         end
         img["data-lightsrc"] = src
       else
@@ -68,6 +82,7 @@ module Pandoc
         if File.exists? darksrc
           img["data-darksrc"] = darksrc
           img["data-lightsrc"] = src
+          img.wrap("<noscript class='img-noscript'></noscript>")
         end
       end
     end
@@ -77,17 +92,6 @@ module Pandoc
     tables.wrap("<div class='table-responsive'></div>")
     tables.add_class("table mx-auto w-auto")
     doc.xpath("//tbody").add_class("table-group-divider")
-
-    # Bootstrap-ify figures.
-    doc.css("figure img").wrap("<div style='overflow-x: auto'></div>")
-    doc.css(".subfigures").each do |subfig|
-      figs = subfig > "figure"
-      figs.add_class("subfigure")
-      div = figs.last.add_next_sibling("<div class='d-md-flex justify-content-md-evenly'></div>").first
-      figs.each do |fig|
-        fig.parent = div
-      end
-    end
 
     # Replace citation link text with number, and add popover for reference.
     doc.css(".citation a").each do |citlink|
