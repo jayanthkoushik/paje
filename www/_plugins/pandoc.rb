@@ -139,12 +139,17 @@ module Pandoc
       footref["data-bs-html"] = "true"
     end
 
+    # Convert footnotes section to div.
+    doc.at_css("#footnotes")&.name = "div"
+
     # Convert bibliography to list.
     refs = doc.at_css("#refs")
     unless refs.nil?
       refs.name = "ol"
+      refs.delete("role")
       doc.css("#refs div.csl-entry").each do |bibentry|
         bibentry.name = "li"
+        bibentry.delete("role")
       end
 
       # Move appendices to after bibliography.
