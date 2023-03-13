@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const themeSrc = coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc';
     document.querySelectorAll('.img-noscript').forEach((noscript) => {
         const img = domParser.parseFromString(
-            noscript.innerHTML, 'text/html'
+            noscript.innerText, 'text/html'
         ).getElementsByTagName('img')[0];
         img.setAttribute('src', img.getAttribute(themeSrc));
         noscript.replaceWith(img);
