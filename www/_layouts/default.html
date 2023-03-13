@@ -36,9 +36,9 @@ layout: compress
 <div class="row justify-content-center">
 <div class="col-xs-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
 
-<h1 id="title">
-  <small class="float-end ms-4">
-    <span class="dropdown" id="theme-selector">
+<div>
+  <div class="h1 float-end ms-4">
+    <div class="dropdown" id="theme-selector">
       <button title="Theme" class="btn dropdown-toggle" id="active-theme-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
       <ul class="dropdown-menu">
         <li class="mx-2">
@@ -63,14 +63,16 @@ layout: compress
           </button>
         </li>
       </ul>
-    </span>
-  </small>
-  <span class="display-6">{{- page.title -}}</span>
-  {% if page.subtitle %}
-  <br>
-  <span class="h2"><small>{{- page.subtitle -}}</small></span>
-  {% endif %}
-</h1>
+    </div>
+  </div>
+  <h1 id="title">
+    <span class="display-6">{{- page.title -}}</span>
+    {% if page.subtitle %}
+    <br>
+    <span class="h2"><small>{{- page.subtitle -}}</small></span>
+    {% endif %}
+  </h1>
+</div>
 
 {% if page.author %}
 
