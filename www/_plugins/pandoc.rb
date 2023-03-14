@@ -81,7 +81,7 @@ module Pandoc
         # use it as the dark source.
         base, hasdot, ext = src.rpartition(".")
         darksrc = base.empty? ? (src + "_dark.svg") : (base + "_dark." + ext)
-        if File.exists? darksrc
+        if File.exist? darksrc
           img["data-darksrc"] = darksrc
           img["data-lightsrc"] = src
         else
