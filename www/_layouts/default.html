@@ -90,7 +90,8 @@ layout: compress
   {%- if author.email -%}<a href="mailto:{{- author.email -}}">{{- author.email -}}</a>{%- endif -%}
   {%- endcapture -%}
   <li class="author list-inline-item">
-    <a data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true" data-bs-title="{{- author.name -}}" data-bs-container="body" data-bs-content="{{- authorpopover | escape -}}">{{- author.name -}}</a>{%- if author.affiliation -%}<sup class="inst-nojs">{%- for aff in author.affiliation -%}{{- aff -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}</sup>{%- endif -%}{%- unless page.skipequal -%}{%- if author.equalcontrib -%}<sup class="sup-right">*</sup>{%- assign has_equal_contribs = true -%}{%- endif -%}{%- endunless -%}
+    {%- if author.affiliation or author.email -%}<a data-bs-toggle="popover" data-bs-trigger="focus" data-bs-html="true" data-bs-title="{{- author.name -}}" data-bs-container="body" data-bs-content="{{- authorpopover | escape -}}">{{- author.name -}}</a>{%- else -%}{{- author.name -}}{%- endif -%}
+    {%- if author.affiliation -%}<sup class="inst-nojs">{%- for aff in author.affiliation -%}{{- aff -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}</sup>{%- endif -%}{%- unless page.skipequal -%}{%- if author.equalcontrib -%}<sup class="sup-right">*</sup>{%- assign has_equal_contribs = true -%}{%- endif -%}{%- endunless -%}
   </li>
 {% endfor %}
 </ul>

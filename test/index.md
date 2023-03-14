@@ -14,9 +14,7 @@ author:
   - 2
   equalcontrib: True
 - name: Author3
-  affiliation:
-  - 2
-  email: 'author3a@institute2.edu'
+  equalcontrib: True
 - name: Author4
   email: 'author4@author4.com'
 institute:
