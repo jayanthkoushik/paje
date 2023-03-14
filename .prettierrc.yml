@@ -1,0 +1,4 @@
+overrides:
+  - files: "www/_layouts/default.html"
+    options:
+      parser: liquid-html

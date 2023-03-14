@@ -1,85 +1,90 @@
 function getPreferredTheme() {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'dark' || storedTheme === 'light') {
-        return storedTheme;
-    }
-    return 'auto';
+  const storedTheme = localStorage.getItem("theme");
+  if (storedTheme === "dark" || storedTheme === "light") {
+    return storedTheme;
+  }
+  return "auto";
 }
 
 function setTheme(theme) {
-    var coreTheme;
-    if (theme === 'dark' || theme === 'light') {
-        coreTheme = theme;
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        coreTheme = 'dark';
-    } else {
-        coreTheme = 'light';
+  var coreTheme;
+  if (theme === "dark" || theme === "light") {
+    coreTheme = theme;
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    coreTheme = "dark";
+  } else {
+    coreTheme = "light";
+  }
+
+  // Set global theme.
+  document.documentElement.setAttribute("data-bs-theme", coreTheme);
+
+  // Update themed images.
+  const themeSrc = coreTheme === "dark" ? "data-darksrc" : "data-lightsrc";
+  document.querySelectorAll("img[data-darksrc]").forEach((img) => {
+    const newSrc = img.getAttribute(themeSrc);
+    if (img.getAttribute("src") !== newSrc) {
+      img.setAttribute("src", newSrc);
+      img.classList.remove("hidden");
     }
+  });
 
-    // Set global theme.
-    document.documentElement.setAttribute('data-bs-theme', coreTheme);
-
-    // Update themed images.
-    const themeSrc = coreTheme === 'dark' ? 'data-darksrc' : 'data-lightsrc';
-    document.querySelectorAll('img[data-darksrc]').forEach((img) => {
-        const newSrc = img.getAttribute(themeSrc);
-        if (img.getAttribute('src') !== newSrc) {
-            img.setAttribute('src', newSrc);
-            img.classList.remove('hidden');
-        }
-    });
-
-    // Update theme selector.
-    document.querySelectorAll('.theme-button').forEach((themeBtn) => {
-        if (themeBtn.getAttribute('data-bs-theme-value') === theme) {
-            themeBtn.classList.add('active');
-            const themeSvg = themeBtn.querySelector('svg');
-            document.querySelector('#active-theme-button svg').innerHTML = themeSvg.innerHTML;
-        } else {
-            themeBtn.classList.remove('active');
-        }
-    });
+  // Update theme selector.
+  document.querySelectorAll(".theme-button").forEach((themeBtn) => {
+    if (themeBtn.getAttribute("data-bs-theme-value") === theme) {
+      themeBtn.classList.add("active");
+      const themeSvg = themeBtn.querySelector("svg");
+      document.querySelector("#active-theme-button svg").innerHTML =
+        themeSvg.innerHTML;
+    } else {
+      themeBtn.classList.remove("active");
+    }
+  });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('theme-selector').classList.remove('hidden');
-    setTheme(getPreferredTheme());
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("theme-selector").classList.remove("hidden");
+  setTheme(getPreferredTheme());
 
-    document.querySelectorAll('.author a').forEach((authorLink) => {
-        authorLink.setAttribute('tabindex', '0');
-        authorLink.setAttribute('role', 'button');
-        authorLink.setAttribute('class', 'author-link');
+  document.querySelectorAll(".author a").forEach((authorLink) => {
+    authorLink.setAttribute("tabindex", "0");
+    authorLink.setAttribute("role", "button");
+    authorLink.setAttribute("class", "author-link");
+  });
+
+  const tooltips = [
+    ...document.querySelectorAll('[data-bs-toggle="tooltip"]'),
+  ].map((tooltipTrigger) => new bootstrap.Tooltip(tooltipTrigger));
+  const popovers = [
+    ...document.querySelectorAll('[data-bs-toggle="popover"]'),
+  ].map((popoverTrigger) => new bootstrap.Popover(popoverTrigger));
+
+  document
+    .querySelectorAll(".citation a, a.footnote-ref")
+    .forEach((citLink) => {
+      citLink.removeAttribute("href");
     });
+  document.querySelectorAll("#footnotes, .inst-nojs").forEach((nojsElem) => {
+    nojsElem.remove();
+  });
 
-    const tooltips = [...document.querySelectorAll('[data-bs-toggle="tooltip"]')].map(
-        tooltipTrigger => new bootstrap.Tooltip(tooltipTrigger)
-    );
-    const popovers = [...document.querySelectorAll('[data-bs-toggle="popover"]')].map(
-        popoverTrigger => new bootstrap.Popover(popoverTrigger)
-    );
-
-    document.querySelectorAll('.citation a, a.footnote-ref').forEach((citLink) => {
-        citLink.removeAttribute('href');
+  document.querySelectorAll(".theme-button").forEach((themeBtn) => {
+    themeBtn.addEventListener("click", function () {
+      const theme = this.getAttribute("data-bs-theme-value");
+      if (theme === "dark" || theme === "light") {
+        localStorage.setItem("theme", theme);
+      } else {
+        localStorage.removeItem("theme");
+      }
+      setTheme(theme);
     });
-    document.querySelectorAll('#footnotes, .inst-nojs').forEach((nojsElem) => {
-        nojsElem.remove(); }
-    );
+  });
 
-    document.querySelectorAll('.theme-button').forEach((themeBtn) => {
-        themeBtn.addEventListener('click', function () {
-            const theme = this.getAttribute('data-bs-theme-value');
-            if (theme === 'dark' || theme === 'light') {
-                localStorage.setItem('theme', theme);
-            } else {
-                localStorage.removeItem('theme');
-            }
-            setTheme(theme);
-        });
-    });
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (getPreferredTheme() === 'auto') {
-            setTheme('auto');
-        }
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      if (getPreferredTheme() === "auto") {
+        setTheme("auto");
+      }
     });
 });

@@ -1,25 +1,25 @@
-name: 'paje'
-author: 'Jayanth Koushik'
-description: 'Build static webpage using jekyll'
+name: "paje"
+author: "Jayanth Koushik"
+description: "Build static webpage using jekyll"
 
 inputs:
   setupscript:
-    description: 'Script to execute before compilation'
+    description: "Script to execute before compilation"
     required: true
   targetbranch:
-    description: 'Target branch to push compiled webpage'
+    description: "Target branch to push compiled webpage"
     required: false
-    default: 'gh-pages'
+    default: "gh-pages"
   no404:
-    description: 'Disable 404 page generation'
+    description: "Disable 404 page generation"
     required: false
     default: false
 
 runs:
-  using: 'docker'
-  image: 'docker://jayanthkoushik/paje:v5.1.1'
-  entrypoint: '/main.sh'
+  using: "docker"
+  image: "docker://jayanthkoushik/paje:v5.1.1"
+  entrypoint: "/main.sh"
 
 branding:
-  icon: 'upload'
-  color: 'orange'
+  icon: "upload"
+  color: "orange"

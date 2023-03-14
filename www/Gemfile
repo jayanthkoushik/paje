@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
-gem 'jekyll'
-gem 'pandoc-ruby'
-gem 'uglifier'
-gem 'nokogiri'
-gem 'katex'
+source "https://rubygems.org"
+gem "jekyll"
+gem "pandoc-ruby"
+gem "uglifier"
+gem "nokogiri"
+gem "katex"

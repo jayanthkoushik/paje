@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: end-of-file-fixer
+        name: fix eofs
+        exclude: "^\\.version$"
+      - id: mixed-line-ending
+        name: fix line endings
+      - id: trailing-whitespace
+        name: remove trailing whitespace
+
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettify files
+        language: system
+        entry: prettier --write
+        types_or: [html, javascript, scss, ruby, yaml]
+        exclude: "www/_layouts/compress.html"
+      - id: prettiermd
+        name: prettify plain markdown files
+        language: system
+        entry: prettier --write
+        files: "README|CONTRIBUTING\\.md"

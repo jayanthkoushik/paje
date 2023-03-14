@@ -3,30 +3,30 @@ name: Build test page
 on:
   push:
     branches:
-    - master
+      - master
     paths:
-    - '.github/workflows/build-test.yml'
-    - 'test/**'
-    - 'www/**'
-    - 'Dockerfile'
-    - 'action.yml'
-    - 'main.sh'
+      - ".github/workflows/build-test.yml"
+      - "test/**"
+      - "www/**"
+      - "Dockerfile"
+      - "action.yml"
+      - "main.sh"
 
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: |
-        perl -pi -e "s/image: .*$/image: 'Dockerfile'/g" action.yml
-        cat action.yml
-    - uses: ./
-      with:
-        setupscript: |
-          cp test/index.md /www/
-          cp -r test/figures /www/
-          cp -r test/sections /www/_includes/
-          cp -r test/utils /www/_includes/
-          cp test/references.bib /www/_includes/
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - run: |
+          perl -pi -e "s/image: .*$/image: 'Dockerfile'/g" action.yml
+          cat action.yml
+      - uses: ./
+        with:
+          setupscript: |
+            cp test/index.md /www/
+            cp -r test/figures /www/
+            cp -r test/sections /www/_includes/
+            cp -r test/utils /www/_includes/
+            cp test/references.bib /www/_includes/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
