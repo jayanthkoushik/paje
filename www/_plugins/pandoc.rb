@@ -58,6 +58,10 @@ module Pandoc
         fig.parent = div
       end
     end
+    # Remove 'data-darksrc' from 'figures' (it's also on 'img's).
+    doc.css("figure").each do |fig|
+      fig.delete("data-darksrc")
+    end
 
     # Set dark/light sources for images.
     doc.xpath("//img").each do |img|
