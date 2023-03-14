@@ -15,11 +15,13 @@
 
 \acrodef{CMU}{Carnegie Mellon University}
 \acrodef{USA}{United States of America}
+\acrodef{SSN}{social security number}
 
 * Default (short+long): \ac{CMU}
 * Repeated (short): \ac{CMU}
 * Forced short: \acs{USA}
 * Repeated after forced short (short+long): \ac{USA}
+* Plural: \acp{SSN}
 
 
 # Math

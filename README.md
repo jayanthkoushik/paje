@@ -42,7 +42,7 @@ Actions](https://github.com/features/actions) workflow to deploy the site using
        runs-on: ubuntu-latest
        steps:
        - uses: actions/checkout@v2
-       - uses: jayanthkoushik/paje@v4
+       - uses: jayanthkoushik/paje@v5
          with:
            setupscript: sh build.sh
            targetbranch: master
@@ -106,60 +106,70 @@ file, add a line to _setup.sh_ copying that file to `/www`, e.g. `cp newfile.md
 ### Metadata
 
 Metadata should be specified within `---` and `---` at the top of the file,
-using yaml syntax. The default _paje_ template handles the tags shown in the
-following example:
+using yaml syntax. The default _paje_ template handles the keys shown in the
+following example. Unless noted otherwise, all attributes are optional.
 
 ```yaml
 ---
-title: page title, displayed at the top of the page
+title: Title              # Required.
+subtitle: Sub-Title       # Displayed below the title.
+description: Description  # Meta data (not displayed).
 
-subtitle: page sub-title, displayed below the title
-
-description: page description meta data (not displayed)
-
-author:  # author list, will be displayed below sub-title
-- name: Author1 Name
+author:
+# Author list, will be displayed below (sub-)title.
+# Each author name will be rendered as a clickable link,
+# which will open a popover with the author details.
+# Only the 'name' attribute is required.
+- name: Author One
+  email: author1@institute1.edu
   affiliation:
-  - 1  # link to an id in the institute list
-  equalcontrib: true  # whether the author is an equal main contributor
-  email: author1@institute1.edu  # author email (shown in popover)
-
-- name: Author2 Name
-  affiliation:
-  - 2
-  equalcontrib: true  # will be indicated with a '*'
-
-- name: Author3 Name
-  affiliation:
+  # The 'affiliation' attribute should be a list of IDs,
+  # with each ID appearing in the 'institute' attribute (see below).
+  # The institute name corresponding to each ID will be shown
+  # in the author detail popover.
   - 1
   - 2
+  equalcontrib: true  # All authors with 'equalcontrib' as 'true'
+                      # will be considered main authors, and an
+                      # asterisk will be added after their names.
+                      # '* Equal contribution' will be displayed
+                      # after the author list.
+- name: Author Two
+  affiliation:
+  - 2
+  equalcontrib: true
 
-institute:  # institute list
-- id: 1  # will be shown in a popover for all authors with this affiliation
-  name: Institute 1
-
+institute:
+# Mapping of institute IDs to names. There should be one
+# for each id that appears in the author list.
+- id: 1
+  name: Institute One
 - id: 2
-  name: Institute 2
+  name: Institute Two
 
-skipequal: true  # skip adding a note about equal authorship
-
-nomath: true # will disable math support
-
-includes:  # files whose content will be added before the main body
-- inc1.md  # should be inside '_includes/'
+includes:
+# List of files whose content will be added before the main body.
+- inc1.md
 - inc2.html
 
-appendices:  # files whose content will be added after the main body
-- app1.md  # should be inside '_includes/'
+appendices:
+# Each file in this list will be used to create a
+# separate appendix, added after the main body.
+- app1.md
 - app2.md
 
 extcss:
-- local1.scss # custom scss files for the page
+# Custom sass files for the page.
+- local1.scss
 - local2.scss
 
 extjs:
-- local1.js # custom javascript files for the page
+# Custom JavaScript files for the page.
+- local1.js
 - local2.js
+
+skipequal: true  # If true, the 'equalcontrib' attribute will be ignored.
+nomath: true     # If true, math support will be displayed
 ---
 ```
 
@@ -176,12 +186,11 @@ $$
 f(x) = \int_{0^\infty} \exp(-x^2) \mathrm{d}x.
 $$
 
-Note the empty lines surrounding the block expression. These are necessary! You
-can also make equations:
+You can also make equations:
 
 $$
 \begin{aligned}
-f(x) &= sin(x).\\
+f(x)  &= sin(x).\\
 f'(x) &= cos(x).
 \end{aligned}
 $$ {#eq:ex}
@@ -189,7 +198,7 @@ $$ {#eq:ex}
 Equations can be referenced (@eq:ex) using tags.
 ```
 
-Definitions are supported, and can be added in any page directly, or in a
+Latex definitions are supported, and can be added in any page directly, or in a
 separate file that's included (via `includes` in the metadata):
 
 ```latex
@@ -226,7 +235,7 @@ The default extension for images is `.svg`, so it can be omitted when
 specifying the path.
 
 The default _paje_ theme has a dark mode. When this is enabled (either based on
-user device preference, or the toggle button), figures will have their colors
+user device preference, or the dropdown menu), figures will have their colors
 inverted. Alternatively, figures can have a separate image to be used in the
 dark theme. For a figure with source '/path/to/fig.ext', if there is a file
 '/path/to/fig_dark.ext', it will be used automatically. A dark mode image can
@@ -262,30 +271,35 @@ Note that support for tables is finicky. They can be added as such:
 ```markdown
 This is a table:
 
-Header    col1   col2    col3
---------- ------ ------- ------
-Row       1      2       3
+Header     col1     col2   col3
+---------  ------  ------  ------
+Row1       1       2       3
+Row2       11      22      333
 
 : Table caption. {#tbl:tblid}
-
-Note the empty lines surrounding the table (@tbl:tblid).
 ```
+
+The main body cannot contain any blank lines. Columns will be aligned
+based on the position of the header with respect to the '---'s below it.
+The example table (@tbl:tblid) above will have columns aligned
+left, left, center, and right respectively.
 
 ### Acronyms
 
-Acronyms can be defined using `\acrodef`:
+Acronyms are supported, using the syntax of the
+[LaTeX acronym package](https://www.ctan.org/pkg/acronym). Definitions
+will be shown in parenthesis for the first occurence of an acronym,
+and only on hover (using `abbr` tags) for subsequent occurences
 
 ```latex
 \acrodef{CMU}{Carnegie Mellon University}
 \acrodef{USA}{United States of America}
-```
+\acrodef{SSN}{social security number}
 
-These can be used using `\ac` and `\acs`:
-
-```latex
-This will be shown with the definition in brackets since it is the first time
-the abbreviation is used: \ac{CMU}.
-This will now be shown only as the abbreviation: \ac{CMU}.
-This will be only shown as the abbreviation even though it has not been used
-before: \acs{USA}.
+* This will be shown with the definition in brackets since it
+  is the first time the abbreviation is used: \ac{CMU}.
+* This will now be shown only as the abbreviation: \ac{CMU}.
+* This will be only shown as the abbreviation even though
+  it has not been used before: \acs{USA}.
+* This will be pluralized: \acp{SSN}.
 ```
