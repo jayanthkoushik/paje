@@ -44,11 +44,11 @@ $$ {#eq:ex2}
 * Commands defined in body (P[x in X]): $\PP{}{x \in \XX}$
 * Aligned:
 
-\begin{align*}
+\begin{aligned}
     x &= 1\\
     x + y &= 10\\
     x + y + z &= 100
-\end{align*}
+\end{aligned}
 
 
 # Links

@@ -39,10 +39,10 @@ Sub-figures with non-default extension
 ## Appendix math
 
 $$
-\begin{align*}
+\begin{aligned}
     x &= 1\\
     x + y &= 10\\
-\end{align*}
+\end{aligned}
 $$ {#eq:app2ex1}
 
 $$
