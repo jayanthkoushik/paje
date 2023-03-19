@@ -12,13 +12,13 @@ tincidunt. Nam non velit et enim rutrum euismod.
 
 * @tbl:app2ex1
 
-Col1       Col2     Col3
 ------   ------    ------
 1             2     3
 11           22     33
 111         222     333
+------   ------    ------
 
-: Appendix table {#tbl:app2ex1}
+: Headless table {#tbl:app2ex1}
 
 ## Appendix figures
 

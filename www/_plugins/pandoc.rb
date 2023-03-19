@@ -114,8 +114,17 @@ module Pandoc
     # Bootstrap-ify tables.
     tables = doc.xpath("//table")
     tables.wrap("<div class='table-responsive'></div>")
-    tables.add_class("table mx-auto w-auto")
-    doc.xpath("//tbody").add_class("table-group-divider")
+    tables.add_class("table table-hover table-borderless mx-auto w-auto")
+    tables.each do |table|
+      # Add a class to bodies of headless tables, so they can be styled differently.
+      if table.at_xpath(".//thead").nil?
+        table.at_xpath(".//tbody").add_class("tbody-headless")
+      end
+      # Add a class to empty rows.
+      table
+        .xpath(".//tr")
+        .each { |tr| tr.add_class("tr-empty") if tr.text.strip() == "" }
+    end
 
     # Replace citation link text with number, and add popover for reference.
     doc

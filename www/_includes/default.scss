@@ -6,6 +6,9 @@ html[data-bs-theme="dark"] {
       border: 1px solid black;
     }
   }
+  .table {
+    --bs-table-hover-bg: var(--bs-secondary-bg) !important;
+  }
 }
 
 #title {
@@ -56,6 +59,19 @@ table {
   margin-bottom: 2rem;
   caption {
     text-align: center;
+  }
+  thead {
+    border-top: 3px solid !important;
+    border-bottom: 2px solid !important;
+  }
+  tbody {
+    border-bottom: 3px solid !important;
+    &.tbody-headless {
+      border-top: 3px solid !important;
+    }
+  }
+  .tr-empty {
+    --bs-table-hover-bg: var(--bs-body-bg) !important;
   }
 }
 
