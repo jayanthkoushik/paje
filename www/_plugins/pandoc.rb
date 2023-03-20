@@ -32,7 +32,7 @@ class Jekyll::Converters::Markdown::PandocProcessor
         {
           bibliography: "_includes/references.bib",
           csl: "_includes/bibstyle.csl",
-          default_image_extension: "svg"
+          default_image_extension: @config["default_image_extension"]
         },
         "-F pandoc-crossref",
         "--citeproc",

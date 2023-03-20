@@ -1,4 +1,6 @@
 markdown: PandocProcessor
+pandoc:
+  default_image_extension: "svg"
 exclude: [Gemfile, Gemfile.lock]
 defaults:
   - scope:
