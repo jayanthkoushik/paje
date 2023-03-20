@@ -133,7 +133,7 @@ class Jekyll::Converters::Markdown::PajeConverter
             hid = appendix["id"] if hid.nil?
             doc
               .css("*[href='\##{hid}']")
-              .each { |a| a.content = "Appendix #{hno}" }
+              .each { |a| a.content = "Appendix\u00a0#{hno}" }
           end
 
         # Change figures.
@@ -141,7 +141,7 @@ class Jekyll::Converters::Markdown::PajeConverter
         appendix
           .xpath(".//figcaption")
           .each do |figcap|
-            next if figcap.parent.matches?(".subfigure")
+            next if figcap.parent.matches?("figure > figure")
             j += 1
             figno = appno + j.to_s()
 
@@ -152,19 +152,19 @@ class Jekyll::Converters::Markdown::PajeConverter
             figid = figcap.parent["id"]
             doc
               .css("*[href='\##{figid}']")
-              .each { |a| a.content = "Figure #{figno}" }
+              .each { |a| a.content = "Figure\u00a0#{figno}" }
 
             # Change links to subfigures.
             figcap
               .parent
-              .css(".subfigure")
+              .xpath(".//figure")
               .each do |subfig|
                 subfigid = subfig["id"]
                 subfigcap = subfig.at_xpath(".//figcaption")
                 doc
                   .css("*[href='\##{subfigid}']")
                   .each do |a|
-                    a.content = "Figure #{figno} (#{subfigcap.content})"
+                    a.content = "Figure\u00a0#{figno} (#{subfigcap.content})"
                   end
               end
           end
@@ -180,10 +180,10 @@ class Jekyll::Converters::Markdown::PajeConverter
             tabcap.content = "Table #{tabno}: #{tabdesc}"
 
             # Change links to this.
-            tabid = tab.parent.parent["id"]
+            tabid = tab.parent["id"]
             doc
               .css("*[href='\##{tabid}']")
-              .each { |a| a.content = "Table #{tabno}" }
+              .each { |a| a.content = "Table\u00a0#{tabno}" }
           end
 
         # Change equations.
@@ -206,7 +206,7 @@ class Jekyll::Converters::Markdown::PajeConverter
             eqno = appno + j.to_s()
             doc
               .css("*[href='\##{eqnid}']")
-              .each { |a| a.content = "Equation #{eqno}" }
+              .each { |a| a.content = "Equation\u00a0#{eqno}" }
           end
       end
   end
