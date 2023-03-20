@@ -1,5 +1,5 @@
-markdown: PandocProcessor
-pandoc:
+markdown: PajeConverter
+paje:
   default_image_extension: "svg"
 exclude: [Gemfile, Gemfile.lock]
 defaults:
