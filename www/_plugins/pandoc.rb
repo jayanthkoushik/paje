@@ -3,8 +3,12 @@ require "pandoc-ruby"
 require "nokogiri"
 require "katex"
 
-module Pandoc
-  def pandoc(content)
+class Jekyll::Converters::Markdown::PandocProcessor
+  def initialize(config)
+    @config = config["pandoc"]
+  end
+
+  def convert(content)
     acros = content.scan(/\\acrodef\{(.*?)\}\{(.*?)\}/)
     acros.each do |acro|
       content =
@@ -26,9 +30,9 @@ module Pandoc
         :katex,
         :N,
         {
-          bibliography: :"_includes/references.bib",
-          csl: :"_includes/bibstyle.csl",
-          default_image_extension: :"svg"
+          bibliography: "_includes/references.bib",
+          csl: "_includes/bibstyle.csl",
+          default_image_extension: "svg"
         },
         "-F pandoc-crossref",
         "--citeproc",
@@ -329,15 +333,3 @@ module Pandoc
     content = doc.to_html
   end
 end
-
-class Jekyll::Converters::Markdown::PandocProcessor
-  include Pandoc
-  def initialize(config)
-    @config = config
-  end
-  def convert(content)
-    pandoc(content)
-  end
-end
-
-Liquid::Template.register_filter(Pandoc)
