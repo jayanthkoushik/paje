@@ -175,6 +175,7 @@ extjs:
 
 skipequal: true # If true, the 'equalcontrib' attribute will be ignored.
 nomath: true # If true, math support will be displayed
+default_image_extension: svg # Default extension for images ('svg' by default)
 ---
 ```
 

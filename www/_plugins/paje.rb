@@ -98,7 +98,11 @@ class Jekyll::Converters::Markdown::PajeConverter
       )
       cfg_args["csl"] = "_includes/bibstyle.csl"
     end
-    cfg_args["default_image_extension"] = @config["default_image_extension"]
+    if page.data["default_image_extension"]
+      cfg_args["default_image_extension"] = page.data["default_image_extension"]
+    else
+      cfg_args["default_image_extension"] = @config["default_image_extension"]
+    end
     page.content =
       converter.to_html(
         :katex,
