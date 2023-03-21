@@ -6,7 +6,7 @@
     }
   ],
   "scripts": {
-    "postbump": "perl -pi -e \"s/image: .*$/image: 'docker:\\/\\/jayanthkoushik\\/paje:v`cat .version`'/g\" action.yml",
+    "postbump": "perl -pi -e \"s/image: .*$/image: \\\"docker:\\/\\/jayanthkoushik\\/paje:v`cat .version`\\\"/g\" action.yml",
     "precommit": "git add action.yml",
     "postcommit": "git tag -f v`cat .version | cut -d. -f1`"
   },
