@@ -43,7 +43,7 @@ Actions](https://github.com/features/actions) workflow to deploy the site using
        runs-on: ubuntu-latest
        steps:
          - uses: actions/checkout@v2
-         - uses: jayanthkoushik/paje@v5
+         - uses: jayanthkoushik/paje@v6
            with:
              setupscript: sh build.sh
              targetbranch: master
