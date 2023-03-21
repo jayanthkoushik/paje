@@ -19,7 +19,7 @@ class Jekyll::Converters::Markdown::PajeConverter
       renumber_appendices(content_doc)
       render_math(content_doc)
       apply_theme(content_doc)
-      page.content = content_doc.to_html
+      page.content = content_doc.inner_html
     end
   end
 
@@ -90,15 +90,20 @@ class Jekyll::Converters::Markdown::PajeConverter
 
   def convert_pandoc(page)
     converter = PandocRuby.new(page.content, from: :"markdown")
+    cfg_args = {}
+    if page.data["bibliography"]
+      cfg_args["bibliography"] = File.join(
+        "_includes",
+        page.data["bibliography"]
+      )
+      cfg_args["csl"] = "_includes/bibstyle.csl"
+    end
+    cfg_args["default_image_extension"] = @config["default_image_extension"]
     page.content =
       converter.to_html(
         :katex,
         :N,
-        {
-          bibliography: "_includes/references.bib",
-          csl: "_includes/bibstyle.csl",
-          default_image_extension: @config["default_image_extension"]
-        },
+        cfg_args,
         "-F pandoc-crossref",
         "--citeproc",
         "-M nameInLink=true",

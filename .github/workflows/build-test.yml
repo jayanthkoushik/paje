@@ -23,10 +23,10 @@ jobs:
       - uses: ./
         with:
           setupscript: |
-            cp test/index.md /www/
-            cp -r test/figures /www/
-            cp -r test/_sections /www/_includes/sections
-            cp -r test/_utils /www/_includes/utils
-            cp test/_references.bib /www/_includes/references.bib
+            cp test/src/index.md /www/
+            cp -r test/src/figures /www/
+            cp -r test/src/sections /www/_includes/
+            cp -r test/src/utils /www/_includes/
+            cp test/src/references.bib /www/_includes/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

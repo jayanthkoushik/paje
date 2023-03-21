@@ -28,6 +28,7 @@ appendices:
 - sections/appendix2.md
 includes:
 - utils/commands.md
+bibliography: references.bib
 extcss:
 - utils/local.scss
 extjs:

@@ -150,6 +150,8 @@ institute:
   - id: 2
     name: Institute Two
 
+bibliography: references.bib # Bibliography file name--see below for details.
+
 includes:
   # List of files whose content will be added before the main body.
   - inc1.md
@@ -216,10 +218,11 @@ $$
 
 ### Bibliography
 
-You can include a `bib` file of references, and add citations in your page. The
-page _must be named `references.bib`_, and you need to add the following line to
-_setup.sh_: `cp references.bib /www/_includes`. Refer to the pandoc guide for
-syntax used to make citations.
+You can include a `bib` file of references, and add citations in your page.
+Set `bibliography` in the page metadata to the file name, and in `setup.sh`,
+copy the file to `/www/_includes` (The file name in the metadata should be
+relative to `/www/_includes`). Refer to the pandoc guide for syntax used
+to make citations.
 
 ### Figures
 
