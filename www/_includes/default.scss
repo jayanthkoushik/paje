@@ -158,3 +158,49 @@ figcaption,
 .hidden {
   display: none;
 }
+
+#toc-sidebar {
+  z-index: 1;
+  strong {
+    font-weight: 500 !important;
+  }
+  button:hover {
+    color: var(--bs-primary-color) !important;
+    border-color: var(--bs-primary-color) !important;
+  }
+  li {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    ul {
+      padding-left: 1rem !important;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #toc-sidebar {
+    position: fixed;
+    top: 2rem;
+    height: calc(80vh);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+#toc {
+  font-size: 0.875rem;
+  a {
+    text-decoration: none !important;
+    color: var(--bs-secondary-color) !important;
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    border-left: 0.125rem solid transparent;
+  }
+  a.active,
+  a:hover {
+    color: var(--bs-emphasis-color) !important;
+    border-left-color: var(--bs-emphasis-color) !important;
+  }
+  a.active {
+    font-weight: 700 !important;
+  }
+}

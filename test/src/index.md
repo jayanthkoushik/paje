@@ -66,6 +66,8 @@ facilisi. Aliquam pharetra scelerisque auctor. Duis vel auctor ipsum. Nullam
 sagittis feugiat mollis. Aliquam at ultrices libero. Nulla facilisi. Fusce sed
 est placerat, fringilla augue at, pretium nisl.
 
+# Section with a very very very very very long name
+
 ### Subsubsection 2
 
 In ut nunc libero. Duis eu elementum purus. Etiam dictum, ipsum nec aliquam

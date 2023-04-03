@@ -33,10 +33,14 @@ layout: compress
     </style>
   </head>
 
-  <body>
+  <body
+    {% unless page.notoc %}
+      data-bs-spy="scroll" data-bs-target="#toc-body" data-bs-root-margin="0px 0px -75% 0px"
+    {% endunless %}
+  >
     <div class="container-xxl my-2 my-md-4">
       <div class="row justify-content-center">
-        <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+        <div class="col-11 col-sm-10 col-md-8 col-lg-7 col-xl-7 col-xxl-7">
           <div>
             <div class="h1 float-end ms-4">
               <div class="dropdown hidden" id="theme-selector">
@@ -173,10 +177,10 @@ layout: compress
               {% endif %}
             {% endunless %}
           {% endif %}
-
-          {{ content }}
         </div>
       </div>
+
+      {{ content }}
     </div>
 
     <script

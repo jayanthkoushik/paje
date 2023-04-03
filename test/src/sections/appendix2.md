@@ -11,6 +11,7 @@ tincidunt. Nam non velit et enim rutrum euismod.
 ## Appendix tables
 
 * @tbl:app2ex1
+* @tbl:app2ex2
 
 ------   ------    ------
 1             2     3
@@ -19,6 +20,16 @@ tincidunt. Nam non velit et enim rutrum euismod.
 ------   ------    ------
 
 : Headless table {#tbl:app2ex1}
+
+
+Col1       Col2     Col3     Col4     Col5     Col6     Col7     Col8     Col9     Col10     Col11     Col12     Col13     Col14     Col15     Col16     Col17   Col17
+------   ------   ------   ------   ------   ------   ------   ------   ------   -------   -------   -------   -------   -------   -------   -------   -------   -------
+a             1        2        3      123     abcd     1234      444        a       bbb      cccc       ddd      eeee       fff      gggg      abcd      1234   9876
+b            11       22       33      456     efgh      567       44       aa        bb      cccc        dd      eeee        ff      gggg      efgh       567   543
+c           111      222      333      789     ijkl       89        4      aaa         b      cccc         d      eeee         f      gggg      ijkl        89   21
+
+: Extra wide table {#tbl:app2ex2}
+
 
 ## Appendix figures
 

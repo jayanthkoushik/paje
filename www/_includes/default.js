@@ -23,7 +23,7 @@ function setTheme(theme) {
   const themeSrc = coreTheme === "dark" ? "data-darksrc" : "data-lightsrc";
   document.querySelectorAll("img[data-darksrc]").forEach((img) => {
     const newSrc = img.getAttribute(themeSrc);
-    if (img.getAttribute("src") !== newSrc) {
+    if (newSrc && img.getAttribute("src") !== newSrc) {
       img.setAttribute("src", newSrc);
       img.classList.remove("hidden");
     }
