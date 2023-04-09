@@ -40,6 +40,10 @@ class Jekyll::Converters::Markdown::PajeConverter
 
     page.content = hdr + page.content
 
+    page.data["sections"]&.each do |sec|
+      page.content += "\n\n{% include #{sec} %}"
+    end
+
     if page.data["appendices"]
       page.content = page.content + "\n\n<div id='appendices'>\n\n"
       for app in page.data["appendices"]

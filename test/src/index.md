@@ -23,6 +23,9 @@ institute:
 - id: 2
   name: Institute2
 abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:ex1. Reference[@texbook].
+sections:
+- sections/main1.md
+- sections/main2.md
 appendices:
 - sections/appendix1.md
 - sections/appendix2.md
@@ -76,7 +79,3 @@ ultrices.
 Proin eleifend lorem semper, commodo tellus nec, porta purus. Nullam commodo
 lectus nibh, consequat maximus lorem faucibus in. Nam purus eros, rutrum in
 sapien et, condimentum lacinia nibh.
-
-{% include sections/main1.md %}
-
-{% include sections/main2.md %}
