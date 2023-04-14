@@ -62,6 +62,6 @@ $$ {#eq:ex2}
 * Short citation[@latex:companion]
 * Long citation: @latex:companion, @lesk:1977
 * Multi citation[@lesk:1977; @knuth:1984; @latex:companion]
-* Pointer to footnote[^1]
+* Pointer to footnote[^m11]
 
-[^1]: Example footnote text.
+[^m11]: Example footnote text.

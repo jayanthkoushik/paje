@@ -224,8 +224,8 @@ class Jekyll::Converters::Markdown::PajeConverter
             j += 1
             figno = appno + j.to_s()
 
-            figdesc = figcap.content.split(": ", 2)[1]
-            figcap.content = "Figure #{figno}: #{figdesc}"
+            figdesc = figcap.inner_html.split(": ", 2)[1]
+            figcap.inner_html = "Figure #{figno}: #{figdesc}"
 
             # Change links that point to this.
             figid = figcap.parent["id"]
@@ -243,7 +243,7 @@ class Jekyll::Converters::Markdown::PajeConverter
                 doc
                   .css("*[href='\##{subfigid}']")
                   .each do |a|
-                    a.content = "Figure\u00a0#{figno} (#{subfigcap.content})"
+                    a.inner_html = "Figure\u00a0#{figno} (#{subfigcap.inner_html})"
                   end
               end
           end
@@ -255,8 +255,8 @@ class Jekyll::Converters::Markdown::PajeConverter
             tabno = appno + (j + 1).to_s()
 
             tabcap = tab.at_xpath(".//caption")
-            tabdesc = tabcap.content.split(": ", 2)[1]
-            tabcap.content = "Table #{tabno}: #{tabdesc}"
+            tabdesc = tabcap.inner_html.split(": ", 2)[1]
+            tabcap.inner_html = "Table #{tabno}: #{tabdesc}"
 
             # Change links to this.
             tabid = tab.parent["id"]
