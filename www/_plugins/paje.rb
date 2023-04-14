@@ -116,9 +116,7 @@ class Jekyll::Converters::Markdown::PajeConverter
             repl = short + ("\ufdd0" * 5)
             if r[3] == "s" || r[3] == "p"
               repl += r[3]
-              if r[4] == "p"
-                repl += "p"
-              end
+              repl += "p" if r[4] == "p"
             end
             repl
           end
@@ -243,7 +241,8 @@ class Jekyll::Converters::Markdown::PajeConverter
                 doc
                   .css("*[href='\##{subfigid}']")
                   .each do |a|
-                    a.inner_html = "Figure\u00a0#{figno} (#{subfigcap.inner_html})"
+                    a.inner_html =
+                      "Figure\u00a0#{figno} (#{subfigcap.inner_html})"
                   end
               end
           end
@@ -318,10 +317,7 @@ class Jekyll::Converters::Markdown::PajeConverter
     content = doc.at_css("#content")
     if sidebar
       # Add col classes to sidebar and content.
-      content.add_class("order-3")
-      sidebar.add_class(
-        "col-11 col-sm-10 col-md-2 order-2 order-md-4 mt-2 mb-4 my-md-0"
-      )
+      sidebar.add_class("col-11 col-sm-10 col-md-2 mt-2 mb-4 my-md-0")
       sidebar.wrap(
         "<div class='row justify-content-center justify-content-md-start'></div>"
       )
@@ -345,13 +341,9 @@ class Jekyll::Converters::Markdown::PajeConverter
       # Add toc title.
       tocbtn.add_next_sibling("<hr class='d-none d-md-block ms-3'>")
       tocbtn.add_next_sibling(
-        "<strong class='d-none d-md-block ms-3'>On this page</strong>"
+        "<strong class='d-none d-md-block ms-3 text-nowrap'>On this page</strong>"
       )
 
-      # Add dummy col.
-      sidebar.add_next_sibling(
-        "<div class='col-2 order-1 d-none d-md-block'></div>"
-      )
       puts "|- themed toc sidebar"
     end
 
@@ -539,19 +531,16 @@ class Jekyll::Converters::Markdown::PajeConverter
     puts "|- themed block math"
 
     # Add col classes to content elements.
+    col_classes = "col-11 col-sm-10 col-md-8 offset-md-1 col-lg-7 offset-lg-0"
     doc
       .css("#content, .appendix")
       .each do |section|
         section.add_class("row justify-content-center")
         section.children.each do |child|
           if child.matches?("h1, h2, h3, h4, h5, h6, p")
-            child.add_class(
-              "col-11 col-sm-10 col-md-8 col-lg-7 col-xl-7 col-xxl-7"
-            )
+            child.add_class(col_classes)
           elsif child.matches?("ul, ol")
-            child.wrap(
-              "<div class='col-11 col-sm-10 col-md-8 col-lg-7 col-xl-7 col-xxl-7'></div>"
-            )
+            child.wrap("<div class='#{col_classes}'></div>")
           end
         end
       end
@@ -559,18 +548,12 @@ class Jekyll::Converters::Markdown::PajeConverter
 
     doc
       .css("#appendices hr")
-      .each do |hr|
-        hr.add_class(
-          "mx-auto col-11 col-sm-10 col-md-8 col-lg-7 col-xl-7 col-xxl-7"
-        )
-      end
+      .each { |hr| hr.add_class("mx-auto #{col_classes}") }
     puts "|- added 'col-' classes to appendix 'hr's"
     # Make figures into rows so they can expand beyond the content container.
     doc.css("figure").add_class("row")
     # Figure captions are still constrained.
-    doc.css("figcaption").add_class(
-      "mx-auto col-11 col-sm-10 col-md-8 col-lg-7 col-xl-7 col-xxl-7"
-    )
+    doc.css("figcaption").add_class("mx-auto #{col_classes}")
     puts "|- added 'row' and 'col-' classes to figures"
   end
 

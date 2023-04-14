@@ -180,10 +180,17 @@ figcaption,
 @media (min-width: 768px) {
   #toc-sidebar {
     position: fixed;
-    top: 2rem;
-    height: calc(80vh);
+    top: 4rem;
+    max-width: 220px;
+    max-height: 80%;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+}
+
+@media (min-width: 1400px) {
+  #toc-sidebar {
+    margin-left: -3rem;
   }
 }
 
