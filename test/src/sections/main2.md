@@ -13,13 +13,15 @@
 * @tbl:ex1
 * @tbl:ex2
 
-Col1       Col2     Col3     Col4
-------   ------    ------    ------
-1             2      3       4
-11           22      33      44
-111         222     333      444
+\acrodef{NASA}{National Aeronautics and Space Administration}
 
-: Short table {#tbl:ex1}
+Col1       Col2     Col3     Abbrs
+------   ------    ------    -------------
+1             2      3       \acs{NASA}
+11           22      33      \ac{USA}
+111         222     333      \acsp{SSN}
+
+: Short table. \ac{NASA}. {#tbl:ex1}
 
  Col1      Col2      Col3      Col4     Col5      Col6      Col7      Col8
 -----     -----     -----     -----    -----     -----     -----     -----
