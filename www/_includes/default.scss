@@ -119,6 +119,19 @@ h4 {
       content: ".";
     }
   }
+  .header-link {
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    color: var(--bs-primary);
+    opacity: 0%;
+    transition: opacity 0.15s ease-in-out;
+  }
+  &:hover {
+    .header-link {
+      opacity: 100% !important;
+    }
+  }
 }
 
 h5,

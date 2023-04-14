@@ -31,6 +31,7 @@ class Jekyll::Converters::Markdown::PajeConverter
       render_math(content_doc)
       move_appendix_ids(content_doc)
       sanitize_hids(content_doc)
+      add_permalinks(content_doc)
       move_appendices(content_doc)
       add_toc(content_doc) if !page.data["notoc"]
       apply_theme(content_doc)
@@ -649,5 +650,16 @@ class Jekyll::Converters::Markdown::PajeConverter
       puts "+ moving appendices to after bibliography"
       refs.after(appendices)
     end
+  end
+
+  def add_permalinks(doc)
+    puts "+ adding permalinks"
+    doc
+      .css("h1, h2, h3")
+      .each do |h|
+        next if h["id"].nil?
+        h.add_child("<a class='header-link' href='\##{h["id"]}'>#</a>")
+        puts "|- added permalink to '\##{h["id"]}'"
+      end
   end
 end
