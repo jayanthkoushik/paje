@@ -47,7 +47,7 @@ c[^a21]     111      222      333      789     ijkl       89        4      aaa  
 
 ![Figure with suppressed dark version](figures/lines.png){#fig:app2ex2b darksrc=""}
 
-Sub-figures with non-default extension
+Sub-figures with non-default extension.
 </div>
 
 ## Appendix math

@@ -8,3 +8,8 @@ tblPrefix: Table
 lstPrefix: List
 secPrefix: Section
 equationNumberTeX: \\tag
+subfigureTemplate: "$$figureTitle$$ $$i$$$$titleDelim$$ $$t$$ $$ccs$$"
+ccsDelim: "&nbsp;"
+subfigureChildTemplate: "($$i$$)"
+ccsLabelSep: "&nbsp;"
+ccsTemplate: "($$i$$)$$ccsLabelSep$$$$t$$"
