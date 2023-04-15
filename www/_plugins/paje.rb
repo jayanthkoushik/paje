@@ -177,16 +177,7 @@ class Jekyll::Converters::Markdown::PajeConverter
         cfg_args,
         "-F pandoc-crossref",
         "--citeproc",
-        "-M nameInLink=true",
-        "-M link-citations=true",
-        "-M linkReferences=true",
-        "-M reference-section-title=References",
-        "-M figPrefix=Figure",
-        "-M eqnPrefix=Equation",
-        "-M tblPrefix=Table",
-        "-M lstPrefix=List",
-        "-M secPrefix=Section",
-        "-M equationNumberTeX=\\\\tag"
+        "-M crossrefYaml=_includes/crossref.yml"
       )
     puts "|- converted markdown to html with pandoc"
   end

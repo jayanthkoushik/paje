@@ -1,0 +1,10 @@
+nameInLink: true
+link-citations: true
+linkReferences: true
+reference-section-title: References
+figPrefix: Figure
+eqnPrefix: Equation
+tblPrefix: Table
+lstPrefix: List
+secPrefix: Section
+equationNumberTeX: \\tag
