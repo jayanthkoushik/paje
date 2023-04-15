@@ -97,7 +97,7 @@ class Jekyll::Converters::Markdown::PajeConverter
     puts "+ extracting acronyms"
     # First, get all acronym definitions and store them in a hash.
     acronyms = {}
-    acrodefs = page.content.scan(/\\acrodef\{([\w-]+)\}\{([\w\s-]+)\}/)
+    acrodefs = page.content.scan(/\\acrodef\{([^{]+)\}\{([^{]+)\}/)
     acrodefs.each do |short, long|
       puts "|- found '#{short}' => '#{long}'"
       acronyms[short] = long
