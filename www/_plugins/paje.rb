@@ -649,7 +649,7 @@ class Jekyll::Converters::Markdown::PajeConverter
       .css("h1, h2, h3")
       .each do |h|
         next if h["id"].nil?
-        h.add_child("<a class='header-link' href='\##{h["id"]}'>#</a>")
+        h.add_child("<a class='header-link' href='\##{h["id"]}'></a>")
         puts "|- added permalink to '\##{h["id"]}'"
       end
   end
