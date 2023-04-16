@@ -234,7 +234,7 @@ class Jekyll::Converters::Markdown::PajeConverter
                   .css("*[href='\##{subfigid}']")
                   .each do |a|
                     a.inner_html =
-                      "Figure\u00a0#{figno} (#{subfigcap.inner_html})"
+                      "Figure\u00a0#{figno}&nbsp;#{subfigcap.inner_html}"
                   end
               end
           end
