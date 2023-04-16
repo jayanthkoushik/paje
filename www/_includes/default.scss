@@ -176,8 +176,12 @@ figcaption,
 
 #toc-sidebar {
   z-index: 1;
-  strong {
+  #toc-title {
     font-weight: 500 !important;
+    border-bottom: 1px solid var(--bs-tertiary-color);
+    &:after {
+      content: "On this page";
+    }
   }
   button:hover {
     color: var(--bs-primary-color) !important;

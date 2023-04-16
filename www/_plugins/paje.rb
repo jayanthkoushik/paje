@@ -329,12 +329,15 @@ class Jekyll::Converters::Markdown::PajeConverter
       ] = "btn btn-link text-decoration-none d-md-none collapsed dropdown-toggle border border-secondary rounded-1 text-body-secondary"
       tocbtn["data-bs-toggle"] = "collapse"
       tocbtn["data-bs-target"] = "#toc"
+      tocbtn["aria-expanded"] = "false"
+      tocbtn["aria-controls"] = "toc"
 
       # Add toc title.
-      tocbtn.add_next_sibling("<hr class='d-none d-md-block ms-3'>")
       tocbtn.add_next_sibling(
-        "<strong class='d-none d-md-block ms-3 text-nowrap'>On this page</strong>"
+        "<p id='toc-title' class='d-none d-md-block ms-3 pb-3 text-nowrap'></p>"
       )
+
+      tocbtn.wrap("<p class='my-0'></p>")
 
       puts "|- themed toc sidebar"
     end
