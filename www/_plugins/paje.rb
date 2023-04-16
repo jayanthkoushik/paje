@@ -539,6 +539,7 @@ class Jekyll::Converters::Markdown::PajeConverter
           end
         end
       end
+    doc.css("#footnotes").add_class(col_classes)
     puts "|- added 'col-' classes to content elements"
 
     doc
