@@ -22,7 +22,7 @@ institute:
   name: Institute1
 - id: 2
   name: Institute2
-abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:ex1. Reference[@texbook].
+abstract: _Markdown_ **in** **_abstract_**. $x+2$. @sec:ex1. Reference [@texbook].
 sections:
 - sections/main1.md
 - sections/main2.md

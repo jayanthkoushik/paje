@@ -314,13 +314,14 @@
     </choose>
   </macro>
   <citation et-al-min="3" et-al-use-first="1">
-    <sort>
-      <key variable="citation-number"/>
-    </sort>
     <layout delimiter=",">
       <group>
-        <text macro="author"/>
+        <text macro="author" suffix="&#xFDD1;"/>
         <text vertical-align="sup" variable="citation-number"/>
+      </group>
+      <group prefix="&#xFDD0;" suffix="&#xFDD0;">
+        <label variable="locator" suffix="&#160;"/>
+        <text variable="locator"/>
       </group>
     </layout>
   </citation>
@@ -331,7 +332,7 @@
     <layout>
       <group>
         <group delimiter=". " suffix=". ">
-          <text macro="author"/>
+          <text macro="author" prefix="&#xFDD1;" suffix="&#xFDD1;"/>
           <text macro="title"/>
         </group>
         <group delimiter=" " suffix=". ">
@@ -353,12 +354,14 @@
         <text macro="report-details" suffix=". "/>
         <text macro="access"/>
       </group>
-      <group>
-        <text variable="title" text-case="title" font-weight="bold" suffix=". "/>
-        <text macro="author"/>
-        <date prefix=" (" suffix=")." variable="issued">
-          <date-part name="year"/>
-        </date>
+      <group delimiter=". " suffix=".">
+        <text variable="title" text-case="title" font-weight="bold"/>
+        <group delimiter=" ">
+          <text macro="author"/>
+          <date prefix="(" suffix=")" variable="issued">
+            <date-part name="year"/>
+          </date>
+        </group>
       </group>
     </layout>
   </bibliography>

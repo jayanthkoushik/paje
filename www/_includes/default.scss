@@ -89,9 +89,7 @@ figure {
   margin-right: -2px;
 }
 
-.sup-right,
-.footnote-ref sup,
-.citation sup {
+.sup-right {
   padding-left: 2px;
 }
 
@@ -150,6 +148,14 @@ a.author-link,
   &:hover {
     cursor: pointer;
   }
+}
+
+.citation .locator {
+  font-size: smaller;
+  vertical-align: top;
+  position: relative;
+  top: 1.25em;
+  margin-left: 1px;
 }
 
 #refs li {

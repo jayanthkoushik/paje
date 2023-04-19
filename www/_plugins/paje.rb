@@ -429,25 +429,88 @@ class Jekyll::Converters::Markdown::PajeConverter
     end
     puts "|- themed tables"
 
-    # Replace citation link text with number, and add popover for reference.
+    # Create popovers for citation links.
+    puts "|- + fixing citations"
     doc
-      .css(".citation a")
-      .each do |citlink|
-        citnum = citlink.at_xpath(".//sup")&.text
-        next if citnum.nil?
-        citlink.inner_html = citnum
-        citlink["tabindex"] = "0"
-        citlink["role"] = "button"
+      .css(".citation")
+      .each do |cit|
+        cit.inner_html = cit.inner_html.gsub("\n", " ").strip()
+        long_cit_author_lists = []
+        cit
+          .css("a")
+          .each do |citlink|
+            puts "   |- + fixing citation link '#{citlink.inner_html}'"
+            # Extract citation number from inside '<sup></sup>'.
+            citnum = citlink.at_xpath(".//sup")&.text
+            puts "      |- no citation number found: skipping" if citnum.nil?
+            puts "      |- found citation number '#{citnum}'"
 
-        ref = doc.at_css("*[id='#{citlink["href"][1..]}']")
-        shortref =
-          ref.at_css(".csl-right-inline").inner_html.gsub("\n", " ").strip()
+            # Extract locator wrapped between '\uFDD0' characters.
+            locator =
+              citlink
+                .inner_html
+                .match(/\uFDD0(.+)\uFDD0/)
+                &.captures
+                &.first
+                .to_s
+                .strip()
+            puts "      |- found locator '#{locator}'"
 
-        citlink.add_class("btn-link")
-        citlink["data-bs-title"] = shortref
-        citlink["data-bs-toggle"] = "tooltip"
-        citlink["data-bs-container"] = "body"
-        citlink["data-bs-html"] = "true"
+            # Find reference corresponding to citation link.
+            ref = doc.at_css("*[id='#{citlink["href"][1..]}']")
+            ref.inner_html = ref.inner_html.gsub("\n", " ").strip()
+            shortref = ref.at_css(".csl-right-inline").inner_html.strip()
+            puts "      |- found citation reference '#{shortref}'"
+
+            # Check if it is a long citation. For long citation, the author list is
+            # moved outside the link by pandoc, so the marker '\uFDD1' is not present.
+            if citlink.inner_html.include? "\uFDD1"
+              puts "      |- identified as short citation"
+            else
+              puts "      |- identified as long citation"
+              # Get the author list from the reference, wrapped between '\uFDD1' characters.
+              authorlist =
+                ref.inner_html.match(/\uFDD1(.+)\uFDD1/)&.captures&.first
+              puts "      |- found author list '#{authorlist}'"
+              long_cit_author_lists << authorlist
+            end
+
+            # Add attributes for bootstrap popover.
+            citlink.add_class("btn-link")
+            citlink["tabindex"] = "0"
+            citlink["role"] = "button"
+            citlink["data-bs-title"] = shortref
+            citlink["data-bs-toggle"] = "tooltip"
+            citlink["data-bs-container"] = "body"
+            citlink["data-bs-html"] = "true"
+            puts "      |- added popover attributes"
+
+            # Replace citation link text with number.
+            citlink.inner_html = citnum
+            puts "      |- replaced citation link text with number '#{citlink.inner_html}'"
+
+            # Add locator as a sibling to the citation link.
+            unless locator.nil? || locator.empty?
+              loc =
+                citlink.add_next_sibling(
+                  "<span class='locator'>(#{locator})</span>"
+                ).first
+              puts "      |- added locator '#{loc}'"
+            end
+          end
+
+        # Wrap long citation author lists in spans.
+        next if long_cit_author_lists.empty?
+        puts "   |- + wrapping author lists inside '#{cit.inner_html}'"
+        long_cit_author_lists.uniq.each do |author_list|
+          puts "      |- wrapping author list '#{author_list}'"
+          cit.inner_html =
+            cit.inner_html.gsub(
+              author_list,
+              "<span class='authors'>#{author_list}</span>"
+            )
+        end
+        puts "   |- + wrapped author lists: new inner html is '#{cit.inner_html}'"
       end
     puts "|- added popovers for citations"
 
@@ -460,19 +523,18 @@ class Jekyll::Converters::Markdown::PajeConverter
       end
     puts "|- removed short references from bibliography"
 
+    # Convert citations to superscripts.
     doc
       .css(".citation")
       .each do |citation|
-        cittext = citation.at_xpath(".//text()").to_s()
-        citlinks = citation.xpath(".//a")
-        # Superscript citation numbers.
-        sup_citlinks = "<sup>" + citlinks.map(&:to_s).join(",") + "</sup>"
-        if cittext != citlinks[0].text.to_s()
-          # Remove extra space from long citations.
-          citation.inner_html = cittext.rstrip() + sup_citlinks
-        else
-          citation.inner_html = sup_citlinks
-        end
+        citation.wrap("<span class='citation-wrapper'></span>")
+        # Move author list, previously wrapped into a span, outside the citation.
+        citation
+          .css(".authors")
+          &.reverse
+          .each { |author_list| citation.add_previous_sibling(author_list) }
+        # Convert the citation to a superscript.
+        citation.name = "sup"
       end
     puts "|- converted citations to superscripts"
 
@@ -505,6 +567,8 @@ class Jekyll::Converters::Markdown::PajeConverter
         .each do |bibentry|
           bibentry.name = "li"
           bibentry.delete("role")
+          # Remove the placeholder character '\uFDD1'.
+          bibentry.inner_html = bibentry.inner_html.gsub("\uFDD1", "")
         end
     end
     puts "|- converted bibliography to list"

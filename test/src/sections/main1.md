@@ -56,12 +56,25 @@ $$ {#eq:ex2}
 
 * Section: @sec:ex1, @sec:ex1.2
 * Appendix section: @sec:app2ex1, @sec:app1ex1.1.1
-* Appendix figure: @fig:app2ex1, @fig:app2ex2a
+* Appendix figure: @fig:app2ex2b
 * Appendix table: @tbl:app2ex1
-* Appendix math: @eq:app2ex1
-* Short citation[@latex:companion]
-* Long citation: @latex:companion, @lesk:1977
-* Multi citation[@lesk:1977; @knuth:1984; @latex:companion]
-* Pointer to footnote[^m11]
+* Appendix math: @eq:app2ex2
+* Pointer to footnote [^m11]
 
 [^m11]: Example footnote text.
+
+# Citations
+
+* Short citation [@latex:companion]
+* Short citation with pre note [see @latex:companion]
+* Short citation with locator [@latex:companion, p. 1]
+* Short citation with post note [@latex:companion, for more]
+* Short citation with locators and pre/post notes [see @latex:companion, chap. 1-4, for more]
+* Long citation: @lesk:1977
+* Long citation with locator: @lesk:1977 [chap. 1]
+* Long citation with note: @lesk:1977 [for more]
+* Multi citation [@lesk:1977; @knuth:1984; @latex:companion]
+* Multi citation with pre note [see @lesk:1977; @knuth:1984; @latex:companion]
+* Multi citation with locators [@lesk:1977, sec. 1; @knuth:1984; @latex:companion, p. 1-3]
+* Multi citation with post note [@lesk:1977; @knuth:1984; @latex:companion, for more]
+* Multi citation with locators and pre/post notes [see @lesk:1977, p. 1; @knuth:1984; @latex:companion, chap. 1-2, for more]
