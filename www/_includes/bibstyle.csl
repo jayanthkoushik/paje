@@ -332,7 +332,13 @@
     <layout>
       <group>
         <group delimiter=". " suffix=". ">
-          <text macro="author" prefix="&#xFDD1;" suffix="&#xFDD1;"/>
+          <names variable="author" prefix="&#xFDD1;" suffix="&#xFDD1;">
+            <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always" et-al-min="3" et-al-use-first="1"/>
+            <label form="long" prefix=", "/>
+            <substitute>
+              <names variable="editor"/>
+            </substitute>
+          </names>
           <text macro="title"/>
         </group>
         <group delimiter=" " suffix=". ">

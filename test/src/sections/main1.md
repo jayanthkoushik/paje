@@ -70,7 +70,7 @@ $$ {#eq:ex2}
 * Short citation with locator [@latex:companion, p. 1]
 * Short citation with post note [@latex:companion, for more]
 * Short citation with locators and pre/post notes [see @latex:companion, chap. 1-4, for more]
-* Long citation: @lesk:1977
+* Long citation: @lesk:1977, @latex:companion
 * Long citation with locator: @lesk:1977 [chap. 1]
 * Long citation with note: @lesk:1977 [for more]
 * Multi citation [@lesk:1977; @knuth:1984; @latex:companion]
