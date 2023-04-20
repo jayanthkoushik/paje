@@ -535,6 +535,11 @@ class Jekyll::Converters::Markdown::PajeConverter
           .each { |author_list| citation.add_previous_sibling(author_list) }
         # Convert the citation to a superscript.
         citation.name = "sup"
+        if citation.parent.css(".authors").empty?
+          # Add a span with a single space to match spacing.
+          # citation.add_child("<span> </span>")
+          citation.inner_html = "<span> </span>" + citation.inner_html
+        end
       end
     puts "|- converted citations to superscripts"
 

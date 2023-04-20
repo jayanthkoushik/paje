@@ -26,9 +26,9 @@ Col1         Col2     Col3     Col4     Col5     Col6     Col7     Col8     Col9
 ---------  ------   ------   ------   ------   ------   ------   ------   ------   -------   -------   -------   -------   -------   -------   -------   -------   -------
 a               1        2        3      123     abcd     1234      444        a       bbb      cccc       ddd      eeee       fff      gggg      abcd      1234   9876
 b              11       22       33      456     efgh      567       44       aa        bb      cccc        dd      eeee        ff      gggg      efgh       567   543
-c [^a21]      111      222      333      789     ijkl       89        4      aaa         b      cccc         d      eeee         f      gggg      ijkl        89   21
+c[^a21]       111      222      333      789     ijkl       89        4      aaa         b      cccc         d      eeee         f      gggg      ijkl        89   21
 
-: Extra wide table [^a22] {#tbl:app2ex2}
+: Extra wide table[^a22] {#tbl:app2ex2}
 
 [^a21]: Footnote in table.
 [^a22]: Footnote in table caption.

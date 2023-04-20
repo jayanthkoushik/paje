@@ -49,7 +49,7 @@ Col1       Col2     Col3     Abbrs
 
 ![Figure with 'width=5in'[^m21]](figures/densities){#fig:ex3b width=5in}
 
-Sub-figures with auto dark versions [^m22]
+Sub-figures with auto dark versions[^m22]
 </div>
 
 [^m21]: Footnote in sub-figure caption.

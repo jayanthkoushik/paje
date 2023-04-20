@@ -59,22 +59,25 @@ $$ {#eq:ex2}
 * Appendix figure: @fig:app2ex2b
 * Appendix table: @tbl:app2ex1
 * Appendix math: @eq:app2ex2
-* Pointer to footnote [^m11]
+* Pointer to footnote[^m11][^m12]
 
 [^m11]: Example footnote text.
+[^m12]: Integer at enim eu tellus malesuada scelerisque. Ut sed rhoncus ipsum, at tempor
+      nisl. Vivamus vitae pulvinar leo, at pharetra massa. Ut lobortis odio non nulla
+      tincidunt pulvinar.
 
 # Citations
 
-* Short citation [@latex:companion]
-* Short citation with pre note [see @latex:companion]
-* Short citation with locator [@latex:companion, p. 1]
-* Short citation with post note [@latex:companion, for more]
-* Short citation with locators and pre/post notes [see @latex:companion, chap. 1-4, for more]
+* Short citation[@latex:companion]
+* Short citation with pre note[see @latex:companion]
+* Short citation with locator[@latex:companion, p. 1]
+* Short citation with post note[@latex:companion, for more]
+* Short citation with locators and pre/post notes[see @latex:companion, chap. 1-4, for more]
 * Long citation: @lesk:1977, @latex:companion
 * Long citation with locator: @lesk:1977 [chap. 1]
 * Long citation with note: @lesk:1977 [for more]
-* Multi citation [@lesk:1977; @knuth:1984; @latex:companion]
-* Multi citation with pre note [see @lesk:1977; @knuth:1984; @latex:companion]
-* Multi citation with locators [@lesk:1977, sec. 1; @knuth:1984; @latex:companion, p. 1-3]
-* Multi citation with post note [@lesk:1977; @knuth:1984; @latex:companion, for more]
-* Multi citation with locators and pre/post notes [see @lesk:1977, p. 1; @knuth:1984; @latex:companion, chap. 1-2, for more]
+* Multi citation[@lesk:1977; @knuth:1984; @latex:companion]
+* Multi citation with pre note[see @lesk:1977; @knuth:1984; @latex:companion]
+* Multi citation with locators[@lesk:1977, sec. 1; @knuth:1984; @latex:companion, p. 1-3]
+* Multi citation with post note[@lesk:1977; @knuth:1984; @latex:companion, for more]
+* Multi citation with locators and pre/post notes[see @lesk:1977, p. 1; @knuth:1984; @latex:companion, chap. 1-2, for more]
