@@ -510,7 +510,7 @@ class Jekyll::Converters::Markdown::PajeConverter
         long_cit_author_lists.uniq.each do |author_list|
           puts "      |- wrapping author list '#{author_list}'"
           cit.inner_html =
-            cit.inner_html.gsub(
+            cit.inner_html.sub(
               author_list,
               "<span class='authors'>#{author_list}</span>"
             )
