@@ -459,7 +459,12 @@ class Jekyll::Converters::Markdown::PajeConverter
             # Find reference corresponding to citation link.
             ref = doc.at_css("*[id='#{citlink["href"][1..]}']")
             ref.inner_html = ref.inner_html.gsub("\n", " ").strip()
-            shortref = ref.at_css(".csl-right-inline").inner_html.strip()
+            shortref =
+              ref
+                .at_css(".csl-right-inline")
+                .inner_html
+                .gsub("\uFDD1", "")
+                .strip()
             puts "      |- found citation reference '#{shortref}'"
 
             # Check if it is a long citation. For long citation, the author list is
@@ -571,8 +576,6 @@ class Jekyll::Converters::Markdown::PajeConverter
         .each do |bibentry|
           bibentry.name = "li"
           bibentry.delete("role")
-          # Remove the placeholder character '\uFDD1'.
-          bibentry.inner_html = bibentry.inner_html.gsub("\uFDD1", "")
         end
     end
     puts "|- converted bibliography to list"

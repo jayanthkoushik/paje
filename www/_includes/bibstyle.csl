@@ -330,16 +330,10 @@
       <key variable="citation-number"/>
     </sort>
     <layout>
-      <group>
-        <names variable="author" prefix="&#xFDD1;" suffix=". &#xFDD1;">
-          <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always" et-al-min="3" et-al-use-first="1"/>
-          <label form="long" prefix=", "/>
-          <substitute>
-            <names variable="editor"/>
-          </substitute>
-        </names>
-        <text macro="title" suffix=". "/>
-        <group delimiter=" " suffix=". ">
+      <group delimiter=". " suffix=".">
+        <text macro="author"/>
+        <text macro="title"/>
+        <group delimiter=" ">
           <group delimiter=": ">
             <text macro="chapter-marker"/>
             <group delimiter=" ">
@@ -354,14 +348,20 @@
             <text macro="pages"/>
           </group>
         </group>
-        <text macro="collection-details" suffix=". "/>
-        <text macro="report-details" suffix=". "/>
+        <text macro="collection-details"/>
+        <text macro="report-details"/>
         <text macro="access"/>
       </group>
       <group delimiter=". " suffix=".">
         <text variable="title" text-case="title" font-weight="bold"/>
         <group delimiter=" ">
-          <text macro="author"/>
+          <names variable="author" prefix="&#xFDD1;" suffix="&#xFDD1;">
+            <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always" et-al-min="3" et-al-use-first="1"/>
+            <label form="long" prefix=", "/>
+            <substitute>
+              <names variable="editor"/>
+            </substitute>
+          </names>
           <date prefix="(" suffix=")" variable="issued">
             <date-part name="year"/>
           </date>
