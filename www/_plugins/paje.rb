@@ -511,7 +511,7 @@ class Jekyll::Converters::Markdown::PajeConverter
           puts "      |- wrapping author list '#{author_list}'"
           cit.inner_html =
             cit.inner_html.sub(
-              author_list,
+              / ?#{author_list} ?/,
               "<span class='authors'>#{author_list}</span>"
             )
         end
@@ -540,10 +540,6 @@ class Jekyll::Converters::Markdown::PajeConverter
           .each { |author_list| citation.add_previous_sibling(author_list) }
         # Convert the citation to a superscript.
         citation.name = "sup"
-        if citation.parent.css(".authors").empty?
-          # Add a span with a single space to match spacing.
-          citation.inner_html = "<span>&nbsp;</span>" + citation.inner_html
-        end
       end
     puts "|- converted citations to superscripts"
 

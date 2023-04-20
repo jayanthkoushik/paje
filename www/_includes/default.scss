@@ -85,10 +85,8 @@ figure {
   }
 }
 
-sup:not(.citation) {
-  &:not(.sup-left) {
-    padding-left: 3px;
-  }
+sup:not(.sup-left) {
+  padding-left: 3px;
 }
 
 h1,
