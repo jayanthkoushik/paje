@@ -537,8 +537,7 @@ class Jekyll::Converters::Markdown::PajeConverter
         citation.name = "sup"
         if citation.parent.css(".authors").empty?
           # Add a span with a single space to match spacing.
-          # citation.add_child("<span> </span>")
-          citation.inner_html = "<span> </span>" + citation.inner_html
+          citation.inner_html = "<span>&nbsp;</span>" + citation.inner_html
         end
       end
     puts "|- converted citations to superscripts"
