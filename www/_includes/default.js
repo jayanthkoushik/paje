@@ -53,8 +53,21 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   const tooltips = [
-    ...document.querySelectorAll('[data-bs-toggle="tooltip"]'),
-  ].map((tooltipTrigger) => new bootstrap.Tooltip(tooltipTrigger));
+    ...document.querySelectorAll('[data-bs-toggle="tooltip"'),
+  ].map((tooltipTrigger) => {
+    const tooltip = new bootstrap.Tooltip(tooltipTrigger);
+    tooltipTrigger.addEventListener("inserted.bs.tooltip", (e) => {
+      // Theme tooltip contents opposite to the body theme.
+      const coreTheme = document.documentElement.getAttribute("data-bs-theme");
+      const tooltipInner =
+        tooltip.tip.getElementsByClassName("tooltip-inner")[0];
+      tooltipInner.setAttribute(
+        "data-bs-theme",
+        coreTheme === "dark" ? "light" : "dark"
+      );
+    });
+    return tooltip;
+  });
   const popovers = [
     ...document.querySelectorAll('[data-bs-toggle="popover"]'),
   ].map((popoverTrigger) => new bootstrap.Popover(popoverTrigger));
