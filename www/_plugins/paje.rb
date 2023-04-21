@@ -360,7 +360,7 @@ class Jekyll::Converters::Markdown::PajeConverter
       .css(".subfigures")
       .each do |subfig|
         figs = subfig > "figure"
-        figs.add_class("subfigure px-2")
+        figs.add_class("subfigure px-1")
         div =
           figs
             .last
