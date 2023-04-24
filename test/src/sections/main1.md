@@ -51,6 +51,12 @@ $$ {#eq:ex2}
     x + y + z &= 100
 \end{aligned}
 
+Proin eleifend lorem semper, commodo tellus nec, porta purus. Nullam commodo
+lectus nibh, consequat maximus lorem faucibus in. Nam purus eros, rutrum in
+sapien et, condimentum lacinia nibh. Block math in same paragraph as text:
+$$
+\int_0^\infty \exp^{-x^2}\,\mathrm{d}x
+$$
 
 # Links
 

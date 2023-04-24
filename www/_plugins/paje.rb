@@ -599,7 +599,7 @@ class Jekyll::Converters::Markdown::PajeConverter
       .each do |section|
         section.add_class("row justify-content-center")
         section.children.each do |child|
-          if child.matches?("h1, h2, h3, h4, h5, h6, p")
+          if child.matches?("h1, h2, h3, h4, h5, h6, p, .math.display")
             child.add_class(col_classes)
           elsif child.matches?("ul, ol")
             child.wrap("<div class='#{col_classes}'></div>")
