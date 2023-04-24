@@ -613,11 +613,18 @@ class Jekyll::Converters::Markdown::PajeConverter
       .css("#appendices hr")
       .each { |hr| hr.add_class("mx-auto #{col_classes}") }
     puts "|- added 'col-' classes to appendix 'hr's"
-    # Make figures into rows so they can expand beyond the content container.
-    doc.css("figure").add_class("row")
-    # Figure captions are still constrained.
-    doc.css("figcaption").add_class("mx-auto #{col_classes}")
-    puts "|- added 'row' and 'col-' classes to figures"
+
+    # Put tables and figures in larger max size columns.
+    doc.css("figure").add_class(
+      "col-11 col-sm-10 col-md-8 offset-md-1 offset-lg-0"
+    )
+    doc
+      .css(".table-responsive")
+      .each do |table|
+        table.parent.add_class(
+          "col-11 col-sm-10 col-md-8 offset-md-1 offset-lg-0"
+        )
+      end
   end
 
   def add_toc(doc)
