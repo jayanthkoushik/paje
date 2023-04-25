@@ -578,18 +578,32 @@ class Jekyll::Converters::Markdown::PajeConverter
 
     # Theme block math.
     doc
-      .css("span.math.display")
+      .css(".math.display .katex-html")
       .each do |math|
+        math.add_class("d-flex flex-wrap justify-content-center")
+        tag = math.at_css(".tag")
         bases = math.css(".base")
-        base = bases.last
-        next if base.nil?
-        basewrap =
-          base.add_next_sibling("<span class='mx-auto my-2'></span>").first
-        basewrap.wrap(
-          "<span class='d-inline-flex w-75 overflow-x-auto'></span>"
-        )
-        bases.each { |base| base.parent = basewrap }
+        baseswrap =
+          bases
+            .first
+            .add_previous_sibling(
+              "<span class='overflow-x-auto px-2 py-2'></span>"
+            )
+            .first
+        bases.each { |base| base.parent = baseswrap }
+        next if tag.nil?
+        tag.add_class("flex-grow-1 text-end mb-2")
+        dummy =
+          bases
+            .first
+            .parent
+            .add_previous_sibling(
+              "<span class='flex-grow-1 dummy-math-tag'></span>"
+            )
+            .first
+        dummy.inner_html = tag.inner_html
       end
+    doc.css(".katex-display").remove_class("katex-display")
     puts "|- themed block math"
 
     # Add col classes to content elements.
