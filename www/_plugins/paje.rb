@@ -355,12 +355,13 @@ class Jekyll::Converters::Markdown::PajeConverter
     puts "|- replaced non-title 'h1's with 'h2's"
 
     # Bootstrap-ify figures.
-    doc.css("figure img").wrap("<div style='overflow-x: auto'></div>")
+    # doc.css("figure img").wrap("<div style='overflow-x: auto'></div>")
+    doc.css("figure img").wrap("<div></div>")
     doc
       .css(".subfigures")
       .each do |subfig|
         figs = subfig > "figure"
-        figs.add_class("subfigure px-1")
+        figs.add_class("subfigure px-2")
         div =
           figs
             .last
@@ -629,7 +630,7 @@ class Jekyll::Converters::Markdown::PajeConverter
     puts "|- added 'col-' classes to appendix 'hr's"
 
     # Put tables and figures in larger max size columns.
-    doc.css("figure").add_class(
+    doc.css("figure:not(.subfigure)").add_class(
       "col-11 col-sm-10 col-md-8 offset-md-1 offset-lg-0"
     )
     doc

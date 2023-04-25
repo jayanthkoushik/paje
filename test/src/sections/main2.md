@@ -30,8 +30,9 @@ Col1       Col2     Col3     Abbrs
 <!--  -->
     c       111       222       333      789      ijkl        89         4
 
-: Wide table {#tbl:ex2}
-
+: In mollis tortor vel ante cursus, ac consectetur nibh commodo.
+Aenean ultricies ornare ante ac fermentum. Vestibulum malesuada lectus at
+pellentesque hendrerit. {#tbl:ex2}
 
 # Figures
 
@@ -45,7 +46,7 @@ Col1       Col2     Col3     Abbrs
 
 <div id="fig:ex3">
 
-![Figure with 'width=3in'](figures/gaussian2d){#fig:ex3a width=3in}
+![Suspendisse erat est, imperdiet sed dolor at, sagittis lobortis tortor. Nulla facilisi. Aliquam pharetra scelerisque auctor. Duis vel auctor ipsum.](figures/gaussian2d){#fig:ex3a width=3in}
 
 ![Figure with 'width=5in'[^m21]](figures/densities){#fig:ex3b width=5in}
 

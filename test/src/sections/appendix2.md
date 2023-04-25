@@ -39,7 +39,7 @@ c[^a21]       111      222      333      789     ijkl       89        4      aaa
 * @fig:app2ex1
 * @fig:app2ex2, @fig:app2ex2b
 
-![Figure with implicit dark version](figures/anscombe){#fig:app2ex1}
+![Figure with implicit dark version. Suspendisse erat est, imperdiet sed dolor at, sagittis lobortis tortor. Nulla facilisi. Aliquam pharetra scelerisque auctor. Duis vel auctor ipsum.](figures/anscombe){#fig:app2ex1}
 
 <div id="fig:app2ex2">
 
