@@ -38,6 +38,7 @@ c[^a21]       111      222      333      789     ijkl       89        4      aaa
 
 * @fig:app2ex1
 * @fig:app2ex2, @fig:app2ex2b
+* @fig:app2ex3
 
 ![Figure with implicit dark version. Suspendisse erat est, imperdiet sed dolor at, sagittis lobortis tortor. Nulla facilisi. Aliquam pharetra scelerisque auctor. Duis vel auctor ipsum.](figures/anscombe){#fig:app2ex1}
 
@@ -49,6 +50,8 @@ c[^a21]       111      222      333      789     ijkl       89        4      aaa
 
 Sub-figures with non-default extension.
 </div>
+
+![Extra wide figure](figures/densities){#fig:app3ex3 width=10in}
 
 ## Appendix math
 
