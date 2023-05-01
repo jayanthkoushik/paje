@@ -580,7 +580,7 @@ class Jekyll::Converters::Markdown::PajeConverter
     doc
       .css(".math.display .katex-html")
       .each do |math|
-        math.add_class("d-flex flex-wrap justify-content-center")
+        math.add_class("d-flex flex-wrap justify-content-center my-3")
         tag = math.at_css(".tag")
         bases = math.css(".base")
         baseswrap =
@@ -592,7 +592,8 @@ class Jekyll::Converters::Markdown::PajeConverter
             .first
         bases.each { |base| base.parent = baseswrap }
         next if tag.nil?
-        tag.add_class("flex-grow-1 text-end mb-2")
+        tag.add_class("flex-grow-1 text-end align-self-center")
+        tag.at_css(".strut")&.remove
         dummy =
           bases
             .first
