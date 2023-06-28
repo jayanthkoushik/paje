@@ -13,10 +13,11 @@ RUN pacman -S imagemagick --noconfirm
 RUN pacman -S ghostscript --noconfirm
 RUN pacman -S git --noconfirm
 RUN pacman -S rsync --noconfirm
+RUN pacman -S python-pipx
 
 RUN truncate -s 0 /etc/ImageMagick-7/policy.xml
 
-RUN pip install shiny-mdc
+RUN pipx install shiny-mdc
 
 ADD main.sh /main.sh
 ADD www /www
