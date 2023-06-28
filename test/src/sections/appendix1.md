@@ -6,7 +6,7 @@ luctus varius. Sed sollicitudin ligula ante. Integer porta a erat commodo
 dignissim. Duis et lectus diam. Nulla id erat vestibulum nisi placerat
 efficitur. Nulla a semper libero. Praesent pharetra ullamcorper massa vel
 tincidunt. Sed dignissim magna et tellus efficitur, vitae sollicitudin lorem
-tincidunt. Nam non velit et enim rutrum euismod.
+tincidunt. Nam non velit et enim rutrum euismod[@broken_reference].
 
 ## Appendix subsection
 

@@ -458,14 +458,19 @@ class Jekyll::Converters::Markdown::PajeConverter
 
             # Find reference corresponding to citation link.
             ref = doc.at_css("*[id='#{citlink["href"][1..]}']")
-            ref.inner_html = ref.inner_html.gsub("\n", " ").strip()
-            shortref =
-              ref
-                .at_css(".csl-right-inline")
-                .inner_html
-                .gsub("\uFDD1", "")
-                .strip()
-            puts "      |- found citation reference '#{shortref}'"
+            if ref
+              ref.inner_html = ref.inner_html.gsub("\n", " ").strip()
+              shortref =
+                ref
+                  .at_css(".csl-right-inline")
+                  .inner_html
+                  .gsub("\uFDD1", "")
+                  .strip()
+              puts "      |- found citation reference '#{shortref}'"
+            else
+              puts "      |- no citation reference found: skipping"
+              next
+            end
 
             # Check if it is a long citation. For long citation, the author list is
             # moved outside the link by pandoc, so the marker '\uFDD1' is not present.
