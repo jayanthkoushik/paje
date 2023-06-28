@@ -13,7 +13,7 @@ RUN pacman -S imagemagick --noconfirm
 RUN pacman -S ghostscript --noconfirm
 RUN pacman -S git --noconfirm
 RUN pacman -S rsync --noconfirm
-RUN pacman -S python-pipx
+RUN pacman -S python-pipx --noconfirm
 
 RUN truncate -s 0 /etc/ImageMagick-7/policy.xml
 
