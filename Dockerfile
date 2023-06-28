@@ -7,7 +7,7 @@ RUN pacman -S base-devel --noconfirm
 RUN pacman -S python python-pip --noconfirm
 RUN pacman -S ruby ruby-bundler --noconfirm
 RUN pacman -S nodejs --noconfirm
-RUN pacman -S texlive-most --noconfirm
+RUN pacman -S texlive-basic texlive-latex texlive-latexrecommended texlive-latexextra texlive-fontsrecommended texlive-fontsextra texlive-xetex texlive-luatex texlive-bibtexextra --noconfirm
 RUN pacman -S pandoc pandoc-crossref --noconfirm
 RUN pacman -S imagemagick --noconfirm
 RUN pacman -S ghostscript --noconfirm
