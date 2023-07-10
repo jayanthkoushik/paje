@@ -14,9 +14,9 @@ class Jekyll::Converters::Markdown::PajeConverter
 
     Jekyll::Hooks.register :pages, :post_convert do |page|
       puts "\nrunning post convert hooks for page '#{page.data["title"]}'"
-      acronyms = extract_acronyms(page)
-      convert_pandoc(page)
-      convert_acronyms(page, acronyms)
+      acronyms, acronym_shorts = extract_acronyms(page)
+      convert_pandoc(page, acronyms, acronym_shorts)
+      convert_acronyms(page, acronyms, acronym_shorts)
 
       content_doc = Nokogiri::HTML.parse(page.content).at_xpath("//body")
       next if content_doc.nil?
@@ -97,62 +97,92 @@ class Jekyll::Converters::Markdown::PajeConverter
     puts "+ extracting acronyms"
     # First, get all acronym definitions and store them in a hash.
     acronyms = {}
-    acrodefs = page.content.scan(/\\acrodef\{([^{]+)\}\{([^{]+)\}/)
-    acrodefs.each do |short, long|
-      puts "|- found '#{short}' => '#{long}'"
-      acronyms[short] = long
+    acronym_shorts = {}
+    acrodefs = page.content.scan(/\\acrodef\{([^{]+)\}(\[(.+)\])?\{([^{]*)\}/)
+    acrodefs.each do |key, _, short, long|
+      if short.nil?
+        # No explicit short form provided.
+        puts "|- found '#{key}' => '#{long}'"
+      else
+        acronym_shorts[key] = short
+        puts "|- found '#{key} (#{short})' => '#{long}'"
+      end
+
+      acronyms[key] = long
+
       # Now, replace all occurrences of this acronym with a placeholder.
       # Acronyms are not directly converted here because that messes up
       # the formatting of tables.
       page.content =
         page
           .content
-          .gsub(/\\ac(s?)(p?)\{#{short}\}/) do |r|
+          .gsub(/\\ac(s|l?)(p?)\{#{key}\}/) do |r|
             # Replace with a placeholder of the same length.
             # The base placeholder character if '\ufdd0' ('@' in this comment from now).
             # '\ac{xyz}' -> 'xyz@@@@@'  (5 extra characters correponding to '\ac{}')
             # '\acs{xyz}' -> 'xyz@@@@@s'
+            # '\acl{xyz}' -> 'xyz@@@@@l'
             # '\acp{xyz}' -> 'xyz@@@@@p'
             # '\acsp{xyz}' -> 'xyz@@@@@sp'
-            repl = short + ("\ufdd0" * 5)
-            if r[3] == "s" || r[3] == "p"
+            # '\aclp{xyz}' -> 'xyz@@@@@lp'
+            repl = key + ("\ufdd0" * 5)
+            if r[3] == "s" || r[3] == "l" || r[3] == "p"
               repl += r[3]
               repl += "p" if r[4] == "p"
             end
             repl
           end
     end
-    acronyms
+    return acronyms, acronym_shorts
   end
 
-  def convert_acronyms(page, acronyms)
+  def convert_acronyms(page, acronyms, acronym_shorts)
     puts "+ converting acronyms"
     # All acronyms have been replaced with placeholders. Now, we can
     # safely replace them with the actual HTML.
-    acronyms.each do |short, long|
+    acronyms.each do |key, long|
+      if !acronym_shorts[key].nil?
+        short = acronym_shorts[key]
+      else
+        short = key
+      end
       long_shown = false
       page.content =
         page
           .content
-          # The placeholder is of the form '<short>@@@@@[s][p]' where
+          # The placeholder is of the form '<short>@@@@@[s|l][p]' where
           # '@' is '\ufdd0'.
-          .gsub(/#{short}\ufdd0{5}(s?)(p?)/) do |r|
+          .gsub(/#{key}\ufdd0{5}(s|l?)(p?)/) do |r|
             is_short = r[$1] == "s"
+            is_long = r[$1] == "l"
             is_plural = r[$2] == "p"
-            abbr_inner = short + (is_plural ? "s" : "")
-            if !is_short && !long_shown
-              abbr = "<span class='abbr'>#{abbr_inner}</span> (#{long})"
+
+            suffix = is_plural ? "s" : ""
+
+            if is_long
+              if long == ""
+                puts "ERROR: no long form available: #{key}"
+                exit 1
+              else
+                abbr = long + suffix
+              end
+            elsif long == ""
+              abbr = "<span class='abbr'>#{short + suffix}</span>"
+            elsif !is_short && !long_shown
+              abbr =
+                "<span class='abbr'>#{short + suffix}</span> (#{long + suffix})"
               long_shown = true
             else
-              abbr = "<abbr title='#{long}'>#{abbr_inner}</abbr>"
+              abbr = "<abbr title='#{long + suffix}'>#{short + suffix}</abbr>"
             end
-            puts "|- converted '\\ac#{r[$1]}#{r[$2]}{#{short}}' -> '#{abbr}'"
+
+            puts "|- converted '\\ac#{r[$1]}#{r[$2]}{#{key}}' -> '#{abbr}'"
             abbr
           end
     end
   end
 
-  def convert_pandoc(page)
+  def convert_pandoc(page, acronyms, acronym_shorts)
     puts "+ converting markdown"
     converter = PandocRuby.new(page.content, from: :"markdown")
     cfg_args = {}
@@ -180,6 +210,28 @@ class Jekyll::Converters::Markdown::PajeConverter
         "-M crossrefYaml=_includes/crossref.yml"
       )
     puts "|- converted markdown to html with pandoc"
+    puts "|- + converting acronyms with pandoc"
+    acronyms.each do |key, long|
+      next if long == ""
+      converter = PandocRuby.new(long, from: :"markdown")
+      long_converted = converter.to_html(:katex).strip
+      long_converted =
+        Nokogiri::HTML.parse(long_converted).at_xpath("//p").inner_html
+      if long != long_converted
+        acronyms[key] = long_converted
+        puts "   |- converted '#{long}' => '#{long_converted}'"
+      end
+    end
+    acronym_shorts.each do |key, short|
+      converter = PandocRuby.new(short, from: :"markdown")
+      short_converted = converter.to_html(:katex).strip
+      short_converted =
+        Nokogiri::HTML.parse(short_converted).at_xpath("//p").inner_html
+      if short != short_converted
+        acronym_shorts[key] = short_converted
+        puts "   |- converted '#{short}' => '#{short_converted}'"
+      end
+    end
   end
 
   def renumber_appendices(doc)

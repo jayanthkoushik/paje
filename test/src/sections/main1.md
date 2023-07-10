@@ -13,15 +13,25 @@
 
 # Acronyms
 
+\newenvironment*{acros}{}{}
+\begin{acros}
 \acrodef{CMU}{Carnegie Mellon University}
 \acrodef{USA}{United States of America}
 \acrodef{SSN}{social security number}
+\acrodef{NVIDIA}{}
+\acrodef{H20}[$\mathrm{H}_2\mathrm{O}$]{water}
+\acrodef{AC}[A/C]{}
+\end{acros}
 
 * Default (short+long): \ac{CMU}
 * Repeated (short): \ac{CMU}
+* Forced long: \acl{CMU}
 * Forced short: \acs{USA}
 * Repeated after forced short (short+long): \ac{USA}
 * Plural: \acp{SSN}
+* No long form: \ac{NVIDIA}
+* Special short form: \ac{H20}
+* Special short form without long form: \ac{AC}
 
 
 # Math
