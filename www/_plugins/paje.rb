@@ -98,7 +98,8 @@ class Jekyll::Converters::Markdown::PajeConverter
     # First, get all acronym definitions and store them in a hash.
     acronyms = {}
     acronym_shorts = {}
-    acrodefs = page.content.scan(/\\acrodef\{([^{]+)\}(\[(.+)\])?\{([^{]*)\}/)
+    acrodefs =
+      page.content.scan(/\\acro(?:def)?\{([^{]+)\}(\[(.+)\])?\{([^{]*)\}/)
     acrodefs.each do |key, _, short, long|
       if short.nil?
         # No explicit short form provided.

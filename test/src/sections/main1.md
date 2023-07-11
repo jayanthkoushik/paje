@@ -13,15 +13,14 @@
 
 # Acronyms
 
-\newenvironment*{acros}{}{}
-\begin{acros}
-\acrodef{CMU}{Carnegie Mellon University}
-\acrodef{USA}{United States of America}
-\acrodef{SSN}{social security number}
-\acrodef{NVIDIA}{}
-\acrodef{H20}[$\mathrm{H}_2\mathrm{O}$]{water}
-\acrodef{AC}[A/C]{}
-\end{acros}
+\begin{acronym}
+\acro{CMU}{Carnegie Mellon University}
+\acro{USA}{United States of America}
+\acro{SSN}{social security number}
+\acro{NVIDIA}{}
+\acro{H20}[$\mathrm{H}_2\mathrm{O}$]{water}
+\acro{AC}[A/C]{}
+\end{acronym}
 
 * Default (short+long): \ac{CMU}
 * Repeated (short): \ac{CMU}
