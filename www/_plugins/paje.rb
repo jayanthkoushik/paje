@@ -605,7 +605,10 @@ class Jekyll::Converters::Markdown::PajeConverter
     doc
       .css("a.footnote-ref")
       .each do |footref|
-        reftext = doc.at_css("#{footref["href"]}").at_xpath(".//text()")
+        refelem = doc.at_css("#{footref["href"]}").clone
+        refelem.at_css(".footnote-back").remove
+        reftext = refelem.at_css("p").inner_html
+        refelem.remove
         footref.add_class("btn-link")
         footref["tabindex"] = "0"
         footref["role"] = "button"

@@ -75,11 +75,14 @@ $$
 * Appendix table: @tbl:app2ex1
 * Appendix math: @eq:app2ex2
 * Pointer to footnote[^m11][^m12]
+* Footnote with link[^m13]
 
 [^m11]: Example footnote text.
 [^m12]: Integer at enim eu tellus malesuada scelerisque. Ut sed rhoncus ipsum, at tempor
       nisl. Vivamus vitae pulvinar leo, at pharetra massa. Ut lobortis odio non nulla
       tincidunt pulvinar.
+[^m13]: **[This is a footnote with a link](https://www.example.com)**.
+      Click the footnote reference to make this popup persistent.
 
 # Citations
 
