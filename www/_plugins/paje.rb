@@ -610,6 +610,7 @@ class Jekyll::Converters::Markdown::PajeConverter
         reftext = refelem.at_css("p").inner_html
         refelem.remove
         footref.add_class("btn-link")
+        footref.inner_html = "<sup>" + "n" + footref.content + "</sup>"
         footref["tabindex"] = "0"
         footref["role"] = "button"
         footref["data-bs-title"] = reftext
