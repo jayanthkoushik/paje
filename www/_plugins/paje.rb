@@ -761,6 +761,15 @@ class Jekyll::Converters::Markdown::PajeConverter
       .css(".appendix")
       .each do |app|
         appid = app["id"]
+        if appid.nil?
+          appid = app.at_css("h1")["id"]
+          if appid.nil?
+            puts "ERROR: appendix has no id"
+            exit 1
+          end
+          puts "|- '\##{appid}' already on header"
+          next
+        end
         app.delete("id")
         app.at_css("h1")["id"] = appid
         puts "|- updated '\##{appid}'"
