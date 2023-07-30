@@ -51,7 +51,7 @@ c[^a21]       111      222      333      789     ijkl       89        4      aaa
 Sub-figures with non-default extension.
 </div>
 
-![Extra wide figure](figures/densities){#fig:app3ex3 width=10in}
+![Extra wide figure](figures/densities){#fig:app2ex3 width=10in}
 
 ## Appendix math
 
