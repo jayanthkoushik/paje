@@ -43,7 +43,13 @@ function setTheme(theme) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("theme-selector").classList.remove("hidden");
+  const themeSelector = document
+    .getElementById("theme-selector-template")
+    .content.cloneNode(true);
+  document
+    .getElementById("theme-selector-container")
+    .appendChild(themeSelector);
+
   setTheme(getPreferredTheme());
 
   document.querySelectorAll(".author a").forEach((authorLink) => {
