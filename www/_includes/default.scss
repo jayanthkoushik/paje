@@ -255,7 +255,7 @@ figcaption,
 
 #scroll-to-top {
   svg {
-    fill: var(--bs-info-text);
+    fill: var(--bs-info-text-emphasis);
     svg {
       fill: var(--bs-secondary-bg);
     }
@@ -263,6 +263,6 @@ figcaption,
 }
 
 #scroll-shadow feDropShadow {
-  flood-color: var(--bs-secondary-text);
+  flood-color: var(--bs-info-text-emphasis);
   flood-opacity: 50%;
 }
