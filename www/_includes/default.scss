@@ -16,13 +16,15 @@ html[data-bs-theme="dark"] {
 }
 
 #theme-selector {
+  button {
+    border-width: 0px !important;
+  }
   svg {
     overflow-x: visible !important;
     overflow-y: visible !important;
   }
   .dropdown-toggle {
     color: currentColor;
-    border: 0px;
     svg {
       width: 19px;
       height: 19px;
@@ -36,8 +38,8 @@ html[data-bs-theme="dark"] {
       height: 17px;
     }
     .dropdown-item {
-      border-radius: 0.25rem;
-      --bs-dropdown-item-padding-x: 0.5rem;
+      border-radius: 0.25rem !important;
+      --bs-dropdown-item-padding-x: 0.5rem !important;
     }
   }
   svg {
