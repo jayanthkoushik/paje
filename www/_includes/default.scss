@@ -250,3 +250,17 @@ figcaption,
 .math.inline .katex {
   font-size: 1.1em;
 }
+
+#scroll-to-top {
+  svg {
+    fill: var(--bs-info-text);
+    svg {
+      fill: var(--bs-secondary-bg);
+    }
+  }
+}
+
+#scroll-shadow feDropShadow {
+  flood-color: var(--bs-secondary-text);
+  flood-opacity: 50%;
+}

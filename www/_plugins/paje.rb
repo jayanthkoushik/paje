@@ -34,6 +34,7 @@ class Jekyll::Converters::Markdown::PajeConverter
       add_permalinks(content_doc)
       move_appendices(content_doc)
       add_toc(content_doc) if !page.data["notoc"]
+      add_scroll_to_top_btn(content_doc)
       apply_theme(content_doc)
       page.content = content_doc.inner_html
     end
@@ -352,6 +353,45 @@ class Jekyll::Converters::Markdown::PajeConverter
           Katex.render(math.text, display_mode: math.matches?(".display"))
       end
     puts "|- converted math with katex"
+  end
+
+  def add_scroll_to_top_btn(doc)
+    content = doc.at_css("#content")
+    scroll_btn_wrapper = content.add_child("<div></div>").first
+    scroll_btn_wrapper.add_class(
+      "col-11 col-sm-10 col-md-8 offset-md-1 col-lg-7 offset-lg-0 position-fixed bottom-0 text-end m-4"
+    )
+    scroll_btn = scroll_btn_wrapper.add_child("<a></a>").first
+    scroll_btn["href"] = "#"
+    scroll_btn["role"] = "button"
+    scroll_btn["id"] = "scroll-to-top"
+    scroll_btn["aria-label"] = "Scroll to top"
+    scroll_btn["onclick"] = "window.scrollTo({top: 0, behavior: 'smooth'})"
+    scroll_btn.add_class("text-decoration-none")
+    scroll_btn_svg =
+      scroll_btn.add_child(
+        "<svg xmlns='http://www.w3.org/2000/svg'></svg>"
+      ).first
+    scroll_btn_svg.add_class("p-1")
+    scroll_btn_svg["viewBox"] = "0 0 16 16"
+    scroll_btn_svg["width"] = "50px"
+    scroll_btn_svg["height"] = "50px"
+    scroll_btn_svg.add_child(
+      "<g filter='url(#scroll-shadow)'><circle cx='8' cy='8' r='8'/></g>"
+    )
+    scroll_btn_inner_svg =
+      scroll_btn_svg.add_child(
+        "<svg xmlns='http://www.w3.org/2000/svg'></svg>"
+      ).first
+    scroll_btn_inner_svg["x"] = "3"
+    scroll_btn_inner_svg["y"] = "3"
+    scroll_btn_inner_svg["viewBox"] = "0 0 16 16"
+    scroll_btn_inner_svg["width"] = "10px"
+    scroll_btn_inner_svg["height"] = "10px"
+    scroll_btn_inner_svg.add_child(
+      '<path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>'
+    )
+    puts "|- added scroll-to-top button"
   end
 
   def apply_theme(doc)
