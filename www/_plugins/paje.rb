@@ -367,7 +367,7 @@ class Jekyll::Converters::Markdown::PajeConverter
     scroll_btn["id"] = "scroll-to-top"
     scroll_btn["aria-label"] = "Scroll to top"
     scroll_btn["onclick"] = "window.scrollTo({top: 0, behavior: 'smooth'})"
-    scroll_btn.add_class("text-decoration-none")
+    scroll_btn.add_class("text-decoration-none invisible")
     scroll_btn_svg =
       scroll_btn.add_child(
         "<svg xmlns='http://www.w3.org/2000/svg'></svg>"

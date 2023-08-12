@@ -106,4 +106,13 @@ window.addEventListener("DOMContentLoaded", () => {
         setTheme("auto");
       }
     });
+
+  const scrollTopBtn = document.getElementById("scroll-to-top");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY == 0) {
+      scrollTopBtn.classList.add("invisible");
+    } else {
+      scrollTopBtn.classList.remove("invisible");
+    }
+  });
 });
